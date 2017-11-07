@@ -2,6 +2,7 @@
 Software Engineering 2: Project Teamwork
 
 ## Project Group
+![alt tag](https://github.com/Enari/DVA313/raw/master/Project%20Documents/Group%20Photo.png)
 * André Caldegren
 * Anton Roslund
 * Amer Surkovic
