@@ -44,6 +44,7 @@ return array(
 	|
 	*/
 
+
 	'connections' => array(
 
 		'sqlite' => array(
