@@ -6,3 +6,11 @@ composer.lock
 .env.php
 .DS_Store
 Thumbs.db
+/node_modules
+/public/storage
+/public/static
+/storage/*.key
+/.idea
+Homestead.json
+Homestead.yaml
+.env
