@@ -3,10 +3,10 @@
 <div class="row">
   <div class="col-md-8 col-md-offset-2">
     
-    <div class="part-breaker" style="height:auto;background:#1F262D;color:#fefefe;padding:15px;">Categories</div>
+    <div class="part-breaker" style="height:auto;background:#1F262D;color:#fefefe;padding:15px;">Swimlanes</div>
    
-      <a href="{{ url('admin/categories') }}" class="item"> <i class="fa fa-commenting-o" aria-hidden="true"></i> Category</a>
-      {!! Form::open(['url' => '/admin/categories', 'class' => 'form-horizontal', 'files' => true]) !!}
+      <a href="{{ url('admin/swimlanes') }}" class="item"> <i class="fa fa-commenting-o" aria-hidden="true"></i> Swimlane</a>
+      {!! Form::open(['url' => '/admin/swimlanes', 'class' => 'form-horizontal', 'files' => true]) !!}
       
       <div class="form-group {{ $errors->has('name') ? 'has-error' : ''}}">
       {!! Form::label('name', 'NAME:', ['class' => 'control-label', 'style' => 'margin-left:15px;color:#000000;margin-bottom:10px;']) !!}
@@ -19,9 +19,9 @@
 
 
     <div class="form-group {{ $errors->has('name') ? 'has-error' : ''}}">
-      {!! Form::label('limit', 'Card limit:', ['class' => 'control-label', 'style' => 'margin-left:15px;color:#000000;margin-bottom:10px;']) !!}
+      {!! Form::label('sortnumber', 'Sort number:', ['class' => 'control-label', 'style' => 'margin-left:15px;color:#000000;margin-bottom:10px;']) !!}
       <div class="col-sm-12">
-        {!! Form::text('limit', null, ['class' => 'form-control', 'required' => 'required']) !!}
+        {!! Form::text('sortnumber', null, ['class' => 'form-control', 'required' => 'required']) !!}
         {!! $errors->first('name', '<p class="help-block">:message</p>') !!}
       </div>
     </div>

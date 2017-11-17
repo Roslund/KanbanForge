@@ -21,5 +21,8 @@ Route::get('/', function () {
 
 Route::resource('admin/categories', 'CategoryController');
 
-/*Route::get('admin/categories/{id}', 
-	['as' => 'admin.categories', 'uses' => 'CategoryController@show']);*/
+Route::get('admin/categories/{id}', 
+	['as' => 'admin.categories', 'uses' => 'CategoryController@show']);
+
+
+Route::resource('admin/swimlanes', 'SwimlaneController');
