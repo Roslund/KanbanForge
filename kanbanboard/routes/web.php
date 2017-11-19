@@ -14,3 +14,15 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+
+/* Admin */
+
+Route::resource('admin/categories', 'CategoryController');
+
+Route::get('admin/categories/{id}', 
+	['as' => 'admin.categories', 'uses' => 'CategoryController@show']);
+
+
+Route::resource('admin/swimlanes', 'SwimlaneController');
