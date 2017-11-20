@@ -21,11 +21,11 @@ Route::get('/', function () {
 
 Route::resource('admin/categories', 'CategoryController');
 
-Route::get('admin/categories/{id}', 
+Route::get('admin/categories/{category}', 
 	['as' => 'admin.categories', 'uses' => 'CategoryController@show']);
 
 
 Route::resource('admin/swimlanes', 'SwimlaneController');
 
-Route::get('admin/swimlanes/{id}',
+Route::get('admin/swimlanes/{swimlane}',
 	['as' => 'admin.swimlanes', 'uses' => 'SwimlaneController@show']);

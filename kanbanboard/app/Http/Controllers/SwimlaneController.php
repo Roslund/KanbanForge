@@ -53,10 +53,8 @@ class SwimlaneController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Swimlane $swimlane)
     {
-        $swimlane = Swimlane::findOrFail($id);
-
         return view('admin.swimlane.show', compact('swimlane'));
     }
 
@@ -78,7 +76,7 @@ class SwimlaneController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Swimlane $swimlane)
     {
         //
     }
@@ -89,9 +87,8 @@ class SwimlaneController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Swimlane $swimlane)
     {
-        $swimlane = Swimlane::find($id);
         $swimlane->delete();
 
         return redirect('admin/swimlanes');
