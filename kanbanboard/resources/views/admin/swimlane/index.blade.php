@@ -12,7 +12,9 @@
 			<thead>
 				<tr>
 					<th> No. </th>
+					<th> Name </th>
 					<th> Limit </th>
+					<th> Actions </th>
 				</tr>
 			</thead>
 			<tbody>

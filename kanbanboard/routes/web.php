@@ -26,3 +26,6 @@ Route::get('admin/categories/{id}',
 
 
 Route::resource('admin/swimlanes', 'SwimlaneController');
+
+Route::get('admin/swimlanes/{id}',
+	['as' => 'admin.swimlanes', 'uses' => 'SwimlaneController@show']);

@@ -55,7 +55,9 @@ class SwimlaneController extends Controller
      */
     public function show($id)
     {
-        
+        $swimlane = Swimlane::findOrFail($id);
+
+        return view('admin.swimlane.show', compact('swimlane'));
     }
 
     /**
