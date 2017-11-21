@@ -12,16 +12,19 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('login');
+    //return view('welcome');
 });
 
-
+Route::get('/login', function () {
+    return view('login');
+});
 
 /* Admin */
 
 Route::resource('admin/categories', 'CategoryController');
 
-Route::get('admin/categories/{category}', 
+Route::get('admin/categories/{category}',
 	['as' => 'admin.categories', 'uses' => 'CategoryController@show']);
 
 
