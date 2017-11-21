@@ -38,7 +38,7 @@ class SwimlaneController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         $swimlane = new Swimlane;
         $swimlane->name = $request->name;
         $swimlane->sortnumber = $request->sortnumber;
@@ -64,9 +64,10 @@ class SwimlaneController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Swimlane $swimlane)
     {
         //
+        return view('admin.swimlane.edit', compact('swimlane'));
     }
 
     /**
@@ -79,6 +80,11 @@ class SwimlaneController extends Controller
     public function update(Request $request, Swimlane $swimlane)
     {
         //
+        $swimlane->update($request->all());
+
+        $swimlane->save();
+
+        return redirect('admin/swimlanes');
     }
 
     /**
