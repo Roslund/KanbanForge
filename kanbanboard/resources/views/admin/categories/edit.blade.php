@@ -14,10 +14,10 @@
         'class' => 'form-horizontal',
         'files' => true
         ]) !!}
-        
+
         <div class="form-group {{ $errors->has('name') ? 'has-error' : ''}}">
-          {!! Form::label('name', 'NAME:', ['class' => 'control-label', 'style' => 'margin-left:15px;color:#000000;margin-bottom:10px;']) !!}
-          
+          {!! Form::label('name', 'Name:', ['class' => 'control-label', 'style' => 'margin-left:15px;color:#000000;margin-bottom:10px;']) !!}
+
           <div class="col-sm-12">
             {!! Form::text('name', null, ['class' => 'form-control', 'required' => 'required']) !!}
             {!! $errors->first('name', '<p class="help-block">:message</p>') !!}
@@ -35,7 +35,7 @@
             {!! Form::submit('Save', ['class' => 'btn btn-primary form-control']) !!}
           </div>
         </div>
-        
+
         {!! Form::close() !!}
         @if ($errors->any())
         <ul class="alert alert-danger">
