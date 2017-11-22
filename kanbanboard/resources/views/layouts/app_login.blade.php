@@ -34,65 +34,6 @@
 
 </head>
 
-    <nav class="navbar navbar-default" role="navigation">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">ABB Ports Kanban Board</a>
-      </div>
-
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav">
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="material-icons">dashboard</i>
-              Dashboard <b class="caret"></b></a>
-              <ul class="dropdown-menu">
-              	<li>
-              		<a href="#dashboard" role="tab" data-toggle="tab">
-              			<i class="material-icons">import_export</i>
-              			Select artifacts
-              		</a>
-              	</li>
-              	<li class="active">
-              		<a href="#schedule" role="tab" data-toggle="tab">
-              			<i class="material-icons">view_week</i>
-              			Categories
-              		</a>
-              	</li>
-              	<li>
-              		<a href="#tasks" role="tab" data-toggle="tab">
-              			<i class="material-icons">view_agenda</i>
-              			Swimlanes
-              		</a>
-              	</li>
-              </ul>
-            </li>
-        </ul>
-
-    <div class="collapse navbar-collapse" id="navigation-example">
-      <ul class="nav navbar-nav navbar-right">
-            <li>
-		            <a href="#pablo">
-						            <i class="material-icons">account_circle</i>
-		                    Profile
-		            <div class="ripple-container"></div></a>
-		        </li>
-            <li>
-            <a href="#pablo">
-											<i class="material-icons">cached</i>
-											Refresh artifacts
-		        </a>
-            </li>
-        </ul>
-        </div>
-    </div>
-    </nav>
-
     @yield('content')
 
     <!-- In order for theme to work
