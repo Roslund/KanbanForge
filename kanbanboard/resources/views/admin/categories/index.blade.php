@@ -1,12 +1,10 @@
-
 @extends('layouts.app')
 @section('content')
 
 <div class="container">
 	<h1>Categories
 	<a href="{{ url('/admin/categories/create') }}" class="btn btn-primary btn-xs" title="Add New Category"><span class="glyphicon glyphicon-plus" aria-hidden="true"/></a></h1>
-	
-	
+
 	<div class="table">
 		<table class="table table-bordered table-striped table-hover">
 			<thead>
@@ -28,7 +26,7 @@
 						<td>{{ $loop->iteration }}</td>
 						<td>{{ $item->name }}</td>
 						<td>{{ $item->limit }}</td>
-						
+
 						<td>
 							<a href="{{ url('/admin/categories/' . $item->id) }}" class="btn btn-success btn-xs" title="View Category">
 							<span class="glyphicon glyphicon-eye-open" aria-hidden="true"/></a>
