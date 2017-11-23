@@ -33,7 +33,6 @@
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
 
 </head>
-
     @yield('content')
 
     <!-- In order for theme to work
@@ -61,5 +60,4 @@
   	<!-- Control Center for Material Kit: activating the ripples, parallax effects, scripts from the example pages etc -->
   	<script src="{{ URL::asset('js/material-kit.js') }}" type="text/javascript"></script>
 
-</body>
 </html>
