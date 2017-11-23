@@ -1,4 +1,11 @@
 @extends('layouts.app_login')
+
+@section('head')
+
+	<title>Sign In</title>
+
+@endsection
+
 @section('content')
 
 
@@ -20,7 +27,7 @@
 						<div class="card card-signup">
 							<form class="form" method="post" action="">
 								<div class="header header-primary text-center" style="margin-top: 0; box-shadow: none; margin: 0; border-radius: 3px 3px 0 0;">
-									<h2>Log In</h2>
+									<h2>Sign In</h2>
 								</div>
 								<p class="text-divider">Teamforge or local user</p>
 								<div class="content">

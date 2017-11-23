@@ -32,6 +32,8 @@
     <link href='http://fonts.googleapis.com/css?family=Exo:200,300,100' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
 
+    @yield('head')
+
 </head>
     @yield('content')
 
