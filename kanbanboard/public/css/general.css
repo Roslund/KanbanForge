@@ -1,0 +1,26 @@
+body
+{
+	background-color: white;
+}
+
+a.no-underline
+{
+	text-decoration: none;
+}
+
+.swimlane-container-card
+{
+	background-color: white;
+	box-shadow: 0px 0px 10px 0px rgba(156,39,176,0.5);
+	padding: 15px;
+}
+
+.swimlane-card-title
+{
+	margin-top: 0;
+}
+
+.swimlane-row
+{
+	margin-top: 15px;
+}
