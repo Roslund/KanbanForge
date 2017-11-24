@@ -25,9 +25,17 @@
     <link href='http://fonts.googleapis.com/css?family=Exo+2:200,300,100' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Exo:200,300,100' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+
+    <!-- this should be moved to its own file at some point // andre -->
+    <style type="text/css">
+      body
+      {
+        background-color: white;
+      }
+    </style>
   </head>
 
-
+<body>
   <nav class="navbar navbar-default" id="navbar">
     <div class="container-fluid">
       <div class="navbar-header">
