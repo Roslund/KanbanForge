@@ -1,97 +1,49 @@
 @extends('layouts.app_login')
+
+@section('head')
+
+	<title>Sign In</title>
+
+@endsection
+
 @section('content')
-<div class="row">
+
 
 <body class="signup-page">
 	<nav class="navbar navbar-transparent navbar-absolute">
     	<div class="container">
         	<!-- Brand and toggle get grouped for better mobile display -->
         	<div class="navbar-header">
-        		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example">
-            		<span class="sr-only">Toggle navigation</span>
-		            <span class="icon-bar"></span>
-		            <span class="icon-bar"></span>
-		            <span class="icon-bar"></span>
-        		</button>
-        		<a class="navbar-brand" href="#">ABB Ports Kanban Board</a>
-        	</div>
-
-        	<div class="collapse navbar-collapse" id="navigation-example">
-        		<ul class="nav navbar-nav navbar-right">
-					<!--<li>
-    					<a href="../components-documentation.html" target="_blank">
-    						Components
-    					</a>
-    				</li>
-    				<li>
-						<a href="http://demos.creative-tim.com/material-kit-pro/presentation.html?ref=utp-freebie" target="_blank">
-							<i class="material-icons">unarchive</i> Upgrade to PRO
-						</a>
-    				</li>
-		            <li>
-		                <a href="https://twitter.com/CreativeTim" target="_blank" class="btn btn-simple btn-white btn-just-icon">
-							<i class="fa fa-twitter"></i>
-						</a>
-		            </li>
-		            <li>
-		                <a href="https://www.facebook.com/CreativeTim" target="_blank" class="btn btn-simple btn-white btn-just-icon">
-							<i class="fa fa-facebook-square"></i>
-						</a>
-		            </li>
-					<li>
-		                <a href="https://www.instagram.com/CreativeTimOfficial" target="_blank" class="btn btn-simple btn-white btn-just-icon">
-							<i class="fa fa-instagram"></i>
-						</a>
-		            </li>
-        		</ul>-->
-						<li>
-	    					<a href="#" target="_blank">
-	    						This application is for ABB Ports in-house use only.
-	    					</a>
-	    				</li>
+        		<a class="navbar-brand" href="/">ABB Ports Kanban Board</a>
         	</div>
     	</div>
     </nav>
 
     <div class="wrapper">
-		<div class="header header-filter" style="background-image: url('/img/bg.jpg'); background-size: cover; background-position: top center;">
+		<div class="header header-filter" style="background-image: url('/img/crane.jpg'); background-size: cover; background-position: center;">
 			<div class="container">
-				<div class="row">
+				<div class="row" style="margin-left: 0; margin-right: 0;">
 					<div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
 						<div class="card card-signup">
-							<form class="form" method="" action="">
-								<div class="header header-primary text-center">
-									<h4>Log In With</h4>
-									<div class="social-line">
-									<!--	<a href="#pablo" class="btn btn-simple btn-just-icon">
-											<i class="fa fa-facebook-square"></i>
-										</a>
-										<a href="#pablo" class="btn btn-simple btn-just-icon">
-											<i class="fa fa-twitter"></i>
-										</a>
-										<a href="#pablo" class="btn btn-simple btn-just-icon">
-											<i class="fa fa-google-plus"></i>
-										</a>-->
-										<a href="#pablo" class="btn btn-simple btn-just-icon">
-											<img src='/img/teamforge.png' style="width:155px;height:50px;">
-										</a>
-									</div>
+							<form class="form" method="post" action="">
+								<div class="header header-primary text-center" style="margin-top: 0; box-shadow: none; margin: 0; border-radius: 3px 3px 0 0;">
+									<h2>Sign In</h2>
 								</div>
-								<p class="text-divider">Or If TeamForge Is Down</p>
+								<p class="text-divider" style="padding: 10px;"><i>{{ \Illuminate\Foundation\Inspiring::quote() }}</i></p>
 								<div class="content">
 
 									<div class="input-group">
 										<span class="input-group-addon">
 											<i class="material-icons">face</i>
 										</span>
-										<input type="text" class="form-control" placeholder="User Name...">
+										<input type="text" class="form-control" placeholder="Username" required>
 									</div>
 
 									<div class="input-group">
 										<span class="input-group-addon">
 											<i class="material-icons">lock_outline</i>
 										</span>
-										<input type="password" placeholder="Password..." class="form-control" />
+										<input type="password" placeholder="Password" class="form-control" required>
 									</div>
 
 									<!-- If you want to add a checkbox to this form, uncomment this code
@@ -104,43 +56,33 @@
 									</div> -->
 								</div>
 								<div class="footer text-center">
-									<a href="#pablo" class="btn btn-simple btn-primary btn-lg">Log In</a>
+									<!--<a href="#pablopicasso" class="btn btn-simple btn-primary btn-lg" onclick="form.submit();">Teamforge</a>
+									<a href="#pabloescobar" class="btn btn-simple btn-primary btn-lg" onclick="form.submit();">Local</a>-->
+									<button class="btn btn-primary btn-simple btn-lg">Teamforge<div class="ripple-container"></div></button>
+									<button class="btn btn-primary btn-simple btn-lg">Local<div class="ripple-container"></div></button>
 								</div>
 							</form>
 						</div>
 					</div>
 				</div>
 			</div>
-
-			<footer class="footer">
-		        <div class="container">
-		            <nav class="pull-left">
-						<ul>
-							<li>
-								<a href="http://presentation.creative-tim.com">
-								   About Us
-								</a>
-							</li>
-							<li>
-								<a href="http://blog.creative-tim.com">
-								   Contact
-								</a>
-							</li>
-						</ul>
-		            </nav>
-		            <div class="copyright pull-right">
-		                &copy; 2017, application made with <i class="fa fa-heart heart"></i> in Västerås <br>
-                    &copy; 2016, theme made with <i class="fa fa-heart heart"></i> by <a href="http://www.creative-tim.com" target="_blank">Creative Tim</a>
-                </div>
-		        </div>
-		    </footer>
-
 		</div>
-
     </div>
 
+    <!--   Core JS Files   -->
+  	<script src="{{ URL::asset('js/jquery.min.js') }}" type="text/javascript"></script>
+  	<script src="{{ URL::asset('js/bootstrap.min.js') }}" type="text/javascript"></script>
+  	<script src="{{ URL::asset('js/material.min.js') }}"></script>
 
+  	<!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+  	<script src="{{ URL::asset('js/nouislider.min.js') }}" type="text/javascript"></script>
+
+  	<!--  Plugin for the Datepicker, full documentation here: http://www.eyecon.ro/bootstrap-datepicker/ -->
+  	<script src="{{ URL::asset('js/bootstrap-datepicker.js') }}" type="text/javascript"></script>
+
+  	<!-- Control Center for Material Kit: activating the ripples, parallax effects, scripts from the example pages etc -->
+  	<script src="{{ URL::asset('js/material-kit.js') }}" type="text/javascript"></script>
 </body>
-</div>
+
 
 @endsection
