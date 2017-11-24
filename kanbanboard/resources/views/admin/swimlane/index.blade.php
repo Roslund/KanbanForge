@@ -1,9 +1,14 @@
 
 @extends('layouts.app')
+
+@section('head')
+<title>Swimlanes</title>
+@endsection
+
 @section('content')
 
 <div class="container">
-	<h1><a href="/" class="text-muted" style="text-decoration: none;">Home</a> \ Swimlanes</h1>
+	<h1><a href="/" class="text-muted no-underline">Home</a> \ Swimlanes</h1>
 	
 	<a href="{{ url('/admin/swimlanes/create') }}" class="btn btn-primary" title="Add New Swimlane">Add</a>
 	<div class="table">
