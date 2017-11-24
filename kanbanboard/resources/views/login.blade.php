@@ -29,7 +29,7 @@
 								<div class="header header-primary text-center" style="margin-top: 0; box-shadow: none; margin: 0; border-radius: 3px 3px 0 0;">
 									<h2>Sign In</h2>
 								</div>
-								<p class="text-divider"><i>{{ \Illuminate\Foundation\Inspiring::quote() }}</i></p>
+								<p class="text-divider" style="padding: 10px;"><i>{{ \Illuminate\Foundation\Inspiring::quote() }}</i></p>
 								<div class="content">
 
 									<div class="input-group">

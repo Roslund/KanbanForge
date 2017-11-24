@@ -27,11 +27,12 @@
 						<td>{{ $item->name }}</td>
 						
 						<td>
-							<a href="#up" class="btn btn-info btn-sm" title="View Swimlane">
-								<span class="glyphicon glyphicon-arrow-up" aria-hidden="true"/></a>
-								<a href="#down" class="btn btn-info btn-sm" title="View Swimlane">
-								<span class="glyphicon glyphicon-arrow-down" aria-hidden="true"/></a>
-								
+							<a href="#up" class="btn btn-info btn-sm" title="Up">
+							<span class="glyphicon glyphicon-arrow-up" aria-hidden="true"/></a>
+
+							<a href="#down" class="btn btn-info btn-sm" title="Down">
+							<span class="glyphicon glyphicon-arrow-down" aria-hidden="true"/></a>
+
 							<a href="{{ url('/admin/swimlanes/' . $item->id) }}" class="btn btn-success btn-sm" title="View Swimlane">
 							<span class="glyphicon glyphicon-eye-open" aria-hidden="true"/></a>
 							<a href="{{ url('/admin/swimlanes/' . $item->id . '/edit') }}" class="btn btn-primary btn-sm" title="Edit Swimlane">
