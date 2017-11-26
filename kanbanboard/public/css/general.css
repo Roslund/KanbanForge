@@ -24,3 +24,11 @@ a.no-underline
 {
 	margin-top: 15px;
 }
+
+.part-breaker
+{
+	height:auto;
+	background:#1F262D;
+	color:#fefefe;
+	padding:15px;
+}

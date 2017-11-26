@@ -9,7 +9,7 @@
 
 <div class="container">
 	<h1><a href="/" class="text-muted no-underline">Home</a> \ Swimlanes</h1>
-	
+	<hr>
 	<a href="{{ url('/admin/swimlanes/create') }}" class="btn btn-primary" title="Add New Swimlane">Add</a>
 	<div class="table">
 		<table class="table table-bordered table-striped table-hover" style="table-layout: fixed;">

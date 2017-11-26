@@ -10,6 +10,7 @@
 		<h1><a href="/" class="text-muted no-underline">Home</a> \ <a href="/admin/swimlanes" class="text-muted no-underline">Swimlanes</a> \ {{ $swimlane->name }}</h1>
 	</div>
 </div>
+<hr>
 <div class="row swimlane-row">
 	<div class="col-sm-3">
 		<div class="card swimlane-container-card">
