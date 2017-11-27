@@ -3,7 +3,7 @@
 
 <div class="container">
   <div class="row">
-    <div class="part-breaker" style="height:auto;background:#1F262D;color:#fefefe;padding:15px;">Swimlanes</div>
+    <div class="part-breaker">Swimlanes</div>
     <a href="{{ url('admin/swimlanes') }}" class="item"> <i class="fa fa-newspaper-o"></i> Swimlanes</a>
     <a href="{{ url('admin/swimlanes/create') }}" class="item"><i class="fa fa-plus-square-o"></i>Create</a>
     <div class="col-md-9 col-sm-12">
@@ -32,7 +32,7 @@
         </div>
         <div class="form-group">
           <div class="col-sm-offset-9 col-sm-3">
-            {!! Form::submit('Save', ['class' => 'btn btn-primary form-control']) !!}
+            {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
           </div>
         </div>
 

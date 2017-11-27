@@ -26,18 +26,15 @@
     <link href='http://fonts.googleapis.com/css?family=Exo:200,300,100' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
 
-    <!-- this should be moved to its own file at some point // andre -->
-    <style type="text/css">
-      body
-      {
-        background-color: white;
-      }
-    </style>
+    <!-- our own css // andre -->
+    <link rel="stylesheet" type="text/css" href="{{ url('/css/general.css') }}" />
+
+    @yield('head')
   </head>
 
 <body>
   <nav class="navbar navbar-default" id="navbar">
-    <div class="container-fluid">
+    <div class="container">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
         <span class="sr-only">Toggle navigation</span>
@@ -79,7 +76,9 @@
       </div>
     </nav>
 
-    @yield('content')
+    <div class="container">
+      @yield('content')
+    </div>
     <!-- In order for theme to work
     -- with functionalities such is the dropdown
     -- this should stay commented. Cheers, Amer
