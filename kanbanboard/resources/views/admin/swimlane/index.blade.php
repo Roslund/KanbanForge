@@ -74,13 +74,9 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLongTitle">Edit {{ $item->name }}</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
+				<h2 class="modal-title" id="exampleModalLongTitle">Edit {{ $item->name }}</h2>
 			</div>
-
-			<div class="modal-body">
+			<div class="modal-body" style="margin-top: 0; padding-top: 0;">
 				{!! Form::model($item, [
 				'method' => 'PATCH',
 				'url' => ['/admin/swimlanes', $item->id],
@@ -122,13 +118,10 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLongTitle">Create Swimlane</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
+				<h2 class="modal-title" id="exampleModalLongTitle">Create Swimlane</h2>
 			</div>
 
-			<div class="modal-body">
+			<div class="modal-body" style="margin-top: 0; padding-top: 0;">
 				 {!! Form::open(['url' => '/admin/swimlanes', 'class' => 'form-horizontal', 'files' => true]) !!}
 
 				<div class="form-group {{ $errors->has('name') ? 'has-error' : ''}}">
