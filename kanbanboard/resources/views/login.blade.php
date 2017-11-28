@@ -63,10 +63,17 @@
 						</div>
 					</div>
 				</div>
+
 			</div>
 		</div>
     </div>
 
+			
+	<footer class="footer" style="position: absolute; bottom: 0; z-index: 10; text-align: center; width: 100%;">
+		<div class="container">
+			<h4 style="color: white;"><i>{{ \Illuminate\Foundation\Inspiring::quote() }}</i></h4>
+		</div>
+	</footer>
     <!--   Core JS Files   -->
   	<script src="{{ URL::asset('js/jquery.min.js') }}" type="text/javascript"></script>
   	<script src="{{ URL::asset('js/bootstrap.min.js') }}" type="text/javascript"></script>

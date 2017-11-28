@@ -44,37 +44,37 @@
         </button>
         <a class="navbar-brand" href="#">ABB Ports Kanban Board</a>
       </div>
+
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav">
-          <li class="dropdown"><a href="#"  class="dropdown-toggle" data-toggle="dropdown"><i class="material-icons">dashboard</i>Dashboard<b class="caret"></b></a>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown"><a href="#"  class="dropdown-toggle" data-toggle="dropdown"><i class="material-icons">dashboard</i>Dashboard<b class="caret"></b></a>
           <ul class="dropdown-menu">
-            <li><a href="#"><i class="material-icons">import_export</i>
-            Select artifacts</a></li>
-            <li><a href="{{ url('admin/categories') }}"> <i class="material-icons">view_week</i>
-            Categories</a></li>
-            <li><a href="{{ url('admin/swimlanes') }}"> <i class="material-icons">view_agenda</i>
-            Swimlanes</a></li>
-          </ul>
+          <li><a href="#"><i class="material-icons">import_export</i>
+          Select artifacts</a></li>
+          <li><a href="{{ url('admin/categories') }}"> <i class="material-icons">view_week</i>
+          Categories</a></li>
+          <li><a href="{{ url('admin/swimlanes') }}"> <i class="material-icons">view_agenda</i>
+          Swimlanes</a></li>
+        </ul>
         </li>
-      </ul>
-      <div class="collapse navbar-collapse" id="navigation-example">
-        <ul class="nav navbar-nav navbar-right">
-          <li>
-            <a href="#pablo">
-              <i class="material-icons">account_circle</i>
-              Profile
-              <div class="ripple-container"></div></a>
-            </li>
+
+        <li class="dropdown"><a href="#"  class="dropdown-toggle" data-toggle="dropdown"><i class="material-icons">account_circle</i>Profile<b class="caret"></b></a>
+          <ul class="dropdown-menu">
             <li>
               <a href="#pablo">
-                <i class="material-icons">cached</i>
-                Refresh artifacts
-              </a>
+              <i class="material-icons">exit_to_app</i>
+              Sign Out
+              <div class="ripple-container"></div></a>
             </li>
           </ul>
-        </div>
+        </li>
+
+      </ul>
+      
       </div>
-    </nav>
+    </div>
+  </nav>
+
 
     <div class="container">
       @yield('content')
