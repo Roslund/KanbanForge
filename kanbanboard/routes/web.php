@@ -30,5 +30,7 @@ Route::get('admin/categories/{category}',
 
 Route::resource('admin/swimlanes', 'SwimlaneController');
 
+/*
 Route::get('admin/swimlanes/{swimlane}',
 	['as' => 'admin.swimlanes', 'uses' => 'SwimlaneController@show']);
+*/
