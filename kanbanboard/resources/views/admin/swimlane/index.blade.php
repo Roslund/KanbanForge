@@ -9,7 +9,8 @@
 
 <h1><a href="/" class="text-muted no-underline">Home</a> \ Swimlanes</h1>
 <hr>
-<a href="{{ url('/admin/swimlanes/create') }}" class="btn btn-primary" title="Add New Swimlane">Add</a>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createModal" title="Edit Swimlane">Add</button>
+
 <div class="table">
 	<table class="table table-bordered table-striped table-hover" style="table-layout: fixed;">
 		<thead>
@@ -86,6 +87,49 @@
 				'class' => 'form-horizontal',
 				'files' => true
 				]) !!}
+
+				<div class="form-group {{ $errors->has('name') ? 'has-error' : ''}}">
+					{!! Form::label('name', 'Name:', ['class' => 'control-label', 'style' => 'margin-left:15px;color:#000000;margin-bottom:10px;']) !!}
+
+					<div class="col-sm-12">
+						{!! Form::text('name', null, ['class' => 'form-control', 'required' => 'required']) !!}
+						{!! $errors->first('name', '<p class="help-block">:message</p>') !!}
+					</div>
+				</div>
+
+				<div class="form-group {{ $errors->has('name') ? 'has-error' : ''}}">
+					{!! Form::label('sortnumber', 'Sort number:', ['class' => 'control-label', 'style' => 'margin-left:15px;color:#000000;margin-bottom:10px;']) !!}
+					<div class="col-sm-12">
+						{!! Form::text('sortnumber', null, ['class' => 'form-control', 'required' => 'required']) !!}
+						{!! $errors->first('name', '<p class="help-block">:message</p>') !!}
+					</div>
+				</div>
+
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				{!! Form::button('Save', ['class' => 'btn btn-primary', 'type' => 'submit']) !!}
+			</div>
+
+			{!! Form::close() !!}
+
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Create Modal -->
+<div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="Create" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLongTitle">Create Swimlane</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+
+			<div class="modal-body">
+				 {!! Form::open(['url' => '/admin/swimlanes', 'class' => 'form-horizontal', 'files' => true]) !!}
 
 				<div class="form-group {{ $errors->has('name') ? 'has-error' : ''}}">
 					{!! Form::label('name', 'Name:', ['class' => 'control-label', 'style' => 'margin-left:15px;color:#000000;margin-bottom:10px;']) !!}
