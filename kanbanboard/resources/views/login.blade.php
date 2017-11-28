@@ -35,7 +35,7 @@
 								
 								<div class="content">
 									<div class="text-center">
-										<a href="https://www.collab.net/products/teamforge-alm" class="btn btn-simple btn-primary btn-lg">Teamforge</a>
+										<a href="https://www.collab.net/products/teamforge-alm" class="btn btn-simple btn-primary btn-lg" target="_blank">Teamforge</a>
 										<button class="btn btn-primary btn-simple btn-lg" id="local-sign-in-btn">Local<div class="ripple-container"></div></button>
 									</div>
 
