@@ -7,63 +7,150 @@
 
 @section('content')
 
-<div class="container">
-	<h1><a href="/" class="text-muted no-underline">Home</a> \ Swimlanes</h1>
-	<hr>
-	<a href="{{ url('/admin/swimlanes/create') }}" class="btn btn-primary" title="Add New Swimlane">Add</a>
-	<div class="table">
-		<table class="table table-bordered table-striped table-hover" style="table-layout: fixed;">
-			<thead>
-				<tr>
-					<th> Sort No. </th>
-					<th> Name </th>
-					<th> Actions </th>
-				</tr>
-			</thead>
-			<tbody>
+<h1><a href="/" class="text-muted no-underline">Home</a> \ Swimlanes</h1>
+<hr>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createModal" title="Edit Swimlane">Add</button>
 
-				@if (empty($swimlanes))
-					<p>There are no swimlanes</p>
-				@else
+<div class="table">
+	<table class="table table-bordered table-striped table-hover" style="table-layout: fixed;">
+		<thead>
+			<tr>
+				<th> Sort No. </th>
+				<th> Name </th>
+				<th> Actions </th>
+			</tr>
+		</thead>
+	<tbody>
 
-					@foreach($swimlanes as $item)
-					<tr>
-						<td>{{ $item->sortnumber }}</td>
-						<td>{{ $item->name }}</td>
-						
-						<td>
-							<a href="#up" class="btn btn-info btn-sm" title="Up">
-							<span class="glyphicon glyphicon-arrow-up" aria-hidden="true"/></a>
+	@if (empty($swimlanes))
+		<p>There are no swimlanes</p>
+	@else
 
-							<a href="#down" class="btn btn-info btn-sm" title="Down">
-							<span class="glyphicon glyphicon-arrow-down" aria-hidden="true"/></a>
+	@foreach($swimlanes as $item)
+		<tr>
+			<td>{{ $item->sortnumber }}</td>
+			<td>{{ $item->name }}</td>
 
-							<a href="{{ url('/admin/swimlanes/' . $item->id) }}" class="btn btn-success btn-sm" title="View Swimlane">
-							<span class="glyphicon glyphicon-eye-open" aria-hidden="true"/></a>
-							<a href="{{ url('/admin/swimlanes/' . $item->id . '/edit') }}" class="btn btn-primary btn-sm" title="Edit Swimlane">
+			<td>
+				<a href="#up" class="btn btn-info btn-sm" title="Up">
+				<span class="glyphicon glyphicon-arrow-up" aria-hidden="true"/></a>
 
-							<span class="glyphicon glyphicon-pencil" aria-hidden="true"/></a>
-							{!! Form::open([
-							'method'=>'DELETE',
-							'url' => ['/admin/swimlanes', $item->id],
-							'style' => 'display:inline'
-							]) !!}
-							{!! Form::button('<span class="glyphicon glyphicon-trash" aria-hidden="true" title="Delete Swimlane" />', array(
-								'type' => 'submit',
-								'class' => 'btn btn-danger btn-sm',
-								'title' => 'Delete',
-								'onclick'=>'return confirm("Confirm delete?")'
-								)) !!}
-								{!! Form::close() !!}
-							</td>
-						</tr>
-						@endforeach
-					@endif
-				</tbody>
-			</table>
-			<div class="pagination-wrapper"> {!! $swimlanes->render() !!} </div>
+				<a href="#down" class="btn btn-info btn-sm" title="Down">
+				<span class="glyphicon glyphicon-arrow-down" aria-hidden="true"/></a>
+
+				<!--
+				<a href="{{ url('/admin/swimlanes/' . $item->id) }}" class="btn btn-success btn-sm" title="View Swimlane">
+				<span class="glyphicon glyphicon-eye-open" aria-hidden="true"/></a>
+				-->
+
+				<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editModal" title="Edit Swimlane">
+				<span class="glyphicon glyphicon-pencil" aria-hidden="true"/>
+				</button>
+
+				{!! Form::open([
+				'method'=>'DELETE',
+				'url' => ['/admin/swimlanes', $item->id],
+				'style' => 'display:inline'
+				]) !!}
+				{!! Form::button('<span class="glyphicon glyphicon-trash" aria-hidden="true" title="Delete Swimlane" />', array(
+				'type' => 'submit',
+				'class' => 'btn btn-danger btn-sm',
+				'title' => 'Delete',
+				'onclick'=>'return confirm("Confirm delete?")'
+				)) !!}
+				{!! Form::close() !!}
+			</td>
+		</tr>
+	@endforeach
+
+	@endif
+	</tbody>
+	</table>
+	<div class="pagination-wrapper"> {!! $swimlanes->render() !!} </div>
+</div>
+
+<!-- Edit Modal -->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="Edit" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h2 class="modal-title" id="exampleModalLongTitle">Edit {{ $item->name }}</h2>
+			</div>
+			<div class="modal-body" style="margin-top: 0; padding-top: 0;">
+				{!! Form::model($item, [
+				'method' => 'PATCH',
+				'url' => ['/admin/swimlanes', $item->id],
+				'class' => 'form-horizontal',
+				'files' => true
+				]) !!}
+
+				<div class="form-group {{ $errors->has('name') ? 'has-error' : ''}}">
+					{!! Form::label('name', 'Name:', ['class' => 'control-label', 'style' => 'margin-left:15px;color:#000000;margin-bottom:10px;']) !!}
+
+					<div class="col-sm-12">
+						{!! Form::text('name', null, ['class' => 'form-control', 'required' => 'required']) !!}
+						{!! $errors->first('name', '<p class="help-block">:message</p>') !!}
+					</div>
+				</div>
+
+				<div class="form-group {{ $errors->has('name') ? 'has-error' : ''}}">
+					{!! Form::label('sortnumber', 'Sort number:', ['class' => 'control-label', 'style' => 'margin-left:15px;color:#000000;margin-bottom:10px;']) !!}
+					<div class="col-sm-12">
+						{!! Form::text('sortnumber', null, ['class' => 'form-control', 'required' => 'required']) !!}
+						{!! $errors->first('name', '<p class="help-block">:message</p>') !!}
+					</div>
+				</div>
+
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				{!! Form::button('Save', ['class' => 'btn btn-primary', 'type' => 'submit']) !!}
+			</div>
+
+			{!! Form::close() !!}
+
+			</div>
 		</div>
 	</div>
 </div>
+
+<!-- Create Modal -->
+<div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="Create" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h2 class="modal-title" id="exampleModalLongTitle">Create Swimlane</h2>
+			</div>
+
+			<div class="modal-body" style="margin-top: 0; padding-top: 0;">
+				 {!! Form::open(['url' => '/admin/swimlanes', 'class' => 'form-horizontal', 'files' => true]) !!}
+
+				<div class="form-group {{ $errors->has('name') ? 'has-error' : ''}}">
+					{!! Form::label('name', 'Name:', ['class' => 'control-label', 'style' => 'margin-left:15px;color:#000000;margin-bottom:10px;']) !!}
+
+					<div class="col-sm-12">
+						{!! Form::text('name', null, ['class' => 'form-control', 'required' => 'required']) !!}
+						{!! $errors->first('name', '<p class="help-block">:message</p>') !!}
+					</div>
+				</div>
+
+				<div class="form-group {{ $errors->has('name') ? 'has-error' : ''}}">
+					{!! Form::label('sortnumber', 'Sort number:', ['class' => 'control-label', 'style' => 'margin-left:15px;color:#000000;margin-bottom:10px;']) !!}
+					<div class="col-sm-12">
+						{!! Form::text('sortnumber', null, ['class' => 'form-control', 'required' => 'required']) !!}
+						{!! $errors->first('name', '<p class="help-block">:message</p>') !!}
+					</div>
+				</div>
+
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				{!! Form::button('Save', ['class' => 'btn btn-primary', 'type' => 'submit']) !!}
+			</div>
+
+			{!! Form::close() !!}
+
+			</div>
+		</div>
+	</div>
 </div>
+
 @endsection
