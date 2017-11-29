@@ -3,11 +3,13 @@
 
 <div class="container">
   <div class="row">
-    <div class="part-breaker">Swimlanes</div>
-    <a href="{{ url('admin/swimlanes') }}" class="item"> <i class="fa fa-newspaper-o"></i> Swimlanes</a>
-    <a href="{{ url('admin/swimlanes/create') }}" class="item"><i class="fa fa-plus-square-o"></i>Create</a>
-    <div class="col-md-9 col-sm-12">
-      <div class="col-md-12 any-block col-sm-12 any-block">
+    <div class="col-md-8">
+      <h1><a href="/" class="text-muted no-underline">Home</a> \ <a href="/admin/swimlanes" class="text-muted no-underline">Swimlanes</a> \ {{ $swimlane->name }}</h1>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+      <div class="col-md-4 any-block col-sm-6 any-block offset-md-4">
         {!! Form::model($swimlane, [
         'method' => 'PATCH',
         'url' => ['/admin/swimlanes', $swimlane->id],
@@ -45,7 +47,9 @@
         </ul>
         @endif
       </div>
-    </div>
+      <div class="col-md-4">
+        
+      </div>
   </div>
 </div>
 @endsection
