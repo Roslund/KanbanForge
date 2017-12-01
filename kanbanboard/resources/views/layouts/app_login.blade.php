@@ -34,6 +34,23 @@
 
     <link rel="stylesheet" type="text/css" href="{{ url('/css/general.css') }}" />
 
+
+
+
+      <!--   Core JS Files   -->
+    <script src="{{ URL::asset('js/jquery.min.js') }}" type="text/javascript"></script>
+    <script src="{{ URL::asset('js/bootstrap.min.js') }}" type="text/javascript"></script>
+    <script src="{{ URL::asset('js/material.min.js') }}"></script>
+
+    <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+    <script src="{{ URL::asset('js/nouislider.min.js') }}" type="text/javascript"></script>
+
+    <!--  Plugin for the Datepicker, full documentation here: http://www.eyecon.ro/bootstrap-datepicker/ -->
+    <script src="{{ URL::asset('js/bootstrap-datepicker.js') }}" type="text/javascript"></script>
+
+    <!-- Control Center for Material Kit: activating the ripples, parallax effects, scripts from the example pages etc -->
+    <script src="{{ URL::asset('js/material-kit.js') }}" type="text/javascript"></script>
+
     @yield('head')
 
 </head>
@@ -49,7 +66,5 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
 -->
-
-    
 
 </html>

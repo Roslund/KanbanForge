@@ -11,15 +11,13 @@
 |
 */
 
-Route::get('/', function () {
-    return view('login');
-    //return view('welcome');
-});
 
-Route::get('/login', function () {
+Route::get('/', 'HomeLoginController@index');
+
+/*Route::get('/login', function () {
     return view('login');
 });
-
+*/
 /* Admin */
 
 Route::resource('admin/categories', 'CategoryController');

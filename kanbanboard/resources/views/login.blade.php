@@ -28,7 +28,6 @@
 				<div class="row" style="margin-left: 0; margin-right: 0;">
 					<div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
 						<div class="card card-signup">
-							<form class="form" method="post" action="">
 								<div class="header header-primary text-center" style="margin-top: 0; box-shadow: none; margin: 0; border-radius: 3px 3px 0 0;">
 									<h2>Sign In</h2>
 								</div>
@@ -38,7 +37,7 @@
 										<a href="https://www.collab.net/products/teamforge-alm" class="btn btn-simple btn-primary btn-lg" target="_blank">Teamforge</a>
 										<button class="btn btn-primary btn-simple btn-lg" id="local-sign-in-btn">Local<div class="ripple-container"></div></button>
 									</div>
-
+									<form class="form" method="GET" action="">
 									<div id="local-sign-in-form" style="display: none;">
 										<hr style="margin: 0;">
 										<div class="input-group">
@@ -58,8 +57,8 @@
 											<button class="btn btn-primary btn-simple btn-lg">Sign In<div class="ripple-container"></div></button>
 										</div>
 									</div>
+									</form>
 								</div>
-							</form>
 						</div>
 					</div>
 				</div>
@@ -74,19 +73,7 @@
 			<h4 style="color: white;"><i>{{ \Illuminate\Foundation\Inspiring::quote() }}</i></h4>
 		</div>
 	</footer>
-    <!--   Core JS Files   -->
-  	<script src="{{ URL::asset('js/jquery.min.js') }}" type="text/javascript"></script>
-  	<script src="{{ URL::asset('js/bootstrap.min.js') }}" type="text/javascript"></script>
-  	<script src="{{ URL::asset('js/material.min.js') }}"></script>
 
-  	<!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
-  	<script src="{{ URL::asset('js/nouislider.min.js') }}" type="text/javascript"></script>
-
-  	<!--  Plugin for the Datepicker, full documentation here: http://www.eyecon.ro/bootstrap-datepicker/ -->
-  	<script src="{{ URL::asset('js/bootstrap-datepicker.js') }}" type="text/javascript"></script>
-
-  	<!-- Control Center for Material Kit: activating the ripples, parallax effects, scripts from the example pages etc -->
-  	<script src="{{ URL::asset('js/material-kit.js') }}" type="text/javascript"></script>
 </body>
 
 <script type="text/javascript">
@@ -95,3 +82,7 @@
     });
 </script>
 @endsection
+
+
+    
+    
