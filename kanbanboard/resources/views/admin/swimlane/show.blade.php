@@ -11,6 +11,7 @@
 	</div>
 </div>
 <hr>
+<!--
 <div class="row swimlane-row">
 	<div class="col-sm-3">
 		<div class="card swimlane-container-card">
@@ -53,4 +54,5 @@
 		</div>
 	</div>
 </div>
+-->
 @endsection

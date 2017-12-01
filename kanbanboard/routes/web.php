@@ -11,15 +11,17 @@
 |
 */
 
-Route::get('/', function () {
-    return view('login');
-    //return view('welcome');
-});
 
+<<<<<<< HEAD
+=======
+Route::get('/', 'HomeLoginController@index');
+
+>>>>>>> origin/master
 /*Route::get('/login', function () {
     return view('login');
 });
 */
+<<<<<<< HEAD
 
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
@@ -53,8 +55,18 @@ Route::prefix('admin')->group(function(){
 });
 
 
+=======
+/* Admin */
+>>>>>>> origin/master
 
 
 
 
 
+<<<<<<< HEAD
+=======
+/*
+Route::get('admin/swimlanes/{swimlane}',
+	['as' => 'admin.swimlanes', 'uses' => 'SwimlaneController@show']);
+*/
+>>>>>>> origin/master
