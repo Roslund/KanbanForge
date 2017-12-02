@@ -12,61 +12,81 @@
 */
 
 
-<<<<<<< HEAD
-=======
-Route::get('/', 'HomeLoginController@index');
 
->>>>>>> origin/master
-/*Route::get('/login', function () {
-    return view('login');
+Route::get('/', 'HomeController@index');
+
+Route::get('login', 'Auth\UsersLoginController@showLoginForm')->name('users.login');
+
+Route::post('login', 'Auth\UsersLoginController@login')->name('login.submit');
+
+
+Route::get('welcome', function () {
+    return view('welcomeboard');
 });
-*/
-<<<<<<< HEAD
-
-Auth::routes();
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/users/logout', 'Auth\LoginController@userLogout')->name('user.logout');
 
 
-Route::prefix('admin')->group(function(){
+Route::get('/logout', 'Auth\UsersLoginController@logoutUser');
 
-	/*login*/
-	Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
-  	Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
+
+Route::prefix('admin')->group(function(){ 
 
 	/*categories*/
 	Route::resource('/categories', 'CategoryController');
 
-	Route::get('/categories/{category}',
+	/*Route::get('/categories/{category}',
 		['as' => 'admin.categories', 'uses' => 'CategoryController@show']);
-
+	
 	/*swimlanes*/
 	Route::resource('/swimlanes', 'SwimlaneController');
 
-	Route::get('/swimlanes/{swimlane}',
+	/*Route::get('/swimlanes/{swimlane}',
 		['as' => 'admin.swimlanes', 'uses' => 'SwimlaneController@show']);
+	*/
 
-	/*dashboard*/
-	Route::get('/', 'AdminController@index')->name('admin.dashboard');
 
 	/*logout*/
-	 Route::get('/logout', 'Auth\AdminLoginController@logout')->name('admin.logout');
+	Route::get('/logout', 'Auth\UsersLoginController@logoutAdmin');
 
 });
 
-
-=======
-/* Admin */
->>>>>>> origin/master
+//Route::get('/', 'HomeLoginController@index');
 
 
-
-
-
-<<<<<<< HEAD
-=======
-/*
-Route::get('admin/swimlanes/{swimlane}',
-	['as' => 'admin.swimlanes', 'uses' => 'SwimlaneController@show']);
+//Auth::routes(); 
+//Route::get('/login', 'HomeLoginController@login')->name('login');
+/*Route::get('/login', function () {
+    return view('login');
+});
 */
->>>>>>> origin/master
+
+
+
+//Route::get('/home', 'HomeLoginController@login')->name('home');
+/*Route::get('/users/logout', 'Auth\LoginController@userLogout')->name('user.logout');
+*/
+
+//Route::prefix('admin')->group(function(){
+
+	/*login
+	Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
+  	Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
+
+	/*categories*/
+	//Route::resource('/categories', 'CategoryController');
+
+	/*Route::get('/categories/{category}',
+		['as' => 'admin.categories', 'uses' => 'CategoryController@show']);
+	
+	/*swimlanes*/
+	//Route::resource('/swimlanes', 'SwimlaneController');
+
+	/*Route::get('/swimlanes/{swimlane}',
+		['as' => 'admin.swimlanes', 'uses' => 'SwimlaneController@show']);
+	*/
+	/*dashboard*/
+	//Route::get('/', 'AdminController@index')->name('admin.dashboard');
+
+	/*logout*/
+	//Route::get('/logout', 'Auth\AdminLoginController@logout')->name('admin.logout');
+
+//});

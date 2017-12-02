@@ -1,4 +1,4 @@
-@extends('layouts.app_welcome')
+@extends('layouts.app')
 
 @section('head')
 
@@ -15,12 +15,7 @@
         <div class="container">
             <div class="row">
             <hr>
-                <a href="login"> User login</a><br><hr>
-                
-                <a href="register"> User register</a><br><hr>
-                
-                <a href="admin"> Admin login </a><br><hr>
-
+                <h2>KANBAN BOARD</h2>
             </div>
         </div>
     </div>
