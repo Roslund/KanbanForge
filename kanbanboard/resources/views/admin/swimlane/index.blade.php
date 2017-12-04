@@ -12,7 +12,7 @@
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createModal" title="Edit Swimlane">Add</button>
 
 <div class="table">
-	<table class="table table-bordered table-striped table-hover" style="table-layout: fixed;">
+	<table class="table table-bordered table-striped table-hover table-fixed">
 		<thead>
 			<tr>
 				<th> Sort No. </th>
