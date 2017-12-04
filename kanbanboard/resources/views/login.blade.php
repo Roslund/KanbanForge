@@ -30,16 +30,16 @@
 									<div id="local-sign-in-form" style="display: none;">
 										<hr style="margin: 0;">
 										
-										<div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+										<div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
 											<div class="form-group">
 												<div class="input-group">
 													<span class="input-group-addon">
 														<i class="material-icons">face</i>
 													</span>
-													<input id="email" type="email" class="form-control" name="email" placeholder="Username" required autofocus>
-													@if ($errors->has('email'))
+													<input id="username" type="text" class="form-control" name="username" placeholder="Username" required autofocus>
+													@if ($errors->has('username'))
 													<span class="help-block">
-														<strong>{{ $errors->first('email') }}</strong>
+														<strong>{{ $errors->first('username') }}</strong>
 													</span>
 													@endif
 												</div>
