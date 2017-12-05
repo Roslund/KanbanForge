@@ -13,12 +13,23 @@ class CreateArtifactsTable extends Migration
      */
     public function up() {
         Schema::create('artifacts', function (Blueprint $table) {
-            $table->increments('id');
+            // In the API the id is a string for some reason
+            //$table->increments('id');
+            $table->string('id');
+            $table->string('projectId');
+            //In the API is called title and not name
             $table->string('title');
+            // In the API is called createdDate and not date
+            // Format "2017-12-04"
             //$table->date('date');
-            $table->text('state');
-            $table->text('description');
-            $table->string('personAssigned');
+            $table->date('cratedDate');
+            // In the API is called state and not status
+            //$table->string('state');
+            $table->string('status');
+            $table->string('description');
+            // In the API is called assignetTo instead of personAssigned
+            //$table->string('personAssigned');
+            $table->string('assignedTo');
             $table->timestamps();
         });
     }
