@@ -19,6 +19,12 @@ class TeamForgeAuthApiUserProvider implements UserProvider {
     {
         \Log::info('function called TeamForge retrieveById');
         // TODO: Implement retrieveById() method.
+        $users = User::all();
+        foreach ($users as $user) {
+            if($user->id == $identifier){
+                return $user;
+            }
+        }
         return null;
     }
 
