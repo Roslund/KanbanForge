@@ -26,43 +26,21 @@ class UsersLoginController extends Controller
         	'password' => 'required|min:5'
       	]);
 
-      	//check if admin
-        $admins = Admin::all();
-        foreach ($admins as $admin) {
+      
+      if(Auth::guard('teamforge')->attempt([$request], false, true)){
+        return redirect('admin/swimlanes');
+      }
 
-          if($admin->username == $request->username) {
-            $this->middleware('auth:admin');
-            //$this->middleware('guest:admin');
+      if(Auth::guard('admin')->attempt(['username' => $request->username, 'password' => $request->password], $request->remember)) {
+        return redirect('admin/categories');
+      }
+   	
+      if(Auth::guard('web')->attempt(['username' => $request->username, 'password' => $request->password], $request->remember)) {
+        return redirect('welcome');
+      }
 
-            if(Auth::guard('admin')->attempt(['username' => $request->username, 'password' => $request->password], $request->remember)) {
-              return redirect('admin/categories');
-            }
-
-            //wrong password redirect
-            return redirect()->back()->withInput($request->only('username', 'remember'));
-          }
-         
-        }     	
-
-
-        //check if user
-        $users = User::all();
-        foreach ($users as $user) {
-          if($user->username == $request->username) {
-            $this->middleware('auth:web');
-            //$this->middleware('guest:web');
-
-            if(Auth::guard('web')->attempt(['username' => $request->username, 'password' => $request->password], $request->remember)) {
-              return redirect('welcome');
-            }
-
-            //wrong password redirect
-            return redirect()->back()->withInput($request->only('username', 'remember'));
-          }
-         
-        }
-      	// unsuccessful
-      	return redirect()->back()->withInput($request->only('username', 'remember'));
+    	// unsuccessful
+    	return redirect()->back()->withInput($request->only('username', 'remember'));
     }
 
     public function logoutAdmin()

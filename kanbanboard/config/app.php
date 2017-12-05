@@ -179,6 +179,9 @@ return [
         
         Collective\Html\HtmlServiceProvider::class,
 
+        //Custom added by Anton
+        App\Providers\TeamForgeAuthApiServiceProvider::class,
+
     ],
 
     /*
