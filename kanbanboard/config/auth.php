@@ -53,6 +53,10 @@ return [
             'driver' => 'token',
             'provider' => 'admins',
         ],
+        'teamforge' => [
+            'driver' => 'session',
+            'provider' => 'teamforge',
+        ],
     ],
 
     /*
@@ -79,6 +83,10 @@ return [
         ],
          'admins' => [
             'driver' => 'eloquent',
+            'model' => App\Admin::class,
+        ],
+        'teamforge' => [
+            'driver' => 'teamforgeauthapi',
             'model' => App\Admin::class,
         ],
 
