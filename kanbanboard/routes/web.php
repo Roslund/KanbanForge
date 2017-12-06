@@ -40,7 +40,12 @@ Route::prefix('admin')->group(function(){
 	*/
 
 
+	/*parentcategories*/
+	Route::resource('/parentcategories', 'ParentCategoryController');
+
 	/*logout*/
 	Route::get('/logout', 'Auth\UsersLoginController@logoutAdmin');
+
+
 
 });
