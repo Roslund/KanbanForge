@@ -28,7 +28,7 @@ class UsersLoginController extends Controller
         return redirect('welcome');
       }
    	
-      if(Auth::guard('web')->attempt([$request], $request->remember)) {
+      if(Auth::guard('web')->attempt(['username' => $request->username, 'password' => $request->password], $request->remember)) {
         return redirect('welcome');
       }
 
