@@ -1,10 +1,9 @@
 <?php
-    if(Auth::guard('admin')->check())
-        $user = Auth::guard('admin')->user();
-    elseif(Auth::guard('teamforge')->check())
+    if(Auth::guard('teamforge')->check()){
         $user = Auth::guard('teamforge')->user();
-    elseif(Auth::guard()->check()){
-      $user = Auth::guard()->user();
+    }
+    elseif(Auth::check()){
+      $user = Auth::user();
     }
     else{
       $user = NULL;
