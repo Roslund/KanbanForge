@@ -28,14 +28,14 @@ class UsersLoginController extends Controller
 
       
       if(Auth::guard('teamforge')->attempt([$request], false, true)){
-        return redirect('admin/swimlanes');
+        return redirect('welcome');
       }
 
-      if(Auth::guard('admin')->attempt(['username' => $request->username, 'password' => $request->password], $request->remember)) {
+      if(Auth::guard('admin')->attempt([$request], $request->remember)) {
         return redirect('admin/categories');
       }
    	
-      if(Auth::guard('web')->attempt(['username' => $request->username, 'password' => $request->password], $request->remember)) {
+      if(Auth::guard('web')->attempt([$request], $request->remember)) {
         return redirect('welcome');
       }
 
@@ -43,14 +43,23 @@ class UsersLoginController extends Controller
     	return redirect()->back()->withInput($request->only('username', 'remember'));
     }
 
-    public function logoutAdmin()
-    {
+    public function logout(){
         Auth::guard('admin')->logout();
+        Auth::guard('teamforge')->logout();
+        Auth::logout();
         return redirect('login');
     }
+
+    // obsolete
+    public function logoutAdmin()
+    {
+      $this->logout();
+      return redirect('login');
+    }
+    // obsolete
     public function logoutUser()
     {
-        Auth::guard('web')->logout();
-        return redirect('login');
+      $this->logout();
+      return redirect('login');
     }
 }

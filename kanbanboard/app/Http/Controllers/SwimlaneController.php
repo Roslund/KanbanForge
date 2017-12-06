@@ -13,7 +13,7 @@ class SwimlaneController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth:admin,teamforge');
+        $this->middleware('userisadmin');
     }
     /**
      * Display a listing of the resource.
