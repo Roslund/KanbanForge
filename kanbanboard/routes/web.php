@@ -25,7 +25,7 @@ Route::get('welcome', function () {
 });
 
 
-Route::get('/logout', 'Auth\UsersLoginController@logoutUser');
+Route::get('/logout', 'Auth\UsersLoginController@logout');
 
 
 Route::prefix('admin')->group(function(){ 
@@ -43,8 +43,7 @@ Route::prefix('admin')->group(function(){
 		['as' => 'admin.swimlanes', 'uses' => 'SwimlaneController@show']);
 	*/
 
-
 	/*logout*/
-	Route::get('/logout', 'Auth\UsersLoginController@logoutAdmin');
+	Route::get('/logout', 'Auth\UsersLoginController@logout');
 
 });
