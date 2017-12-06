@@ -12,7 +12,7 @@
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createModal" title="Edit Swimlane">Add</button>
 
 <div class="table">
-	<table class="table table-bordered table-striped table-hover" style="table-layout: fixed;">
+	<table class="table table-bordered table-striped table-hover table-fixed">
 		<thead>
 			<tr>
 				<th> Sort No. </th>
@@ -43,7 +43,7 @@
 				<span class="glyphicon glyphicon-eye-open" aria-hidden="true"/></a>
 				-->
 
-				<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editModal" title="Edit Swimlane">
+				<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editModal-{{ $item->id }}" title="Edit Swimlane">
 				<span class="glyphicon glyphicon-pencil" aria-hidden="true"/>
 				</button>
 
@@ -69,8 +69,9 @@
 	<div class="pagination-wrapper"> {!! $swimlanes->render() !!} </div>
 </div>
 
+@foreach($swimlanes as $item)
 <!-- Edit Modal -->
-<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="Edit" aria-hidden="true">
+<div class="modal fade" id="editModal-{{ $item->id }}" tabindex="-1" role="dialog" aria-labelledby="Edit" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -96,7 +97,7 @@
 				<div class="form-group {{ $errors->has('name') ? 'has-error' : ''}}">
 					{!! Form::label('sortnumber', 'Sort number:', ['class' => 'control-label', 'style' => 'margin-left:15px;color:#000000;margin-bottom:10px;']) !!}
 					<div class="col-sm-12">
-						{!! Form::text('sortnumber', null, ['class' => 'form-control', 'required' => 'required']) !!}
+						{!! Form::number('sortnumber', null, ['class' => 'form-control', 'required' => 'required']) !!}
 						{!! $errors->first('name', '<p class="help-block">:message</p>') !!}
 					</div>
 				</div>
@@ -112,6 +113,7 @@
 		</div>
 	</div>
 </div>
+@endforeach
 
 <!-- Create Modal -->
 <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="Create" aria-hidden="true">
@@ -136,7 +138,7 @@
 				<div class="form-group {{ $errors->has('name') ? 'has-error' : ''}}">
 					{!! Form::label('sortnumber', 'Sort number:', ['class' => 'control-label', 'style' => 'margin-left:15px;color:#000000;margin-bottom:10px;']) !!}
 					<div class="col-sm-12">
-						{!! Form::text('sortnumber', null, ['class' => 'form-control', 'required' => 'required']) !!}
+						{!! Form::number('sortnumber', null, ['class' => 'form-control', 'required' => 'required']) !!}
 						{!! $errors->first('name', '<p class="help-block">:message</p>') !!}
 					</div>
 				</div>

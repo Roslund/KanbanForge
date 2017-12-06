@@ -45,6 +45,18 @@ return [
             'driver' => 'token',
             'provider' => 'users',
         ],
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins',
+        ],
+        'admin-api' => [
+            'driver' => 'token',
+            'provider' => 'admins',
+        ],
+        'teamforge' => [
+            'driver' => 'session',
+            'provider' => 'teamforge',
+        ],
     ],
 
     /*
@@ -69,6 +81,15 @@ return [
             'driver' => 'eloquent',
             'model' => App\User::class,
         ],
+         'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Admin::class,
+        ],
+        'teamforge' => [
+            'driver' => 'teamforgeauthapi',
+            'model' => App\Admin::class,
+        ],
+
 
         // 'users' => [
         //     'driver' => 'database',
@@ -97,6 +118,10 @@ return [
             'table' => 'password_resets',
             'expire' => 60,
         ],
-    ],
-
+        'admins' => [
+            'provider' => 'admins',
+            'table' => 'password_resets',
+            'expire' => 15,
+        ],
+    ]
 ];

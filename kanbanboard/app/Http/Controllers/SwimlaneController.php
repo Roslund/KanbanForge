@@ -9,6 +9,12 @@ use Auth;
 
 class SwimlaneController extends Controller
 {
+
+
+    public function __construct()
+    {
+        $this->middleware('auth:admin,teamforge');
+    }
     /**
      * Display a listing of the resource.
      *
