@@ -77,7 +77,7 @@
         <li class="dropdown"><a href="#"  class="dropdown-toggle" data-toggle="dropdown"><i class="material-icons">account_circle</i>{{$user->username}}<b class="caret"></b></a>
           <ul class="dropdown-menu">
             <li>
-              <a href="logout">
+              <a href="/logout">
               <i class="material-icons">exit_to_app</i>
               Sign Out
               <div class="ripple-container"></div></a>
