@@ -1,6 +1,5 @@
 <?php
 
-Route::get('/', 'HomeLoginController@index');
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,7 +10,6 @@ Route::get('/', 'HomeLoginController@index');
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 
 Route::get('/', 'HomeController@index');
 
@@ -24,9 +22,7 @@ Route::get('welcome', function () {
     return view('welcomeboard');
 });
 
-
 Route::get('/logout', 'Auth\UsersLoginController@logoutUser');
-
 
 Route::prefix('admin')->group(function(){ 
 
