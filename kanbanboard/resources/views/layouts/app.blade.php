@@ -1,3 +1,15 @@
+<?php
+    if(Auth::guard('teamforge')->check()){
+        $user = Auth::guard('teamforge')->user();
+    }
+    elseif(Auth::check()){
+      $user = Auth::user();
+    }
+    else{
+      $user = NULL;
+    }
+
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -48,7 +60,8 @@
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
 
-      @if(Auth::guard('admin')->check())
+    @if($user != NULL)
+      @if($user->isadmin())
         <li class="dropdown"><a href="#"  class="dropdown-toggle" data-toggle="dropdown"><i class="material-icons">dashboard</i>Dashboard<b class="caret"></b></a>
           <ul class="dropdown-menu">
           <li><a href="#"><i class="material-icons">import_export</i>
@@ -61,7 +74,7 @@
         </li>
       @endif
 
-        <li class="dropdown"><a href="#"  class="dropdown-toggle" data-toggle="dropdown"><i class="material-icons">account_circle</i>Profile<b class="caret"></b></a>
+        <li class="dropdown"><a href="#"  class="dropdown-toggle" data-toggle="dropdown"><i class="material-icons">account_circle</i>{{$user->username}}<b class="caret"></b></a>
           <ul class="dropdown-menu">
             <li>
               <a href="logout">
@@ -71,7 +84,7 @@
             </li>
           </ul>
         </li>
-
+    @endif
       </ul>
       
       </div>
