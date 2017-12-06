@@ -8,6 +8,9 @@ use App\Http\Controllers\Controller;
 use App\Category;
 use Auth;
 
+use DB;
+use PDO;
+
 class CategoryController extends Controller
 {
 
@@ -28,8 +31,11 @@ class CategoryController extends Controller
             return redirect('login');
         */
 
-        $categories = Category::orderBy('id', 'desc')->paginate(10);
-        return view('admin.categories.index', compact('categories'));
+        $categories = Category::orderBy('id', 'desc')->paginate(20);
+        $parent_categories = DB::table('parent_categories')->pluck('name', 'id');
+        
+        return view('admin.categories.index',compact(['categories', 'parent_categories']));
+
         
     }
 
@@ -44,7 +50,11 @@ class CategoryController extends Controller
         if(!Auth::check()) 
             return redirect('login');
         */
-        return view('admin.categories.create');
+
+
+        DB::setFetchMode(PDO::FETCH_ASSOC);
+        $pcategories = DB::table('parent_categories')->pluck('name', 'id');   
+        return view('admin.categories.create',  compact(['pcategories']));
     }
 
     /**
@@ -63,6 +73,7 @@ class CategoryController extends Controller
             $category = new Category;
             $category->name = $request->name;
             $category->limit = $request->limit;
+            $category->sortnumber = $request->sortnumber;
 
             $category->save();
             return redirect('admin/categories');
