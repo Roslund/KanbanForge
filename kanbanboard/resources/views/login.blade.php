@@ -21,12 +21,12 @@
 								<h2>Sign In</h2>
 							</div>
 
-							<div class="content">
+							<div class="content" style="padding-left:30px; padding-right:50px;">
 
 								<form class="form-horizontal" method="POST" action="{{ route('login.submit') }}">
 									{{ csrf_field() }}
 									<div id="local-sign-in-form">
-										<hr style="margin: 0;">
+
 										<div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
 											<div class="form-group">
 												<div class="input-group">
