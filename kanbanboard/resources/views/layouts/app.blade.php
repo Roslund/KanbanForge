@@ -40,7 +40,8 @@
 
     <!-- our own css // andre -->
     <link rel="stylesheet" type="text/css" href="{{ url('/css/general.css') }}" />
-
+    <link href="{{ asset('css/board.css') }}" rel="stylesheet">
+    
     @yield('head')
   </head>
 
@@ -86,7 +87,7 @@
         </li>
     @endif
       </ul>
-      
+
       </div>
     </div>
   </nav>
