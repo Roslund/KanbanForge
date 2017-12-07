@@ -20,7 +20,6 @@
                 <div class="container-fluid">
         <div id="sortableKanbanBoards" class="row">
 
-            <!--sütun başlangıç-->
             <div class="panel panel-primary kanban-col">
                 <div class="panel-heading">
                     TODO
@@ -77,8 +76,7 @@
                     <a href="#">Add a card...</a>
                 </div>
             </div>
-            <!--sütun bitiş-->
-            <!--sütun başlangıç-->
+
             <div class="panel panel-primary kanban-col">
                 <div class="panel-heading">
                     DOING
@@ -112,8 +110,7 @@
                     <a href="#">Add a card...</a>
                 </div>
             </div>
-            <!--sütun bitiş-->
-            <!--sütun başlangıç-->
+
             <div class="panel panel-primary kanban-col">
                 <div class="panel-heading">
                     DONE
@@ -147,7 +144,6 @@
                     <a href="#">Add a card...</a>
                 </div>
             </div>
-            <!--sütun bitiş-->
 
 
         </div>
