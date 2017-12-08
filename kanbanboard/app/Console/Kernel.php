@@ -30,7 +30,7 @@ class Kernel extends ConsoleKernel
 
         $schedule->call(function () {
             \Log::info("Scheduler is refreshing projects from teamforge");
-            Project::refresh_all_artifacts_form_teamforge();
+            Project::refresh_all_artifacts_foom_teamforge();
         })->everyMinute();
     }
 

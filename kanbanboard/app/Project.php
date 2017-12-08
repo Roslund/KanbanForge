@@ -10,7 +10,7 @@ class Project extends Model
   protected $primaryKey = 'project_id';
   protected $fillable = ['project_id', 'createdBy','title', 'description'];
 
-  public static function refresh_all_artifacts_form_teamforge()
+  public static function refresh_all_artifacts_from_teamforge()
   {
     $url = 'https://teamforge.srv247.se/ctfrest/foundation/v1/projects';
     $options=array(
