@@ -15,12 +15,10 @@ class Projects extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
 
-            $table->increments('id');
             $table->string('project_id');
             $table->string('createdBy');
             $table->string('title');
             $table->string('description');
-            $table->timestamps();
         });
     }
 
