@@ -30,7 +30,6 @@ class CreateArtifactsTable extends Migration
             // In the API is called assignetTo instead of personAssigned
             //$table->string('personAssigned');
             $table->string('assignedTo');
-            $table->timestamps();
         });
     }
 

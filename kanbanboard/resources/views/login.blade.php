@@ -1,5 +1,6 @@
 @extends('layouts.app_login')
 @section('content')
+
 <body class="signup-page">
 	<nav class="navbar navbar-transparent navbar-absolute">
 		<div class="container">
@@ -9,6 +10,7 @@
 			</div>
 		</div>
 	</nav>
+
 	<div class="wrapper">
 		<div class="header header-filter" style="background-image: url('/img/crane.jpg'); background-size: cover; background-position: center;">
 			<div class="container">
@@ -18,18 +20,13 @@
 							<div class="header header-primary text-center" style="margin-top: 0; box-shadow: none; margin: 0; border-radius: 3px 3px 0 0;">
 								<h2>Sign In</h2>
 							</div>
-							
-							<div class="content">
-								<div class="text-center">
-									<a href="https://www.collab.net/products/teamforge-alm" class="btn btn-simple btn-primary btn-lg" target="_blank">Teamforge</a>
-									<button class="btn btn-primary btn-simple btn-lg" id="local-sign-in-btn">Local<div class="ripple-container"></div></button>
-								</div>
+
+							<div class="content" style="padding-left:30px; padding-right:50px;">
+
 								<form class="form-horizontal" method="POST" action="{{ route('login.submit') }}">
 									{{ csrf_field() }}
-									
-									<div id="local-sign-in-form" style="display: none;">
-										<hr style="margin: 0;">
-										
+									<div id="local-sign-in-form">
+
 										<div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
 											<div class="form-group">
 												<div class="input-group">
@@ -45,9 +42,6 @@
 												</div>
 											</div>
 										</div>
-										
-										
-										
 										<div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
 											<div class="form-group">
 												<div class="input-group">
@@ -63,29 +57,27 @@
 												</div>
 											</div>
 										</div>
-										
-										
 										<div class="form-group">
 											<div class="col-md-8 col-md-offset-4">
 												<button type="submit" class="btn btn-primary">
-												Login
+													Login
 												</button>
 											</div>
 										</div>
-										
 									</div>
 								</form>
 							</div>
+
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	
+
 	<footer class="footer" style="position: absolute; bottom: 0; z-index: 10; text-align: center; width: 100%;">
 		<div class="container">
-			<
+
 		</div>
 	</footer>
 </body>
