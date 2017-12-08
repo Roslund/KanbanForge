@@ -15,10 +15,11 @@ class Project extends Migration
     {
         Schema::create('project', function (Blueprint $table) {
 
-            $table->string('project_id');
+            $table->string('project_id')->unique();
             $table->string('createdBy');
             $table->string('title');
             $table->string('description');
+            $table->timestamps();
         });
     }
 
