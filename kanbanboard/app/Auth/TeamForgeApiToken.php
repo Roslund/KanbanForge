@@ -36,7 +36,6 @@ class TeamForgeApiToken {
 	        $contents = file_get_contents($url, false, $context);
 	        $contents = utf8_encode($contents); 
 	      	$result = json_decode($contents); 
-	        \Log::info($result->access_token);
 	        return $result->access_token;
 	    }
 	    catch (\Exception $e) {
@@ -55,6 +54,7 @@ class TeamForgeApiToken {
 			}
 			self::$token = self::requestToken(self::$credentials);
 			self::$updatedAt = Carbon::now();
+			//\Log::info('TeamForgeApiToken requested new static token');
 		}
 
 		if(self::$token == NULL ){
