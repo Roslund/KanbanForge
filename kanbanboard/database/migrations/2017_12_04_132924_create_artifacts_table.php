@@ -16,6 +16,7 @@ class CreateArtifactsTable extends Migration
             // In the API the id is a string for some reason
             //$table->increments('id');
             $table->string('id');
+            $table->primary('id');
             $table->string('projectId');
             //In the API is called title and not name
             $table->string('title');
