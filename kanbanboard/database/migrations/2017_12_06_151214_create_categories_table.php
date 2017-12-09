@@ -19,9 +19,8 @@ class CreateCategoriesTable extends Migration
             $table->integer('limit');
             $table->integer('sortnumber');
 
-
             $table->integer('parentcategory')->nullable()->unsigned();
-            
+
             $table->timestamps();
         });
     }
@@ -36,4 +35,3 @@ class CreateCategoriesTable extends Migration
         Schema::dropIfExists('categories');
     }
 }
-
