@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Auth\TeamForgeApiToken;
 
 class Project extends Model
 {
@@ -14,6 +15,10 @@ class Project extends Model
   {
     $url = config('teamforge.url') . '/ctfrest/foundation/v1/projects';
     $options=array(
+      'http' => array(
+        'header'  => "Authorization: Bearer " . TeamForgeApiToken::getToken() . "\r\n",
+        'method'  => 'GET',
+      ),
       "ssl"=>array(
         "verify_peer"=>false,
         "verify_peer_name"=>false,
@@ -24,6 +29,7 @@ class Project extends Model
       $contents = utf8_encode($contents); 
       $results = json_decode($contents); 
 
+      \Log::info($contents);
       foreach ($results->items as $item) {
         $temp = Project::firstOrNew(array('project_id' => $item->id));
         $temp->createdBy = $item->createdBy;
