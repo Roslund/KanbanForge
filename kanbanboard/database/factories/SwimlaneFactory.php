@@ -13,13 +13,11 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(App\User::class, function (Faker $faker) {
-    static $password;
+$factory->define(App\Swimlane::class, function (Faker $faker) {
 
     return [
-        'username' => $faker->unique()->userName,
-        'isadmin' => $faker->boolean,
-        'password' => $password ?: $password = bcrypt('secret'),
-        'remember_token' => str_random(10),
+        'name' => $faker->jobTitle(),
+        'sortnumber' => $faker->unique()->randomNumber(),
+
     ];
 });
