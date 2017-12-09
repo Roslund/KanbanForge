@@ -15,9 +15,11 @@ class CreateCardsTable extends Migration
     {
         Schema::create('cards', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('artifact');
-            $table->integer('category')->nullable()->unsigned();
-            $table->integer('swimlane')->nullable()->unsigned();
+
+            $table->string('artifact_id');
+            $table->integer('category_id')->nullable()->unsigned();
+            $table->integer('swimlane_id')->nullable()->unsigned();
+
             $table->timestamps();
         });
     }

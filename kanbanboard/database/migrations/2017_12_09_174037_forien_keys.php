@@ -16,11 +16,11 @@ class ForienKeys extends Migration
         Schema::table('categories', function ($table) {
             $table->foreign('parentcategory')->references('id')->on('parent_categories')->onDelete('cascade');
         });
-        
+
         Schema::table('cards', function ($table) {
-            $table->foreign('artifact')->references('id')->on('artifacts')->onDelete('cascade');;
-            $table->foreign('category')->references('id')->on('categories')->onDelete('cascade');
-            $table->foreign('swimlane')->references('id')->on('swimlanes')->onDelete('cascade');
+            $table->foreign('artifact_id')->references('id')->on('artifacts')->onDelete('cascade');;
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->foreign('swimlane_id')->references('id')->on('swimlanes')->onDelete('cascade');
         });
     }
 
