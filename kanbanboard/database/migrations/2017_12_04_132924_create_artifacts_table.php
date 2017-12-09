@@ -15,8 +15,7 @@ class CreateArtifactsTable extends Migration
         Schema::create('artifacts', function (Blueprint $table) {
             // In the API the id is a string for some reason
             //$table->increments('id');
-            $table->string('id');
-            $table->primary('id');
+            $table->string('id')->primary();
             $table->string('projectId');
             //In the API is called title and not name
             $table->string('title');
