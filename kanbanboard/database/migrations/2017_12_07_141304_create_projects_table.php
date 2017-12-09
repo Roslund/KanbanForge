@@ -14,11 +14,11 @@ class CreateProjectsTable extends Migration
     public function up()
     {
         Schema::create('projects', function (Blueprint $table) {
-
             $table->string('project_id')->unique();
             $table->string('createdBy');
             $table->string('title');
             $table->string('description');
+            $table->boolean('artifact_fetch')->default(false);
             $table->timestamps();
         });
     }

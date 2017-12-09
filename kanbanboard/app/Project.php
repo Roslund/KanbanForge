@@ -8,11 +8,11 @@ class Project extends Model
 {
   protected $table = 'projects';
   protected $primaryKey = 'project_id';
-  protected $fillable = ['project_id', 'createdBy','title', 'description'];
+  protected $fillable = ['project_id', 'createdBy','title', 'description', 'artifact_fetch'];
 
   public static function refresh_all_artifacts_from_teamforge()
   {
-    $url = 'https://teamforge.srv247.se/ctfrest/foundation/v1/projects';
+    $url = config('teamforge.url') . '/ctfrest/foundation/v1/projects';
     $options=array(
       "ssl"=>array(
         "verify_peer"=>false,
