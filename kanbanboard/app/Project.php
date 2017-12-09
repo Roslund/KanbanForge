@@ -8,7 +8,7 @@ class Project extends Model
 {
   protected $table = 'projects';
   protected $primaryKey = 'project_id';
-  protected $fillable = ['project_id', 'createdBy','title', 'description'];
+  protected $fillable = ['project_id', 'createdBy','title', 'description', 'artifact_fetch'];
 
   public static function refresh_all_artifacts_from_teamforge()
   {

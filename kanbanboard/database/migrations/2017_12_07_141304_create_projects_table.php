@@ -19,6 +19,7 @@ class CreateProjectsTable extends Migration
             $table->string('createdBy');
             $table->string('title');
             $table->string('description');
+            $table->boolean('artifact_fetch')->default(false);
             $table->timestamps();
         });
     }
