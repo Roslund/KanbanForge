@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Projects extends Migration
+class CreateProjectsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,10 +15,11 @@ class Projects extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
 
-            $table->string('project_id');
+            $table->string('project_id')->unique();
             $table->string('createdBy');
             $table->string('title');
             $table->string('description');
+            $table->timestamps();
         });
     }
 
