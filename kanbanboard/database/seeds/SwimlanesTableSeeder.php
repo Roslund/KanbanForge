@@ -15,26 +15,26 @@ class SwimlanesTableSeeder extends Seeder
         	[
 	            'name' => 'Fix failing build',
 	            'sortnumber' => 1,
-				'created_at' => date("Y-m-d H:i:s"),
-				'updated_at' => date("Y-m-d H:i:s"),
+	            'created_at' => date("Y-m-d H:i:s"),
+	            'updated_at' => date("Y-m-d H:i:s"),
         	],
         	[
 	            'name' => 'Post mortem analysis',
 	            'sortnumber' => 2,
-				'created_at' => date("Y-m-d H:i:s"),
-				'updated_at' => date("Y-m-d H:i:s"),
+	            'created_at' => date("Y-m-d H:i:s"),
+	            'updated_at' => date("Y-m-d H:i:s"),
         	],
         	[
 	            'name' => 'Continual improvement',
 	            'sortnumber' => 3,
-				'created_at' => date("Y-m-d H:i:s"),
-				'updated_at' => date("Y-m-d H:i:s"),
+	            'created_at' => date("Y-m-d H:i:s"),
+	            'updated_at' => date("Y-m-d H:i:s"),
         	],
         	[
 	            'name' => 'Tasks and bugfixes',
 	            'sortnumber' => 4,
-				'created_at' => date("Y-m-d H:i:s"),
-				'updated_at' => date("Y-m-d H:i:s"),
+	            'created_at' => date("Y-m-d H:i:s"),
+	            'updated_at' => date("Y-m-d H:i:s"),
         	]
         ]);
     }

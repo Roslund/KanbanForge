@@ -16,15 +16,15 @@ class UsersTableSeeder extends Seeder
 	            'username' => 'localadmin',
 	            'password' => bcrypt('localadmin'),
 	            'isadmin' => true,
-				'created_at' => date("Y-m-d H:i:s"),
-				'updated_at' => date("Y-m-d H:i:s"),
+	            'created_at' => date("Y-m-d H:i:s"),
+	            'updated_at' => date("Y-m-d H:i:s"),
         	],
         	[
 	            'username' => 'localuser',
 	            'password' => bcrypt('localuser'),
 	            'isadmin' => false,
-				'created_at' => date("Y-m-d H:i:s"),
-				'updated_at' => date("Y-m-d H:i:s"),
+	            'created_at' => date("Y-m-d H:i:s"),
+	            'updated_at' => date("Y-m-d H:i:s"),
         	]
         ]);
     }
