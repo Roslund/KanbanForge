@@ -12,7 +12,7 @@ class Project extends Model
 
   public static function refresh_all_artifacts_from_teamforge()
   {
-    $url = 'https://teamforge.srv247.se/ctfrest/foundation/v1/projects';
+    $url = config('teamforge.url') . '/ctfrest/foundation/v1/projects';
     $options=array(
       "ssl"=>array(
         "verify_peer"=>false,

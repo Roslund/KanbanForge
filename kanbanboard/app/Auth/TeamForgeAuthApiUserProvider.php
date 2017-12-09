@@ -70,7 +70,7 @@ class TeamForgeAuthApiUserProvider implements UserProvider {
         \Log::info('function called TeamForge retrieveByCredentials');
         
         //Check if credentials match teamforge credentials
-        $url = 'https://teamforge.srv247.se/oauth/auth/token';
+        $url = config('teamforge.url') . '/oauth/auth/token';
         $data = array(
         'grant_type' => 'password',
         'client_id' => 'api-client',
