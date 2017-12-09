@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 
 use App\Category;
-use App\ParentCategory
+use App\ParentCategory;
 use Auth;
 
 use DB;
