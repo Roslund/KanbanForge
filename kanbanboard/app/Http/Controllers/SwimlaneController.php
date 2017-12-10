@@ -22,7 +22,7 @@ class SwimlaneController extends Controller
      */
     public function index()
     {
-        $swimlanes = Swimlane::orderBy('id', 'desc')->paginate(10);
+        $swimlanes = Swimlane::orderBy('sortnumber', 'asc')->paginate(10);
         return view('admin.swimlane.index', compact('swimlanes'));
     }
 
