@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 
 use App\Category;
-use App\ParentCategory
+use App\ParentCategory;
 use Auth;
 
 use DB;
@@ -18,7 +18,7 @@ class ParentCategoryController extends Controller
 
     public function __construct()
     {
-      $this->middleware('auth:admin');
+      $this->middleware('userisadmin');
     }
     /**
      * Display a listing of the resource.
@@ -27,7 +27,7 @@ class ParentCategoryController extends Controller
      */
     public function index()
     {
-        $pcategories = Category::orderBy('id', 'desc')->paginate(20);
+        $pcategories = ParentCategory::orderBy('id', 'desc')->paginate(20);
 
         return view('admin.parentcategories.index',compact('pcategories'));
     }
@@ -91,8 +91,8 @@ class ParentCategoryController extends Controller
         $pcategory->update($request->all());
 
         $pcategory->save();
-       
-        
+
+
         return redirect('admin/parentcategories');
     }
 
