@@ -29,7 +29,6 @@ class Project extends Model
       $contents = utf8_encode($contents); 
       $results = json_decode($contents); 
 
-      \Log::info($contents);
       foreach ($results->items as $item) {
         $temp = Project::firstOrNew(array('project_id' => $item->id));
         $temp->createdBy = $item->createdBy;
@@ -38,7 +37,7 @@ class Project extends Model
         $temp->save();
       }
     } catch (\Exception $e) {
-      \Log::warning('failed to refresh_all_artifacts_form_teamforge()');
+      \Log::warning('failed to refresh_all_failed_form_teamforge()');
     }
 
     return null;
