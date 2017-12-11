@@ -2,7 +2,7 @@
 
 @section('head')
 
-    <title>Sign In</title>
+    <title>Board</title>
 
 @endsection
 
