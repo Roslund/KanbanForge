@@ -41,7 +41,7 @@
     <!-- our own css // andre -->
     <link rel="stylesheet" type="text/css" href="{{ url('/css/general.css') }}" />
     <link href="{{ asset('css/board.css') }}" rel="stylesheet">
-    
+
     @yield('head')
   </head>
 
@@ -71,6 +71,8 @@
           Categories</a></li>
           <li><a href="{{ url('admin/swimlanes') }}"> <i class="material-icons">view_agenda</i>
           Swimlanes</a></li>
+          <li><a href="{{ url('admin/parentcategories') }}"> <i class="material-icons">view_array</i>
+          ParentCategories</a></li>
         </ul>
         </li>
       @endif

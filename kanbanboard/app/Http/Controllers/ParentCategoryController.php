@@ -27,7 +27,7 @@ class ParentCategoryController extends Controller
      */
     public function index()
     {
-        $pcategories = Category::orderBy('id', 'desc')->paginate(20);
+        $pcategories = ParentCategory::orderBy('id', 'desc')->paginate(20);
 
         return view('admin.parentcategories.index',compact('pcategories'));
     }
@@ -86,13 +86,13 @@ class ParentCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, ParentCategory $parentcategory)
     {
-        $pcategory->update($request->all());
+        $parentcategory->update($request->all());
 
-        $pcategory->save();
-       
-        
+        $parentcategory->save();
+
+
         return redirect('admin/parentcategories');
     }
 
@@ -102,7 +102,7 @@ class ParentCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $parentcategory)
+    public function destroy(ParentCategory $parentcategory)
     {
         $parentcategory->delete();
 
