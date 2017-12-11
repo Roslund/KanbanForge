@@ -56,6 +56,19 @@
       @endforeach
     </tr>
     @endforeach
+
+    <tr>
+      <td>&nbsp;</td>
+      @foreach($categories as $category)
+        <td id="c{{$category['id']}}snull" category_id='{{$category["id"]}}' swimlane_id='null'>
+          @foreach($cards as $card)
+            @if(is_null($card["swimlane_id"]) && $card["category_id"] == $category["id"])
+              <div class='card' id="card{{$card['id']}}">Card {{ $card["id"] }}</div>
+            @endif
+          @endforeach
+        </td>
+      @endforeach
+    </tr>
   </table>
 
 </body>
