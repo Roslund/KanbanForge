@@ -348,7 +348,18 @@ img {
     }
 
 
+table {
+  border-collapse: collapse;
+}
 
+table, th, td {
+  border: 1px solid black;
+}
+
+.card {
+  border: 1px solid red;
+  width: 50px;
+}
 
 
 

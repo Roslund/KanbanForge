@@ -19,7 +19,17 @@ Route::post('login', 'Auth\UsersLoginController@login')->name('login.submit');
 
 
 Route::get('welcome', function () {
-    return view('welcomeboard');
+    $cards = App\Card::all();
+    $categories = App\Category::orderBy('parentcategory', 'asc')->orderBy('id', 'asc')->get();
+    $swimlanes = App\Swimlane::all();
+    $parentCategories = App\ParentCategory::all();
+
+    $data = array('cards' => $cards,
+      'categories' => $categories,
+      'swimlanes' => $swimlanes,
+      'parentCategories' => $parentCategories);
+
+    return view('welcomeboard')->with($data);
 });
 
 Route::get('/logout', 'Auth\UsersLoginController@logout');
