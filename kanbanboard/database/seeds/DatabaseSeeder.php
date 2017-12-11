@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
 
         // Tries to get projects from teamforge
         \App\Project::refresh_all_projects_from_teamforge();
+        \App\Artifact::refresh_all_artifacts_from_teamforge();
 
         /*
         //To insert random data... work, but lets have propper static data instead.
