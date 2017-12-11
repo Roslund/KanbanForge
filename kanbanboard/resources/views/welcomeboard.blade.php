@@ -15,11 +15,13 @@
     @if(count($parentCategories) > 0)
       <tr>
         <th></th>
+        <?php $emptyColumns = 0; ?>
         @foreach($categories as $category)
           @if(is_null($category['parentcategory']))
-            <th></th>
+            <?php $emptyColumns++; ?>
           @endif
         @endforeach
+        <th colspan="{{$emptyColumns++}}"></th>
 
         <?php $colSpanForParentCategory = 0; ?>
         @foreach($parentCategories as $parentCategory)
