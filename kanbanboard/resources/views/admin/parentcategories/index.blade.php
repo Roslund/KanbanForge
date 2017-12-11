@@ -9,7 +9,7 @@
 
 <h1><a href="/" class="text-muted no-underline">Home</a> \ ParentCategory</h1>
 <hr>
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createModal" title="Edit Swimlane">Add</button>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createModal" title="Add Parent Category">Add</button>
 
 <div class="table">
 	<table class="table table-bordered table-striped table-hover table-fixed">
@@ -36,13 +36,13 @@
 				<a href="#down" class="btn btn-info btn-sm" title="Down">
 				<span class="glyphicon glyphicon-arrow-down" aria-hidden="true"/></a>
 
-				<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editModal-{{ $item->id }}" title="Edit Swimlane">
+				<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editModal-{{ $item->id }}" title="Edit Parent Category">
 				<span class="glyphicon glyphicon-pencil" aria-hidden="true"/>
 				</button>
 
 				{!! Form::open([
 				'method'=>'DELETE',
-				'url' => ['/admin/parentcategories', $item->name],
+				'url' => ['/admin/parentcategories', $item->id],
 				'style' => 'display:inline'
 				]) !!}
 				{!! Form::button('<span class="glyphicon glyphicon-trash" aria-hidden="true" title="Delete ParentCategory" />', array(
@@ -63,29 +63,27 @@
 </div>
 
 @foreach($pcategories as $item)
-<!-- Edit Modal -->
-<div class="modal fade" id="editModal-{{ $item->id }}" tabindex="-1" role="dialog" aria-labelledby="Edit" aria-hidden="true">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h2 class="modal-title" id="exampleModalLongTitle">Edit {{ $item->name }}</h2>
-			</div>
-			<div class="modal-body" style="margin-top: 0; padding-top: 0;">
-				{!! Form::model($item, [
-				'method' => 'PATCH',
-				'url' => ['/admin/parentcategories', $item->id],
-				'class' => 'form-horizontal',
-				'files' => true
-				]) !!}
-
-				<div class="form-group {{ $errors->has('name') ? 'has-error' : ''}}">
-					{!! Form::label('name', 'Name:', ['class' => 'control-label', 'style' => 'margin-left:15px;color:#000000;margin-bottom:10px;']) !!}
-
-					<div class="col-sm-12">
-						{!! Form::text('name', null, ['class' => 'form-control', 'required' => 'required']) !!}
-						{!! $errors->first('name', '<p class="help-block">:message</p>') !!}
+		<!-- Edit Modal -->
+		<div class="modal fade" id="editModal-{{ $item->id }}" tabindex="-1" role="dialog" aria-labelledby="Edit" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h2 class="modal-title" id="exampleModalLongTitle">Edit {{ $item->name }}</h2>
 					</div>
-				</div>
+					<div class="modal-body" style="margin-top: 0; padding-top: 0;">
+						{!! Form::model($item, [
+						'method' => 'PATCH',
+						'url' => ['/admin/parentcategories', $item->id],
+						'class' => 'form-horizontal',
+						'files' => true
+						]) !!}
+						<div class="form-group {{ $errors->has('name') ? 'has-error' : ''}}">
+							{!! Form::label('name', 'Name:', ['class' => 'control-label', 'style' => 'margin-left:15px;color:#000000;margin-bottom:10px;']) !!}
+							<div class="col-sm-12">
+								{!! Form::text('name', null, ['class' => 'form-control', 'required' => 'required']) !!}
+								{!! $errors->first('name', '<p class="help-block">:message</p>') !!}
+							</div>
+						</div>
 
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -105,7 +103,7 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h2 class="modal-title" id="exampleModalLongTitle">Create parentcategory</h2>
+				<h2 class="modal-title" id="exampleModalLongTitle">Create Parent Category</h2>
 			</div>
 
 			<div class="modal-body" style="margin-top: 0; padding-top: 0;">
