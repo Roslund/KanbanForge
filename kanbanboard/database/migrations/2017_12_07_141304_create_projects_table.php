@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCardsTable extends Migration
+class CreateProjectsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,12 @@ class CreateCardsTable extends Migration
      */
     public function up()
     {
-        Schema::create('cards', function (Blueprint $table) {
-            $table->increments('id');
-
-            $table->string('artifact_id');
-            $table->integer('category_id')->nullable()->unsigned();
-            $table->integer('swimlane_id')->nullable()->unsigned();
-
+        Schema::create('projects', function (Blueprint $table) {
+            $table->string('project_id')->unique();
+            $table->string('createdBy');
+            $table->string('title');
+            $table->string('description');
+            $table->boolean('artifact_fetch')->default(false);
             $table->timestamps();
         });
     }
@@ -31,6 +30,6 @@ class CreateCardsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cards');
+        Schema::dropIfExists('projects');
     }
 }
