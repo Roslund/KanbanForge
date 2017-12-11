@@ -11,7 +11,7 @@ class Project extends Model
   protected $primaryKey = 'project_id';
   protected $fillable = ['project_id', 'createdBy','title', 'description', 'artifact_fetch'];
 
-  public static function refresh_all_artifacts_from_teamforge()
+  public static function refresh_all_projects_from_teamforge()
   {
     $url = config('teamforge.url') . '/ctfrest/foundation/v1/projects';
     $options=array(
