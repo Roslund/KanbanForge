@@ -12,6 +12,11 @@ use Illuminate\Support\Facades\Input;
 class ArtifactController extends Controller {
     
     
+	public function __construct()
+    {
+      $this->middleware('userisadmin');
+    }
+    
     public function index(){
         //Gets the artifacts from the database! :) 
         $artifacts = Artifact::all();
