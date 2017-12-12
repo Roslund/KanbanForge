@@ -5,6 +5,12 @@
 @endsection
 
 @section('content')
+
+
+	<div class="col-sm-offset-9 col-sm-3">
+			<a href="{{ action('ArtifactController@refresh')}}" class="btn btn-primary form-control" style="line-height:38px;height:50px;"><i class="fa fa-refresh" aria-hidden="true"></i> Update</a>
+	</div>
+
 <div class="col-md-12">
 	{!! Form::open(['url' => 'admin/selected', 'class' => 'form-horizontal form', 'files' => true]) !!}
 		<div class="table">

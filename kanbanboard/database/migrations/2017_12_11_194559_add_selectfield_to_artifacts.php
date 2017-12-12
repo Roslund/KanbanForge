@@ -15,7 +15,7 @@ class AddSelectfieldToArtifacts extends Migration
     {
         Schema::table('artifacts', function (Blueprint $table) {
             //
-             $table->boolean('select')->default(0);
+            $table->boolean('select')->default(0);
         });
     }
 
