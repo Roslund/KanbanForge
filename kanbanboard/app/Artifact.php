@@ -31,18 +31,30 @@ class Artifact extends Model
       $contents = utf8_encode($contents); 
       $results = json_decode($contents); 
 
-      \Log::info($results->items);
+      $newArtifacts = array();
       foreach ($results->items as $item) {
         $temp = Artifact::firstOrNew(array('id' => $item->id));
+        $temp->id = $item->id;
         $temp->createdDate = $item->createdDate;
         $temp->title = $item->title;
         $temp->status = $item->status;
         $temp->description = $item->description;
         $temp->assignedTo = $item->assignedTo;
         $temp->save();
+        $newArtifacts[] = $temp;
       }
+
+      //Delete artifacts that are not in database.
+      if(!empty($newArtifacts)){
+        $artifactsInDatabase = Artifact::all();
+        $artifactsToRemove = $artifactsInDatabase->diff($newArtifacts);
+        foreach ($artifactsToRemove as $artifactToRemove) {
+          $artifactToRemove->delete();
+        }
+      }
+
     } catch (\Exception $e) {
-    	\Log::info($e);
+      \Log::info($e);
       \Log::warning('failed to refresh_all_artifacts_from_teamforge()');
     }
 
