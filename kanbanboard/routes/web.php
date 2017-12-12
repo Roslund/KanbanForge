@@ -20,8 +20,8 @@ Route::post('login', 'Auth\UsersLoginController@login')->name('login.submit');
 
 Route::get('welcome', function () {
     $cards = App\Card::all();
-    $categories = App\Category::orderBy('parentcategory', 'asc')->orderBy('id', 'asc')->get();
-    $swimlanes = App\Swimlane::all();
+    $categories = App\Category::orderBy('parentcategory', 'asc')->orderBy('sortnumber', 'asc')->get();
+    $swimlanes = App\Swimlane::orderBy('sortnumber', 'asc')->get();
     $parentCategories = App\ParentCategory::all();
 
     $data = array('cards' => $cards,
