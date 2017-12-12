@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -107,5 +106,9 @@ class SwimlaneController extends Controller
         $swimlane->delete();
 
         return redirect('admin/swimlanes');
+    }
+
+    public function modify(){
+
     }
 }

@@ -32,11 +32,16 @@
 			<td>{{ $item->name }}</td>
 
 			<td>
-				<a href="#up" class="btn btn-info btn-sm" title="Up">
-				<span class="glyphicon glyphicon-arrow-up" aria-hidden="true"/></a>
+				
+				{{Form::button('<span class="glyphicon glyphicon-arrow-up" aria-hidden="true" title="Up">', array(
+					'class' => 'btn btn-info btn-sm',
+					'title' => 'Up',
+				))}}
 
-				<a href="#down" class="btn btn-info btn-sm" title="Down">
-				<span class="glyphicon glyphicon-arrow-down" aria-hidden="true"/></a>
+				{{Form::button('<span class="glyphicon glyphicon-arrow-down" aria-hidden="true" title="Down">', array(
+					'class' => 'btn btn-info btn-sm',
+					'title' => 'Down',
+				))}}
 
 				<!--
 				<a href="{{ url('/admin/swimlanes/' . $item->id) }}" class="btn btn-success btn-sm" title="View Swimlane">
