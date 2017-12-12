@@ -43,4 +43,14 @@ Route::prefix('admin')->group(function(){
 	/*parentcategories*/
 	Route::resource('/parentcategories', 'ParentCategoryController');
 
+	/*see all artifacts*/
+	Route::get('filter', 'ArtifactController@index');
+
+	/*refresh artifacts*/
+	Route::get('filter/update', 'ArtifactController@refresh');
+
+
+	/*selected artifacts*/
+	Route::post('selected', 'ArtifactController@select');
+
 });

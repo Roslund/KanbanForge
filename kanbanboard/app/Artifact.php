@@ -9,6 +9,7 @@ class Artifact extends Model
 {
   protected $table = 'artifacts';
   protected $primaryKey = 'id';
+  public $incrementing = false;
   protected $fillable = ['title','createdDate','status','description','assignedTo'];
 
 
