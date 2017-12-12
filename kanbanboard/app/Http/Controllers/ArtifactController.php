@@ -19,7 +19,7 @@ class ArtifactController extends Controller {
 
     public function index(){
         //Gets the artifacts from the database! :) 
-        $artifacts = Artifact::all()->sortByDesc("id");;
+        $artifacts = Artifact::all()->sortByDesc("id");
 
         return view('admin.artifacts.index',compact(['artifacts']));
     }
