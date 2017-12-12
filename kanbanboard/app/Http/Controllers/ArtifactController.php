@@ -16,10 +16,10 @@ class ArtifactController extends Controller {
     {
       $this->middleware('userisadmin');
     }
-    
+
     public function index(){
         //Gets the artifacts from the database! :) 
-        $artifacts = Artifact::all();
+        $artifacts = Artifact::all()->sortByDesc("id");;
 
         return view('admin.artifacts.index',compact(['artifacts']));
     }
