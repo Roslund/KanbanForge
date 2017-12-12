@@ -50,6 +50,10 @@ class ParentCategoryController extends Controller
      */
     public function store(Request $request)
     {
+
+        $this->validate(request(), [
+          'name'=>'required'
+        ]);
         $pcategory = new ParentCategory;
         $pcategory->name = $request->name;
 
