@@ -25,14 +25,14 @@ Route::get('welcome', function () {
 Route::get('/logout', 'Auth\UsersLoginController@logout');
 
 
-Route::prefix('admin')->group(function(){ 
+Route::prefix('admin')->group(function(){
 
 	/*categories*/
 	Route::resource('/categories', 'CategoryController');
 
 	/*Route::get('/categories/{category}',
 		['as' => 'admin.categories', 'uses' => 'CategoryController@show']);
-	
+
 	/*swimlanes*/
 	Route::resource('/swimlanes', 'SwimlaneController');
 
@@ -42,5 +42,15 @@ Route::prefix('admin')->group(function(){
 
 	/*parentcategories*/
 	Route::resource('/parentcategories', 'ParentCategoryController');
+
+	/*see all artifacts*/
+	Route::get('filter', 'ArtifactController@index');
+
+	/*refresh artifacts*/
+	Route::get('filter/update', 'ArtifactController@refresh');
+
+
+	/*selected artifacts*/
+	Route::post('selected', 'ArtifactController@select');
 
 });

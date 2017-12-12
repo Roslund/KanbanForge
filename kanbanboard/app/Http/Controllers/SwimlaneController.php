@@ -44,7 +44,10 @@ class SwimlaneController extends Controller
      */
     public function store(Request $request)
     {
-
+        $this->validate(request(), [
+          'name'=>'required',
+          'sortnumber'=>'required'
+        ]);
         $swimlane = new Swimlane;
         $swimlane->name = $request->name;
         $swimlane->sortnumber = $request->sortnumber;
