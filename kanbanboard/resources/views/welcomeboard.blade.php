@@ -8,48 +8,76 @@
 
 @section('content')
 
-
 <body class="signup">
-  @if(count($categories) > 0)
-    <table>
-      @if(count($parentCategories) > 0)
+  <!--Style-->
+  <h1>Kanban board</h1>
+  <!--<div class="tbl-header">
+    <table cellpadding="0" cellspacing="0" border="0">
+      <thead>
         <tr>
-          <th></th>
-          <?php $emptyColumns = 0; ?>
-          @foreach($categories as $category)
-            @if(is_null($category['parentcategory']))
-              <?php $emptyColumns++; ?>
-            @endif
-          @endforeach
-          <th colspan="{{$emptyColumns++}}"></th>
-
-          <?php $colSpanForParentCategory = 0; ?>
-          @foreach($parentCategories as $parentCategory)
-            @foreach($categories as $category)
-              @if($category['parentcategory'] == $parentCategory['id'])
-                <?php $colSpanForParentCategory++; ?>
-              @endif
-            @endforeach
-            <th colspan="{{$colSpanForParentCategory}}">{{$parentCategory['name']}}</th>
-            <?php $colSpanForParentCategory = 0 ?>
-          @endforeach
+          <th>Code</th>
+          <th>Company</th>
+          <th>Price</th>
+          <th>Change</th>
+          <th>Change %</th>
         </tr>
-      @endif
-      <tr>
-        <th></th>
-        @foreach($categories as $category)
-          <th>{{ $category["name"] }}</th>
-        @endforeach
-      </tr>
+      </thead>
+    </table>
+  </div>-->
+
+  <div class="tbl-header">
+      @if(count($categories) > 0)
+        <table cellpadding="0" cellspacing="0" border="0">
+          <tbody>
+          @if(count($parentCategories) > 0)
+            <tr>
+              <th></th>
+              <?php $emptyColumns = 0; ?>
+              @foreach($categories as $category)
+                @if(is_null($category['parentcategory']))
+                  <?php $emptyColumns++; ?>
+                @endif
+              @endforeach
+              <th colspan="{{$emptyColumns++}}"></th>
+
+              <?php $colSpanForParentCategory = 0; ?>
+              @foreach($parentCategories as $parentCategory)
+                @foreach($categories as $category)
+                  @if($category['parentcategory'] == $parentCategory['id'])
+                    <?php $colSpanForParentCategory++; ?>
+                  @endif
+                @endforeach
+                <th colspan="{{$colSpanForParentCategory}}">{{$parentCategory['name']}}</th>
+                <?php $colSpanForParentCategory = 0 ?>
+              @endforeach
+            </tr>
+          @endif
+          <tr>
+            <th></th>
+            @foreach($categories as $category)
+              <th>{{ $category["name"] }}</th>
+            @endforeach
+            @endif
+          </tr>
+        </tbody>
+    </table>
+  </div>
+
+  <div class="tbl-content">
+  @if(count($categories) > 0)
+    <table cellpadding="0" cellspacing="0" border="0">
 
       @foreach($swimlanes as $swimlane)
       <tr>
-        <td>{{ $swimlane["name"] }}</td>
+        <th>{{ $swimlane["name"] }}</th>
         @foreach($categories as $category)
           <td id="c{{$category['id']}}s{{$swimlane['id']}}" category_id='{{$category["id"]}}' swimlane_id='{{$swimlane["id"]}}'>
             @foreach($cards as $card)
               @if($card["swimlane_id"] == $swimlane["id"] && $card["category_id"] == $category["id"])
-                <div class='card' id="card{{$card['id']}}">Card {{ $card["id"] }}</div>
+                <div class='card' id="card{{$card['id']}}">Card {{ $card["id"] }}
+                  Assignee:
+                  Description:
+                </div>
               @endif
             @endforeach
           </td>
@@ -63,16 +91,21 @@
           <td id="c{{$category['id']}}snull" category_id='{{$category["id"]}}' swimlane_id='null'>
             @foreach($cards as $card)
               @if(is_null($card["swimlane_id"]) && $card["category_id"] == $category["id"])
-                <div class='card' id="card{{$card['id']}}">Card {{ $card["id"] }}</div>
+                <div class='card' id="card{{$card['id']}}">
+                  Card {{ $card["id"] }}
+                </div>
               @endif
             @endforeach
           </td>
         @endforeach
       </tr>
+    </tbody>
     </table>
   @else
     <h3>The administrator hasn't defined a board, please wait for them to do</h3>
   @endif
+
+  </div>
 </body>
 
 @endsection
@@ -88,6 +121,8 @@
 
   <!-- Kanban Board imports -->
   <script src="{{URL::asset('js/kanbanBoard/boardFunctionality.js')}}"></script>
+
+  <link rel="stylesheet" type="text/css" href="{{ url('/css/board-v2.css') }}" />
 
   <!-- This is to inject the current server timestamp into the cardsTimestamp variable -->
   <!-- Can't inject it directly into the javascript as it doesn't get compiled with blade -->
