@@ -65,7 +65,7 @@
       @if($user->isadmin())
         <li class="dropdown"><a href="#"  class="dropdown-toggle" data-toggle="dropdown"><i class="material-icons">dashboard</i>Dashboard<b class="caret"></b></a>
           <ul class="dropdown-menu">
-          <li><a href="#"><i class="material-icons">import_export</i>
+          <li><a href="{{ url('admin/filter') }}"><i class="material-icons">import_export</i>
           Select artifacts</a></li>
           <li><a href="{{ url('admin/categories') }}"> <i class="material-icons">view_week</i>
           Categories</a></li>
@@ -98,6 +98,15 @@
 
 
     <div class="container">
+      @if ($errors->any())
+      <div class="alert alert-danger">
+        <ul>
+          @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+          @endforeach
+        </ul>
+      </div>
+      @endif
       @yield('content')
     </div>
     <!-- In order for theme to work
