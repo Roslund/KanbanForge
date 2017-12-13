@@ -42,7 +42,7 @@ class ProjectController extends Controller
           }
 
         }
-          return redirect('/welcome');
+          return redirect('/board');
       }
       return back();
     }
