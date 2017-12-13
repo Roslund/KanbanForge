@@ -19,7 +19,7 @@ Route::post('login', 'Auth\UsersLoginController@login')->name('login.submit');
 
 
 Route::get('welcome', function () {
-    return view('welcomeboard');
+    return view('welcome');
 });
 
 Route::get('/logout', 'Auth\UsersLoginController@logout');
