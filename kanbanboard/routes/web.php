@@ -18,8 +18,8 @@ Route::get('login', 'Auth\UsersLoginController@showLoginForm')->name('users.logi
 Route::post('login', 'Auth\UsersLoginController@login')->name('login.submit');
 
 
-Route::get('welcome', function () {
-    return view('welcome');
+Route::get('board', function () {
+    return view('board');
 });
 
 Route::get('/logout', 'Auth\UsersLoginController@logout');
