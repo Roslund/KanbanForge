@@ -17,7 +17,7 @@ class CreateArtifactsTable extends Migration
             $table->string('title');
             $table->string('createdDate');
             $table->string('status');
-            $table->string('description');
+            $table->longText('description');
             $table->string('assignedTo');
             $table->timestamps();
         });
