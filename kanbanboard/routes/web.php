@@ -18,11 +18,12 @@ Route::get('login', 'Auth\UsersLoginController@showLoginForm')->name('users.logi
 Route::post('login', 'Auth\UsersLoginController@login')->name('login.submit');
 
 
-Route::get('welcome', function () {
-    return view('welcomeboard');
+Route::get('board', function () {
+    return view('board');
 });
 
 Route::get('/logout', 'Auth\UsersLoginController@logout');
+
 
 
 Route::prefix('admin')->group(function(){
@@ -30,15 +31,10 @@ Route::prefix('admin')->group(function(){
 	/*categories*/
 	Route::resource('/categories', 'CategoryController');
 
-	/*Route::get('/categories/{category}',
-		['as' => 'admin.categories', 'uses' => 'CategoryController@show']);
 
 	/*swimlanes*/
 	Route::resource('/swimlanes', 'SwimlaneController');
 
-	/*Route::get('/swimlanes/{swimlane}',
-		['as' => 'admin.swimlanes', 'uses' => 'SwimlaneController@show']);
-	*/
 
 	/*parentcategories*/
 	Route::resource('/parentcategories', 'ParentCategoryController');

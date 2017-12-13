@@ -39,9 +39,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        DB::setFetchMode(PDO::FETCH_ASSOC);
-        $pcategories = DB::table('parent_categories')->pluck('name', 'id');
-        return view('admin.categories.create',  compact(['pcategories']));
+       
     }
 
     /**
@@ -74,7 +72,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        return view('admin.categories.show', compact('category'));
+        
     }
 
     /**
@@ -85,7 +83,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        return view('admin.categories.edit', compact('category'));
+        
     }
 
     /**
@@ -97,9 +95,7 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        /*if(!Auth::check())
-            return redirect('login');*/
-
+       
         $category->update($request->all());
 
         $category->save();
