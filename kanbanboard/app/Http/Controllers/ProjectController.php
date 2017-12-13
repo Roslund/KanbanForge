@@ -23,86 +23,34 @@ class ProjectController extends Controller
     public function index()
     {
       $project = Project::all();
-      return $project;
 
       return view('admin.projects.index',compact('project'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
     public function change(Request $request)
     {
-
-      return $request->input('checkbox');
       $myCheckboxes = $request->input('checkbox');
-
-      foreach($myCheckboxes as $item)
+      if($myCheckboxes)
       {
-        Project::where('title','item')->update('artifact_fetch',1);
-      }
+        foreach($myCheckboxes as $item)
+        {
+          $projects = Project::where('project_id',$item)->first();
+          if($projects)
+          {
+            $projects->artifact_fetch = 1;
+            $projects->save();
+          }
 
+        }
+          return redirect('/welcome');
+      }
+      return back();
     }
+
+    public function refresh(){
+
+      Project::refresh_all_projects_from_teamforge();
+
+        return redirect('/admin/projects');
+      }
 }

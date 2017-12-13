@@ -33,7 +33,7 @@
 
             			<td>
                     <div class="checkbox">
-                      <label><input type="checkbox" name="checkbox[]" value="{{$item}}">To import</label>
+                      <label><input type="checkbox" name="checkbox[]" value="{{$item->project_id}}">To import</label>
                     </div>
             			</td>
 
@@ -45,6 +45,5 @@
 
           <button type="button submit" class="btn btn-primary" >Import</button>
 </form>
-</div>
-
+      <a href="{{ action('ProjectController@refresh')}}" class="btn btn-primary"><i class="fa fa-refresh" aria-hidden="true"></i> Update</a>
 @endsection
