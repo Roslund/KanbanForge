@@ -25,20 +25,16 @@ Route::get('welcome', function () {
 Route::get('/logout', 'Auth\UsersLoginController@logout');
 
 
+
 Route::prefix('admin')->group(function(){
 
 	/*categories*/
 	Route::resource('/categories', 'CategoryController');
 
-	/*Route::get('/categories/{category}',
-		['as' => 'admin.categories', 'uses' => 'CategoryController@show']);
 
 	/*swimlanes*/
 	Route::resource('/swimlanes', 'SwimlaneController');
 
-	/*Route::get('/swimlanes/{swimlane}',
-		['as' => 'admin.swimlanes', 'uses' => 'SwimlaneController@show']);
-	*/
 
 	/*parentcategories*/
 	Route::resource('/parentcategories', 'ParentCategoryController');
