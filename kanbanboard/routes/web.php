@@ -43,4 +43,7 @@ Route::prefix('admin')->group(function(){
 	/*parentcategories*/
 	Route::resource('/parentcategories', 'ParentCategoryController');
 
+  Route::resource('/projects', 'ProjectController');
+Route::post('change', 'ProjectController@change');
+
 });
