@@ -73,6 +73,8 @@
           Swimlanes</a></li>
           <li><a href="{{ url('admin/parentcategories') }}"> <i class="material-icons">view_array</i>
           ParentCategories</a></li>
+          <li><a href="{{ url('admin/projects') }}"> <i class="material-icons">description</i>
+          Projects</a></li>
         </ul>
         </li>
       @endif

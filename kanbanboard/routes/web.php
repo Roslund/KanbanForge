@@ -49,8 +49,12 @@ Route::prefix('admin')->group(function(){
 	/*refresh artifacts*/
 	Route::get('filter/update', 'ArtifactController@refresh');
 
-
 	/*selected artifacts*/
 	Route::post('selected', 'ArtifactController@select');
+
+  Route::get('/projects', 'ProjectController@index');
+  Route::get('projects/update', 'ProjectController@refresh');
+  Route::post('change', 'ProjectController@change');
+
 
 });
