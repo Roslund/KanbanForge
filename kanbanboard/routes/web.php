@@ -11,7 +11,12 @@
 |
 */
 
-Route::get('/', 'HomeController@index');
+Route::get('/', function () {
+	if(\Auth::check() || \Auth::guard('teamforge')->check()){
+		return view('board');
+	}
+	return redirect('/login');
+});
 
 Route::get('login', 'Auth\UsersLoginController@showLoginForm')->name('users.login');
 
