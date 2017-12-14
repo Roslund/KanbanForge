@@ -107,7 +107,7 @@
 <!-- Kanban Board imports -->
 <script src="{{URL::asset('js/kanbanBoard/boardFunctionality.js')}}"></script>
 
-<link rel="stylesheet" type="text/css" href="{{ url('/css/board-v2.css') }}" />
+<link rel="stylesheet" type="text/css" href="{{ url('/css/board.css') }}" />
 
 <!-- This is to inject the current server timestamp into the cardsTimestamp variable -->
 <!-- Can't inject it directly into the javascript as it doesn't get compiled with blade -->
