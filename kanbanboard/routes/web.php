@@ -13,7 +13,7 @@
 
 Route::get('/', function () {
 	if(\Auth::check() || \Auth::guard('teamforge')->check()){
-		return view('board');
+		return redirect('/board');
 	}
 	return redirect('/login');
 });
@@ -22,9 +22,18 @@ Route::get('login', 'Auth\UsersLoginController@showLoginForm')->name('users.logi
 
 Route::post('login', 'Auth\UsersLoginController@login')->name('login.submit');
 
-
 Route::get('board', function () {
-    return view('board');
+    $cards = App\Card::all();
+    $categories = App\Category::orderBy('parentcategory', 'asc')->orderBy('sortnumber', 'asc')->get();
+    $swimlanes = App\Swimlane::orderBy('sortnumber', 'asc')->get();
+    $parentCategories = App\ParentCategory::all();
+
+    $data = array('cards' => $cards,
+      'categories' => $categories,
+      'swimlanes' => $swimlanes,
+      'parentCategories' => $parentCategories);
+
+    return view('board')->with($data);
 });
 
 Route::get('/logout', 'Auth\UsersLoginController@logout');

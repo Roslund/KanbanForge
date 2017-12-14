@@ -1,0 +1,155 @@
+
+h1{
+  font-size: 30px;
+  color: #000000;
+  text-transform: uppercase;
+  font-weight: 300;
+  text-align: center;
+  margin-bottom: 15px;
+}
+table{
+  width:100%;
+  table-layout: fixed;
+}
+
+.tbl-board{
+  height: auto;
+  overflow-x:auto;
+  margin-top: 0px;
+  border: 1px solid rgba(255,255,255,0.3);
+  background-color: rgba(221, 221, 221, 0.5);
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.3);
+}
+
+.empty-th
+{
+  background-color: transparent;
+}
+
+
+th{
+  padding: 20px 15px;
+  text-align: center;
+  font-weight: 500;
+  font-size: 12px;
+  color: #000000;
+  text-transform: uppercase;
+}
+td{
+  padding: 15px;
+  text-align: left;
+  vertical-align:middle;
+  font-weight: 300;
+  font-size: 12px;
+  color: #000000;
+  border-right: solid 2px rgba(255,255,255,1);
+}
+
+.tbl-board thead tr
+{
+  border-bottom: solid 2px rgba(255,255,255,1);
+}
+
+.tbl-board th
+{
+  border-right: solid 2px rgba(255,255,255,1);
+}
+
+.tbl-board thead th:last-of-type
+{
+  border-right: none;
+}
+
+.tbl-board tbody tr
+{
+  border-bottom: dashed 2px rgba(255,255,255,1);
+}
+
+.tbl-board td:last-of-type
+{
+  border-right: none;
+}
+
+.tbl-board tbody tr:last-of-type
+{
+  border-bottom: none;
+}
+
+.tbl-board tbody td
+{
+  padding: 5px;
+}
+
+.tbl-board
+{
+  height: calc(100vh - 200px);
+  overflow-y: scroll;
+  overflow-x: none;
+}
+
+.card{
+  display: block;
+  margin: 5px 0;
+  padding: 5px 10px;
+  color: #333;
+  text-decoration: none;
+  font-weight: bold;
+  border: 1px solid #ccc;
+  background: #fafafa;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+
+  box-shadow:
+		0 10px 20px -12px rgba(156,39,176,0.35),
+		0 3px 20px 0px rgba(156,39,176, 0.12),
+		0 8px 10px -5px rgba(156,39,176, 0.2);
+}
+
+.card:hover{
+  background: rgba(156,39,176, 0.12);
+}
+
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,500,300,700);
+body{
+  background-color: white;
+  font-family: 'Roboto', sans-serif;
+}
+section{
+  margin: 50px;
+}
+
+.made-with-love {
+  margin-top: 40px;
+  padding: 10px;
+  clear: left;
+  text-align: center;
+  font-size: 10px;
+  font-family: arial;
+  color: #000000;
+}
+.made-with-love i {
+  font-style: normal;
+  color: #F50057;
+  font-size: 14px;
+  position: relative;
+  top: 2px;
+}
+.made-with-love a {
+  color: #fff;
+  text-decoration: none;
+}
+.made-with-love a:hover {
+  text-decoration: underline;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+::-webkit-scrollbar-thumb {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
