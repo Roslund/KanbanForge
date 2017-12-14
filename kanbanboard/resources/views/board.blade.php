@@ -36,7 +36,7 @@
               $last = $category['parentcategory'];
             ?>
           @endforeach
-          
+
           @foreach($parentCategoriesOrder as $group)
             <th colspan="{{$group['count']}}">{{$group['value']}}</th>
           @endforeach
@@ -53,37 +53,39 @@
 
     <tbody>
       @foreach($swimlanes as $swimlane)
-      <tr>
-      <th>{{ $swimlane["name"] }}</th>
-      @foreach($categories as $category)
-        <td id="c{{$category['id']}}s{{$swimlane['id']}}" category_id='{{$category["id"]}}' swimlane_id='{{$swimlane["id"]}}'>
-          @foreach($cards as $card)
-            @if($card["swimlane_id"] == $swimlane["id"] && $card["category_id"] == $category["id"])
-            <div class='card' id="card{{$card['id']}}">Card {{ $card["id"] }}
-              Assignee:
-              Description:
-            </div>
-            @endif
-          @endforeach
-        </td>
-      @endforeach
-      </tr>
-      @endforeach
-
-      <tr>
-        <td>&nbsp;</td>
+        <tr>
+        <th>{{ $swimlane["name"] }}</th>
         @foreach($categories as $category)
-          <td id="c{{$category['id']}}snull" category_id='{{$category["id"]}}' swimlane_id='null'>
+          <td id="c{{$category['id']}}s{{$swimlane['id']}}" category_id='{{$category["id"]}}' swimlane_id='{{$swimlane["id"]}}'>
             @foreach($cards as $card)
-              @if(is_null($card["swimlane_id"]) && $card["category_id"] == $category["id"])
-              <div class='card' id="card{{$card['id']}}">
-              Card {{ $card["id"] }}
+              @if($card["swimlane_id"] == $swimlane["id"] && $card["category_id"] == $category["id"])
+              <div class='card' id="card{{$card['id']}}">Card {{ $card["id"] }}
+                Assignee:
+                Description:
               </div>
               @endif
             @endforeach
           </td>
         @endforeach
       </tr>
+      @endforeach
+
+      @if($cardsInNullSwimlaneCount > 0)
+        <tr>
+          <td>&nbsp;</td>
+          @foreach($categories as $category)
+            <td id="c{{$category['id']}}snull" category_id='{{$category["id"]}}' swimlane_id='null'>
+              @foreach($cards as $card)
+                @if(is_null($card["swimlane_id"]) && $card["category_id"] == $category["id"])
+                <div class='card' id="card{{$card['id']}}">
+                Card {{ $card["id"] }}
+                </div>
+                @endif
+              @endforeach
+            </td>
+          @endforeach
+        </tr>
+      @endif
     </tbody>
   </table>
 
