@@ -26,17 +26,10 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        /*
-        if(!Auth::check()) 
-            return redirect('login');
-        */
-
         $categories = Category::orderBy('id', 'desc')->paginate(20);
         $parent_categories = DB::table('parent_categories')->pluck('name', 'id');
-        
-        return view('admin.categories.index',compact(['categories', 'parent_categories']));
 
-        
+        return view('admin.categories.index',compact(['categories', 'parent_categories']));
     }
 
     /**
@@ -46,15 +39,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        /*
-        if(!Auth::check()) 
-            return redirect('login');
-        */
-
-
-        DB::setFetchMode(PDO::FETCH_ASSOC);
-        $pcategories = DB::table('parent_categories')->pluck('name', 'id');   
-        return view('admin.categories.create',  compact(['pcategories']));
+       
     }
 
     /**
@@ -65,11 +50,11 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        /*
-        if(!Auth::check()) 
-            return redirect('login');
-        */
-
+            $this->validate(request(), [
+              'name'=>'required',
+              'limit'=>'required',
+              'sortnumber'=>'required'
+            ]);
             $category = new Category;
             $category->name = $request->name;
             $category->limit = $request->limit;
@@ -77,7 +62,6 @@ class CategoryController extends Controller
 
             $category->save();
             return redirect('admin/categories');
-
     }
 
     /**
@@ -88,7 +72,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        return view('admin.categories.show', compact('category'));
+        
     }
 
     /**
@@ -99,11 +83,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        /*if(!Auth::check()) 
-            return redirect('login');
-        */
-
-        return view('admin.categories.edit', compact('category'));
+        
     }
 
     /**
@@ -115,14 +95,12 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        /*if(!Auth::check()) 
-            return redirect('login');*/
-        
+       
         $category->update($request->all());
 
         $category->save();
-       
-        
+
+
         return redirect('admin/categories');
     }
 
@@ -134,10 +112,6 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        /*
-        if(!Auth::check()) 
-            return redirect('login'); */
-
         $category->delete();
 
         return redirect('admin/categories');

@@ -8,6 +8,7 @@ use App\Auth\TeamForgeApiToken;
 class Project extends Model
 {
   protected $table = 'projects';
+  public $incrementing = false;
   protected $primaryKey = 'project_id';
   protected $fillable = ['project_id', 'createdBy','title', 'description', 'artifact_fetch'];
 

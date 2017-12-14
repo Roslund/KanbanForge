@@ -33,7 +33,7 @@ class SwimlaneController extends Controller
      */
     public function create()
     {
-        return view('admin.swimlane.create');
+        
     }
 
     /**
@@ -44,7 +44,10 @@ class SwimlaneController extends Controller
      */
     public function store(Request $request)
     {
-
+        $this->validate(request(), [
+          'name'=>'required',
+          'sortnumber'=>'required'
+        ]);
         $swimlane = new Swimlane;
         $swimlane->name = $request->name;
         $swimlane->sortnumber = $request->sortnumber;
@@ -61,7 +64,7 @@ class SwimlaneController extends Controller
      */
     public function show(Swimlane $swimlane)
     {
-        return view('admin.swimlane.show', compact('swimlane'));
+        
     }
 
     /**
@@ -72,8 +75,7 @@ class SwimlaneController extends Controller
      */
     public function edit(Swimlane $swimlane)
     {
-        //
-        return view('admin.swimlane.edit', compact('swimlane'));
+        
     }
 
     /**
@@ -85,7 +87,7 @@ class SwimlaneController extends Controller
      */
     public function update(Request $request, Swimlane $swimlane)
     {
-        //
+        
         $swimlane->update($request->all());
 
         $swimlane->save();
