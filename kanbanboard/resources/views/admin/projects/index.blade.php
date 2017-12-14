@@ -33,7 +33,8 @@
 
             			<td>
                     <div class="checkbox">
-                      <label><input type="checkbox" name="checkbox[]" value="{{$item->project_id}}">To import</label>
+                      <label><input type="hidden" name="all_checkboxes[]" value="{{$item->project_id}}"></label>
+                      <label><input type="checkbox" name="checkbox[]" value="{{$item->project_id}}" @if ($item->artifact_fetch ==1) checked @endif>To import</label>
                     </div>
             			</td>
 
@@ -43,7 +44,7 @@
           </tbody>
             	</table>
 
-          <button type="button submit" class="btn btn-primary" >Import</button>
+          <button type="button submit" class="btn btn-primary" >Import Or save</button>
 </form>
       <a href="{{ action('ProjectController@refresh')}}" class="btn btn-primary"><i class="fa fa-refresh" aria-hidden="true"></i> Update</a>
 @endsection
