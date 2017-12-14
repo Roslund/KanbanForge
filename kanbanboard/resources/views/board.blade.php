@@ -64,8 +64,6 @@
                                     <h2><a href="#">Random person</a> <span>changed his</span> <a href="#">Profile Picture</a></h2>
 
                                     <blockquote>Pianoforte principles our unaffected not for astonished travelling are particular.</blockquote>
-
-                                    <img src="http://themes.laborator.co/neon/assets/images/timeline-image-3.png" class="img-responsive img-rounded full-width">
                                 </div>
                             </div>
                         </article>
