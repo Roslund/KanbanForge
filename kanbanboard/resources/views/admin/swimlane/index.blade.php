@@ -32,21 +32,22 @@
 			<td>{{ $item->name }}</td>
 
 			<td>
-				
+
 				{{Form::button('<span class="glyphicon glyphicon-arrow-up" aria-hidden="true" title="Up">', array(
 					'class' => 'btn btn-info btn-sm',
 					'title' => 'Up',
-				))}}
-
-				{{Form::button('<span class="glyphicon glyphicon-arrow-down" aria-hidden="true" title="Down">', array(
-					'class' => 'btn btn-info btn-sm',
-					'title' => 'Down',
 				))}}
 
 				<!--
 				<a href="{{ url('/admin/swimlanes/' . $item->id) }}" class="btn btn-success btn-sm" title="View Swimlane">
 				<span class="glyphicon glyphicon-eye-open" aria-hidden="true"/></a>
 				-->
+
+				<a href="{{action('SwimlaneController@updateKevinVersion')}}">Add task template</a>
+
+				<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#editModal-{{ $item->id }}" title="Down">
+				<span class="glyphicon glyphicon-arrow-down" aria-hidden="true"/>
+				</button>
 
 				<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editModal-{{ $item->id }}" title="Edit Swimlane">
 				<span class="glyphicon glyphicon-pencil" aria-hidden="true"/>

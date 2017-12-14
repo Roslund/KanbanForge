@@ -32,7 +32,7 @@ class SwimlaneController extends Controller
      */
     public function create()
     {
-        
+
     }
 
     /**
@@ -63,7 +63,7 @@ class SwimlaneController extends Controller
      */
     public function show(Swimlane $swimlane)
     {
-        
+
     }
 
     /**
@@ -74,7 +74,7 @@ class SwimlaneController extends Controller
      */
     public function edit(Swimlane $swimlane)
     {
-        
+
     }
 
     /**
@@ -86,7 +86,7 @@ class SwimlaneController extends Controller
      */
     public function update(Request $request, Swimlane $swimlane)
     {
-        
+
         $swimlane->update($request->all());
 
         $swimlane->save();
@@ -107,7 +107,11 @@ class SwimlaneController extends Controller
         return redirect('admin/swimlanes');
     }
 
-    public function modify(){
-
+    public function updateKevinVersion(){
+      $swimlane = Swimlane::where('id', '1')->get();
+      $swimlane->increment('sortnumber',1);
+      $swimlane->save();
+      return redirect('admin/swimlanes');
+      // DB::table('swimlane')->increment('votes', 1, ['name' => 'John']);
     }
 }
