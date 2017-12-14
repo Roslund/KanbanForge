@@ -84,7 +84,7 @@ td{
 .tbl-board
 {
   height: calc(100vh - 200px);
-  overflow-y: scroll;
+  overflow-y: visible;
   overflow-x: hidden;
 }
 
@@ -101,7 +101,7 @@ td{
   border-radius: 3px;
   box-sizing: border-box;
   -moz-box-sizing: border-box;
-
+  min-height: 100px;
   box-shadow:
 		0 10px 20px -12px rgba(156,39,176,0.35),
 		0 3px 20px 0px rgba(156,39,176, 0.12),
