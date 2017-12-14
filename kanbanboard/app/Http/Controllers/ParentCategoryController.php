@@ -39,7 +39,7 @@ class ParentCategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.parentcategories.create');
+        
     }
 
     /**
@@ -50,6 +50,10 @@ class ParentCategoryController extends Controller
      */
     public function store(Request $request)
     {
+
+        $this->validate(request(), [
+          'name'=>'required'
+        ]);
         $pcategory = new ParentCategory;
         $pcategory->name = $request->name;
 
@@ -65,7 +69,7 @@ class ParentCategoryController extends Controller
      */
     public function show(ParentCategory $parentcategory)
     {
-        return view('admin.parentcategories.show', compact('parentcategory'));
+        
     }
 
     /**
@@ -76,7 +80,7 @@ class ParentCategoryController extends Controller
      */
     public function edit(ParentCategory $parentcategory)
     {
-        return view('admin.parentcategories.edit', compact('parentcategory'));
+        
     }
 
     /**

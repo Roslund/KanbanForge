@@ -25,11 +25,13 @@ class UsersLoginController extends Controller
 
       
       if(Auth::guard('teamforge')->attempt([$request], false, true)){
-        return redirect('welcome');
+        Auth::logout();
+        return redirect('board');
       }
    	
       if(Auth::guard('web')->attempt(['username' => $request->username, 'password' => $request->password], $request->remember)) {
-        return redirect('welcome');
+        Auth::guard('teamforge')->logout();
+        return redirect('board');
       }
 
     	// unsuccessful
