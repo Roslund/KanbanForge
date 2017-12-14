@@ -13,7 +13,7 @@
 
 Route::get('/', function () {
 	if(\Auth::check() || \Auth::guard('teamforge')->check()){
-		return view('board');
+		return redirect('/board');
 	}
 	return redirect('/login');
 });
