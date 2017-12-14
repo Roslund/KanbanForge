@@ -17,7 +17,7 @@ class CreateProjectsTable extends Migration
             $table->string('project_id')->unique();
             $table->string('createdBy');
             $table->string('title');
-            $table->string('description');
+            $table->longText('description');
             $table->boolean('artifact_fetch')->default(false);
             $table->timestamps();
         });

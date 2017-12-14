@@ -11,18 +11,33 @@
 |
 */
 
-Route::get('/', 'HomeController@index');
+Route::get('/', function () {
+	if(\Auth::check() || \Auth::guard('teamforge')->check()){
+		return redirect('/board');
+	}
+	return redirect('/login');
+});
 
 Route::get('login', 'Auth\UsersLoginController@showLoginForm')->name('users.login');
 
 Route::post('login', 'Auth\UsersLoginController@login')->name('login.submit');
 
+Route::get('board', function () {
+    $cards = App\Card::all();
+    $categories = App\Category::orderBy('parentcategory', 'asc')->orderBy('sortnumber', 'asc')->get();
+    $swimlanes = App\Swimlane::orderBy('sortnumber', 'asc')->get();
+    $parentCategories = App\ParentCategory::all();
 
-Route::get('welcome', function () {
-    return view('welcomeboard');
+    $data = array('cards' => $cards,
+      'categories' => $categories,
+      'swimlanes' => $swimlanes,
+      'parentCategories' => $parentCategories);
+
+    return view('board')->with($data);
 });
 
 Route::get('/logout', 'Auth\UsersLoginController@logout');
+
 
 
 Route::prefix('admin')->group(function(){
@@ -30,15 +45,10 @@ Route::prefix('admin')->group(function(){
 	/*categories*/
 	Route::resource('/categories', 'CategoryController');
 
-	/*Route::get('/categories/{category}',
-		['as' => 'admin.categories', 'uses' => 'CategoryController@show']);
 
 	/*swimlanes*/
 	Route::resource('/swimlanes', 'SwimlaneController');
 
-	/*Route::get('/swimlanes/{swimlane}',
-		['as' => 'admin.swimlanes', 'uses' => 'SwimlaneController@show']);
-	*/
 
 	/*parentcategories*/
 	Route::resource('/parentcategories', 'ParentCategoryController');
@@ -49,8 +59,12 @@ Route::prefix('admin')->group(function(){
 	/*refresh artifacts*/
 	Route::get('filter/update', 'ArtifactController@refresh');
 
-
 	/*selected artifacts*/
 	Route::post('selected', 'ArtifactController@select');
+
+  Route::get('/projects', 'ProjectController@index');
+  Route::get('projects/update', 'ProjectController@refresh');
+  Route::post('change', 'ProjectController@change');
+
 
 });

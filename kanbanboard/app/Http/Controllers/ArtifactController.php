@@ -28,9 +28,6 @@ class ArtifactController extends Controller {
    public function select(Request $request) {
     
       $ids = Input::get('id');
-        
-        //check IDs and update database if artifact is selected
-        /*...*/
 
       return view('admin.artifacts.selected', compact('ids'));
   }
