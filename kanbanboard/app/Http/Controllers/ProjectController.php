@@ -60,7 +60,8 @@ class ProjectController extends Controller
           }
 
         }
-          return redirect('/board');
+          \App\Artifact::refresh_all_artifacts_from_teamforge();
+          return redirect('/admin/filter');
       }
       //If there is no checked checkbox the uncheck all in database
       else
@@ -75,7 +76,8 @@ class ProjectController extends Controller
           }
 
         }
-          return redirect('/board');
+          \App\Artifact::refresh_all_artifacts_from_teamforge();
+          return redirect('/admin/filter');
 
       }
 
