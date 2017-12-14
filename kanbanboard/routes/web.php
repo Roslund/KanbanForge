@@ -48,7 +48,7 @@ Route::prefix('admin')->group(function(){
 
 	/*swimlanes*/
 	Route::resource('/swimlanes', 'SwimlaneController');
-	Route::put('/swimlanes', 'SwimlaneController@updateKevinVersion');
+	Route::put('/swimlanes', 'SwimlaneController@increment');
 
 	/*parentcategories*/
 	Route::resource('/parentcategories', 'ParentCategoryController');
