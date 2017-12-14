@@ -15,11 +15,35 @@ class Artifact extends Model
 
   public static function refresh_all_artifacts_from_teamforge()
   {
-    $url = config('teamforge.url') . '/ctfrest/tracker/v1/artifacts?includeIconLinks=false';
+    //Get projects we will fetch artifacts from.
+    $projIDtoFetch = array();
+    foreach (\App\Project::where('artifact_fetch', 1)->get() as $key => $artifact) {
+      $projIDtoFetch[] = $artifact->project_id;
+    }
+
+    //If no projects are selected, removed all artifacts from database and stop.
+    if(empty($projIDtoFetch)){
+      foreach (Artifact::all() as $artifact) {
+        $artifact->delete();
+      }
+      return null;
+    }
+
+    $postdata = json_encode((object)array(
+     'containerIds' => $projIDtoFetch,
+      'includeSubprojects' => true,
+      'sortBy' => '',
+      'filters' => (object)array(),
+      'details' => array(),
+    ));
+
+    $url = config('teamforge.url') . '/ctfrest/tracker/v1/artifacts/filter';
     $options=array(
       'http' => array(
-        'header'  => "Authorization: Bearer " . TeamForgeApiToken::getToken() . "\r\n",
-        'method'  => 'GET',
+        'header'  => "Authorization: Bearer " . TeamForgeApiToken::getToken() . "\r\n" . 
+                     "Content-type: application/json\r\n",
+        'method'  => 'POST',
+        'content' => $postdata
       ),
       "ssl"=>array(
         "verify_peer"=>false,
