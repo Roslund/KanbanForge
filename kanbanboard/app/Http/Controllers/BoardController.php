@@ -13,10 +13,10 @@ class BoardController extends Controller
   public function index()
   {
     $cards = Card::all();
-    $categories = Category::orderBy('parentcategory', 'asc')->orderBy('sortnumber', 'asc')->get();
+    $categories = Category::orderBy('sortnumber', 'asc')->get();
     $swimlanes = Swimlane::orderBy('sortnumber', 'asc')->get();
-    $parentCategories = ParentCategory::all();
-
+    $parentCategories = ParentCategory::all()->keyBy('id');
+    
     $data = array('cards' => $cards,
       'categories' => $categories,
       'swimlanes' => $swimlanes,

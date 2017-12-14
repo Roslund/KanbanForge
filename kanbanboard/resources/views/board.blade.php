@@ -17,33 +17,33 @@
     <thead>
       @if(count($parentCategories) > 0)
         <tr>
-        <th class="empty-th"></th>
-
-        <?php $emptyColumns = 0; ?>
-        @foreach($categories as $category)
-          @if(is_null($category['parentcategory']))
-            <?php $emptyColumns++; ?>
-          @endif
-        @endforeach
-
-        <th colspan="{{$emptyColumns++}}"></th>
-
-        <?php $colSpanForParentCategory = 0; ?>
-        @foreach($parentCategories as $parentCategory)
+          <th class="empty-th"></th>
+          <?php
+            $last = -1;
+            $counter = -1;
+            $parentCategoriesOrder = array();
+          ?>
           @foreach($categories as $category)
-            @if($category['parentcategory'] == $parentCategory['id'])
-              <?php $colSpanForParentCategory++; ?>
-            @endif
+            <?php
+              if($last != $category['parentcategory'])
+              {
+                $counter++;
+                $parentCategoriesOrder[$counter] = [ "value" => $category['parentcategory'], "count" => 1 ];
+              }
+              else {
+                $parentCategoriesOrder[$counter]["count"]++;
+              }
+              $last = $category['parentcategory'];
+            ?>
           @endforeach
-
-          <th colspan="{{$colSpanForParentCategory}}">{{$parentCategory['name']}}</th>
-
-          <?php $colSpanForParentCategory = 0 ?>
-        @endforeach
+          
+          @foreach($parentCategoriesOrder as $group)
+            <th colspan="{{$group['count']}}">{{$group['value']}}</th>
+          @endforeach
         </tr>
-        @endif
+      @endif
 
-        <tr>
+      <tr>
         <th class="empty-th"></th>
         @foreach($categories as $category)
           <th>{{ $category["name"] }}</th>
@@ -96,12 +96,12 @@
 @endsection
 
 {{--
-    the section below is for the includes related to the kanban board 
-    if we decide that all styling for the board should reside in a spearate file 
-    we can move it over there instead 
+    the section below is for the includes related to the kanban board
+    if we decide that all styling for the board should reside in a spearate file
+    we can move it over there instead
     this is the easiest solution i came up with to make the imports for the board work
-    while at the same time avoiding to have them included in all other pages using app.blade.php 
-    the kanbanBoardJs section is only defined in the kanban board 
+    while at the same time avoiding to have them included in all other pages using app.blade.php
+    the kanbanBoardJs section is only defined in the kanban board
 --}}
 
 @section('kanbanBoardIncludes')
