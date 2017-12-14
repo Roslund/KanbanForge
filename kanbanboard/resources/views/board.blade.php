@@ -16,8 +16,6 @@
   <table cellpadding="0" cellspacing="0" border="0">
     <thead>
       @if(count($parentCategories) > 0)
-        <tr>
-          <th class="empty-th"></th>
           <?php
             $last = -1;
             $counter = -1;
@@ -37,10 +35,14 @@
             ?>
           @endforeach
 
-          @foreach($parentCategoriesOrder as $group)
-            <th colspan="{{$group['count']}}">{{$group['value']}}</th>
-          @endforeach
-        </tr>
+          @if(count($parentCategoriesOrder) > 1)
+            <tr>
+              <th class="empty-th"></th>
+            @foreach($parentCategoriesOrder as $group)
+              <th colspan="{{$group['count']}}">{{$group['value']}}</th>
+            @endforeach
+            </tr>
+          @endif
       @endif
 
       <tr>
