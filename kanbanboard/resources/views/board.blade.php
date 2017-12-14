@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.kanbanboard')
 
 @section('head')
 
@@ -9,6 +9,7 @@
 @section('content')
 
 <h1>Kanban Board</h1>
+<hr>
 
 <div class="tbl-board">
   @if(count($categories) > 0)
