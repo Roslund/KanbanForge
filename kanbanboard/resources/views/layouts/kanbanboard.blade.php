@@ -40,9 +40,7 @@
 
     <!-- our own css // andre -->
     <link rel="stylesheet" type="text/css" href="{{ url('/css/general.css') }}" />
-
-    <!-- Included in the board.blade.php // amer -->
-    <!--<link href="{{ asset('css/board.css') }}" rel="stylesheet">-->
+    <link href="{{ asset('css/board.css') }}" rel="stylesheet">
 
     @yield('head')
   </head>
