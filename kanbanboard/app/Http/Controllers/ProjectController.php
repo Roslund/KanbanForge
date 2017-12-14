@@ -29,10 +29,17 @@ class ProjectController extends Controller
 
     public function change(Request $request)
     {
-      $myCheckboxes = $request->input('checkbox');
-      if($myCheckboxes)
+      //all checkboxes that are checked
+      $checkboxes = $request->input('checkbox');
+      //all checkboxes
+      $values = $request->input('all_checkboxes');
+      //if we have any checked then update 
+      if($checkboxes)
       {
-        foreach($myCheckboxes as $item)
+        //find all unchecked to update the database
+        $unchecked = array_diff($values, $checkboxes);
+        //Do the checked Update
+        foreach($checkboxes as $item)
         {
           $projects = Project::where('project_id',$item)->first();
           if($projects)
@@ -42,9 +49,38 @@ class ProjectController extends Controller
           }
 
         }
-          return redirect('/board');
+        //do the unchecked update
+        foreach($unchecked as $item)
+        {
+          $projects = Project::where('project_id',$item)->first();
+          if($projects)
+          {
+            $projects->artifact_fetch = 0;
+            $projects->save();
+          }
+
+        }
+          \App\Artifact::refresh_all_artifacts_from_teamforge();
+          return redirect('/admin/filter');
       }
-      return back();
+      //If there is no checked checkbox the uncheck all in database
+      else
+      {
+        foreach($values as $item)
+        {
+          $projects = Project::where('project_id',$item)->first();
+          if($projects)
+          {
+            $projects->artifact_fetch = 0;
+            $projects->save();
+          }
+
+        }
+          \App\Artifact::refresh_all_artifacts_from_teamforge();
+          return redirect('/admin/filter');
+
+      }
+
     }
 
     public function refresh(){
