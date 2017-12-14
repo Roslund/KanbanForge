@@ -95,19 +95,19 @@
 
 @endsection
 
-<!-- the section below is for the includes related to the kanban board -->
-<!-- if we decide that all styling for the board should reside in a spearate file -->
-<!-- we can move it over there instead -->
-<!-- this is the easiest solution i came up with to make the imports for the board work -->
-<!-- while at the same time avoiding to have them included in all other pages using app.blade.php -->
-<!-- the kanbanBoardJs section is only defined in the kanban board -->
+{{--
+    the section below is for the includes related to the kanban board 
+    if we decide that all styling for the board should reside in a spearate file 
+    we can move it over there instead 
+    this is the easiest solution i came up with to make the imports for the board work
+    while at the same time avoiding to have them included in all other pages using app.blade.php 
+    the kanbanBoardJs section is only defined in the kanban board 
+--}}
 
 @section('kanbanBoardIncludes')
 
 <!-- Kanban Board imports -->
 <script src="{{URL::asset('js/kanbanBoard/boardFunctionality.js')}}"></script>
-
-<link rel="stylesheet" type="text/css" href="{{ url('/css/board.css') }}" />
 
 <!-- This is to inject the current server timestamp into the cardsTimestamp variable -->
 <!-- Can't inject it directly into the javascript as it doesn't get compiled with blade -->

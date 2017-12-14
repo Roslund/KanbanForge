@@ -20,10 +20,10 @@
         <link href="{{ URL::asset('css/bootstrap.min.css') }}" rel="stylesheet" />
         <link href="{{ URL::asset('css/material-kit.css') }}" rel="stylesheet"/>
         <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
-        <link href='http://fonts.googleapis.com/css?family=Raleway:100,200,300' rel='stylesheet' type='text/css'>
-        <link href='http://fonts.googleapis.com/css?family=Lato:300,100' rel='stylesheet' type='text/css'>
-        <link href='http://fonts.googleapis.com/css?family=Exo+2:200,300,100' rel='stylesheet' type='text/css'>
-        <link href='http://fonts.googleapis.com/css?family=Exo:200,300,100' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Raleway:100,200,300' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Lato:300,100' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Exo+2:200,300,100' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Exo:200,300,100' rel='stylesheet' type='text/css'>
         <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
         <!--   Core JS Files   -->
         <link rel="stylesheet" type="text/css" href="{{ url('/css/general.css') }}" />
