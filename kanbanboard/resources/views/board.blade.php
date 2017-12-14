@@ -34,8 +34,8 @@
               $last = $category['parentcategory'];
             ?>
           @endforeach
-
-          @if(count($parentCategoriesOrder) > 1)
+          
+          @if(count($parentCategoriesOrder) > 1 || (count($parentCategoriesOrder) == 1 && $parentCategoriesOrder[0]['value'] != null))
             <tr>
               <th class="empty-th"></th>
             @foreach($parentCategoriesOrder as $group)
