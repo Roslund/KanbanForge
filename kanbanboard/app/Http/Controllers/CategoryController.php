@@ -39,7 +39,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-       
+
     }
 
     /**
@@ -72,7 +72,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        
+
     }
 
     /**
@@ -83,7 +83,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        
+
     }
 
     /**
@@ -95,7 +95,7 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-       
+
         $category->update($request->all());
 
         $category->save();
@@ -115,5 +115,19 @@ class CategoryController extends Controller
         $category->delete();
 
         return redirect('admin/categories');
+    }
+
+    public function increment(Category $category){
+      $category = Category::find($category->id);
+      $category->increment('sortnumber');
+      $category->save();
+      return redirect('admin/categories');
+    }
+
+    public function decrement(Category $category){
+      $category = Category::find($category->id);
+      $category->decrement('sortnumber');
+      $category->save();
+      return redirect('admin/categories');
     }
 }

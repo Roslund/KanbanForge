@@ -119,6 +119,5 @@ class SwimlaneController extends Controller
       $swimlane->decrement('sortnumber');
       $swimlane->save();
       return redirect('admin/swimlanes');
-      // DB::table('swimlane')->increment('votes', 1, ['name' => 'John']);
     }
 }
