@@ -39,7 +39,12 @@
 				-->
 
 				<a href="{{action('SwimlaneController@increment')}}">
-				<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#editModal-{{ $item->id }}" title="Down">
+				<button type="button" class="btn btn-info btn-sm" title="Up">
+				<span class="glyphicon glyphicon-arrow-up" aria-hidden="true"/>
+				</button></a>
+
+				<a href="{{action('SwimlaneController@decrement', $item->id)}}">
+				<button type="button" class="btn btn-info btn-sm" title="Down">
 				<span class="glyphicon glyphicon-arrow-down" aria-hidden="true"/>
 				</button></a>
 

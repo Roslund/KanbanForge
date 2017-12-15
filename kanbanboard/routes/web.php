@@ -48,7 +48,9 @@ Route::prefix('admin')->group(function(){
 
 	/*swimlanes*/
 	Route::resource('/swimlanes', 'SwimlaneController');
-	Route::put('/swimlanes', 'SwimlaneController@increment');
+	Route::get('/swimlaness', 'SwimlaneController@increment');
+	Route::get('/swimlanes/{swimlane}', 'SwimlaneController@decrement');
+
 
 	/*parentcategories*/
 	Route::resource('/parentcategories', 'ParentCategoryController');
@@ -65,6 +67,7 @@ Route::prefix('admin')->group(function(){
   Route::get('/projects', 'ProjectController@index');
   Route::get('projects/update', 'ProjectController@refresh');
   Route::post('change', 'ProjectController@change');
+
 
 
 });
