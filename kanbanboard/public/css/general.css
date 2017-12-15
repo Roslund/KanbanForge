@@ -48,3 +48,7 @@ a.no-underline
 {
 	table-layout: fixed;
 }
+
+input[type=checkbox]:checked + .checkbox-material .check {
+    background: #9c27b0;
+}

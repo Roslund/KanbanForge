@@ -30,11 +30,6 @@
 			<td>{{ $item->name }}</td>
 
 			<td>
-				<a href="#up" class="btn btn-info btn-sm" title="Up">
-				<span class="glyphicon glyphicon-arrow-up" aria-hidden="true"/></a>
-
-				<a href="#down" class="btn btn-info btn-sm" title="Down">
-				<span class="glyphicon glyphicon-arrow-down" aria-hidden="true"/></a>
 
 				<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editModal-{{ $item->id }}" title="Edit Parent Category">
 				<span class="glyphicon glyphicon-pencil" aria-hidden="true"/>

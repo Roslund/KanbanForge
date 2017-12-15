@@ -22,7 +22,7 @@ class SwimlaneController extends Controller
      */
     public function index()
     {
-        $swimlanes = Swimlane::orderBy('id', 'desc')->paginate(10);
+        $swimlanes = Swimlane::orderBy('sortnumber', 'asc')->paginate(10);
         return view('admin.swimlane.index', compact('swimlanes'));
     }
 
@@ -64,7 +64,7 @@ class SwimlaneController extends Controller
      */
     public function show(Swimlane $swimlane)
     {
-        
+
     }
 
     /**
@@ -75,7 +75,7 @@ class SwimlaneController extends Controller
      */
     public function edit(Swimlane $swimlane)
     {
-        
+
     }
 
     /**
@@ -106,5 +106,19 @@ class SwimlaneController extends Controller
         $swimlane->delete();
 
         return redirect('admin/swimlanes');
+    }
+
+    public function increment(Swimlane $swimlane){
+      $swimlane = Swimlane::find($swimlane->id);
+      $swimlane->increment('sortnumber');
+      $swimlane->save();
+      return redirect('admin/swimlanes');
+    }
+
+    public function decrement(Swimlane $swimlane){
+      $swimlane = Swimlane::find($swimlane->id);
+      $swimlane->decrement('sortnumber');
+      $swimlane->save();
+      return redirect('admin/swimlanes');
     }
 }

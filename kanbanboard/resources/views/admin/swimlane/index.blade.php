@@ -32,16 +32,21 @@
 			<td>{{ $item->name }}</td>
 
 			<td>
-				<a href="#up" class="btn btn-info btn-sm" title="Up">
-				<span class="glyphicon glyphicon-arrow-up" aria-hidden="true"/></a>
-
-				<a href="#down" class="btn btn-info btn-sm" title="Down">
-				<span class="glyphicon glyphicon-arrow-down" aria-hidden="true"/></a>
 
 				<!--
 				<a href="{{ url('/admin/swimlanes/' . $item->id) }}" class="btn btn-success btn-sm" title="View Swimlane">
 				<span class="glyphicon glyphicon-eye-open" aria-hidden="true"/></a>
 				-->
+
+				<a href="{{action('SwimlaneController@increment', $item->id)}}">
+				<button type="button" class="btn btn-info btn-sm" title="Up">
+				<span class="glyphicon glyphicon-arrow-up" aria-hidden="true"/>
+				</button></a>
+
+				<a href="{{action('SwimlaneController@decrement', $item->id)}}">
+				<button type="button" class="btn btn-info btn-sm" title="Down">
+				<span class="glyphicon glyphicon-arrow-down" aria-hidden="true"/>
+				</button></a>
 
 				<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editModal-{{ $item->id }}" title="Edit Swimlane">
 				<span class="glyphicon glyphicon-pencil" aria-hidden="true"/>

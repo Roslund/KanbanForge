@@ -32,10 +32,13 @@ Route::prefix('admin')->group(function(){
 
 	/*categories*/
 	Route::resource('/categories', 'CategoryController');
-
+	Route::get('/categories/{category}', 'CategoryController@increment');
+	Route::get('/categoriess/{category}', 'CategoryController@decrement');
 
 	/*swimlanes*/
 	Route::resource('/swimlanes', 'SwimlaneController');
+	Route::get('/swimlaness/{swimlane}', 'SwimlaneController@increment');
+	Route::get('/swimlanes/{swimlane}', 'SwimlaneController@decrement');
 
 
 	/*parentcategories*/
