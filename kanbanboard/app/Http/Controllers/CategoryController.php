@@ -27,8 +27,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::orderBy('id', 'desc')->paginate(20);
-        $parent_categories = ParentCategory::pluck('name', 'id');
+        $categories = Category::orderBy('sortnumber', 'asc')->paginate(20);
+        $parent_categories = DB::table('parent_categories')->pluck('name', 'id');
         $parent_categories_keyed_by_id = ParentCategory::all()->keyBy('id');
 
         return view('admin.categories.index', compact(['categories', 'parent_categories', 'parent_categories_keyed_by_id']));
@@ -117,5 +117,19 @@ class CategoryController extends Controller
         $category->delete();
 
         return redirect('admin/categories');
+    }
+
+    public function increment(Category $category){
+      $category = Category::find($category->id);
+      $category->increment('sortnumber');
+      $category->save();
+      return redirect('admin/categories');
+    }
+
+    public function decrement(Category $category){
+      $category = Category::find($category->id);
+      $category->decrement('sortnumber');
+      $category->save();
+      return redirect('admin/categories');
     }
 }
