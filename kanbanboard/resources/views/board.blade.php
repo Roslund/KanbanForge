@@ -16,34 +16,36 @@
   <table cellpadding="0" cellspacing="0" border="0">
     <thead>
       @if(count($parentCategories) > 0)
-        <tr>
-        <th class="empty-th"></th>
-
-        <?php $emptyColumns = 0; ?>
-        @foreach($categories as $category)
-          @if(is_null($category['parentcategory']))
-            <?php $emptyColumns++; ?>
-          @endif
-        @endforeach
-
-        <th colspan="{{$emptyColumns++}}"></th>
-
-        <?php $colSpanForParentCategory = 0; ?>
-        @foreach($parentCategories as $parentCategory)
+          <?php
+            $last = -1;
+            $counter = -1;
+            $parentCategoriesOrder = array();
+          ?>
           @foreach($categories as $category)
-            @if($category['parentcategory'] == $parentCategory['id'])
-              <?php $colSpanForParentCategory++; ?>
-            @endif
+            <?php
+              if($last != $category['parentcategory'])
+              {
+                $counter++;
+                $parentCategoriesOrder[$counter] = [ "value" => $category['parentcategory'], "count" => 1 ];
+              }
+              else {
+                $parentCategoriesOrder[$counter]["count"]++;
+              }
+              $last = $category['parentcategory'];
+            ?>
           @endforeach
+          
+          @if(count($parentCategoriesOrder) > 1 || (count($parentCategoriesOrder) == 1 && $parentCategoriesOrder[0]['value'] != null))
+            <tr>
+              <th class="empty-th"></th>
+            @foreach($parentCategoriesOrder as $group)
+              <th colspan="{{$group['count']}}">{{$group['value']}}</th>
+            @endforeach
+            </tr>
+          @endif
+      @endif
 
-          <th colspan="{{$colSpanForParentCategory}}">{{$parentCategory['name']}}</th>
-
-          <?php $colSpanForParentCategory = 0 ?>
-        @endforeach
-        </tr>
-        @endif
-
-        <tr>
+      <tr>
         <th class="empty-th"></th>
         @foreach($categories as $category)
           <th>{{ $category["name"] }}</th>
@@ -53,20 +55,20 @@
 
     <tbody>
       @foreach($swimlanes as $swimlane)
-      <tr>
-      <th>{{ $swimlane["name"] }}</th>
-      @foreach($categories as $category)
-        <td id="c{{$category['id']}}s{{$swimlane['id']}}" category_id='{{$category["id"]}}' swimlane_id='{{$swimlane["id"]}}'>
-          @foreach($cards as $card)
-            @if($card["swimlane_id"] == $swimlane["id"] && $card["category_id"] == $category["id"])
-            <div class='card' id="card{{$card['id']}}">Card {{ $card["id"] }}
-              Assignee:
-              Description:
-            </div>
-            @endif
-          @endforeach
-        </td>
-      @endforeach
+        <tr>
+        <th>{{ $swimlane["name"] }}</th>
+        @foreach($categories as $category)
+          <td id="c{{$category['id']}}s{{$swimlane['id']}}" category_id='{{$category["id"]}}' swimlane_id='{{$swimlane["id"]}}'>
+            @foreach($cards as $card)
+              @if($card["swimlane_id"] == $swimlane["id"] && $card["category_id"] == $category["id"])
+              <div class='card' id="card{{$card['id']}}">Card {{ $card["id"] }}
+                Assignee:
+                Description:
+              </div>
+              @endif
+            @endforeach
+          </td>
+        @endforeach
       </tr>
       @endforeach
 
@@ -96,12 +98,12 @@
 @endsection
 
 {{--
-    the section below is for the includes related to the kanban board 
-    if we decide that all styling for the board should reside in a spearate file 
-    we can move it over there instead 
+    the section below is for the includes related to the kanban board
+    if we decide that all styling for the board should reside in a spearate file
+    we can move it over there instead
     this is the easiest solution i came up with to make the imports for the board work
-    while at the same time avoiding to have them included in all other pages using app.blade.php 
-    the kanbanBoardJs section is only defined in the kanban board 
+    while at the same time avoiding to have them included in all other pages using app.blade.php
+    the kanbanBoardJs section is only defined in the kanban board
 --}}
 
 @section('kanbanBoardIncludes')
