@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\Category;
+use App\ParentCategory;
 use Auth;
 
 use DB;
@@ -27,9 +28,10 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::orderBy('id', 'desc')->paginate(20);
-        $parent_categories = DB::table('parent_categories')->pluck('name', 'id');
+        $parent_categories = ParentCategory::pluck('name', 'id');
+        $parent_categories_keyed_by_id = ParentCategory::all()->keyBy('id');
 
-        return view('admin.categories.index',compact(['categories', 'parent_categories']));
+        return view('admin.categories.index', compact(['categories', 'parent_categories', 'parent_categories_keyed_by_id']));
     }
 
     /**
@@ -39,7 +41,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-       
+
     }
 
     /**
@@ -72,7 +74,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        
+
     }
 
     /**
@@ -83,7 +85,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        
+
     }
 
     /**
@@ -95,7 +97,7 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-       
+
         $category->update($request->all());
 
         $category->save();
