@@ -15,7 +15,7 @@ class Category extends Model
     public function getParentCategory() {
 
         $pk = DB::table('parent_categories')->where('id', $this->pk)->first();
-
+        
         if($pk == null) return "";
         else  return $pk->name;
     }

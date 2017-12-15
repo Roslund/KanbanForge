@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -32,7 +33,7 @@ class SwimlaneController extends Controller
      */
     public function create()
     {
-
+        
     }
 
     /**
@@ -86,7 +87,7 @@ class SwimlaneController extends Controller
      */
     public function update(Request $request, Swimlane $swimlane)
     {
-
+        
         $swimlane->update($request->all());
 
         $swimlane->save();
