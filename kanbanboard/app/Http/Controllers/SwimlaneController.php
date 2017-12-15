@@ -107,8 +107,8 @@ class SwimlaneController extends Controller
         return redirect('admin/swimlanes');
     }
 
-    public function increment(){
-      $swimlane = Swimlane::find('2');
+    public function increment(Swimlane $swimlane){
+      $swimlane = Swimlane::find($swimlane->id);
       $swimlane->increment('sortnumber');
       $swimlane->save();
       return redirect('admin/swimlanes');

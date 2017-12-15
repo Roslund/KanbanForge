@@ -48,7 +48,7 @@ Route::prefix('admin')->group(function(){
 
 	/*swimlanes*/
 	Route::resource('/swimlanes', 'SwimlaneController');
-	Route::get('/swimlaness', 'SwimlaneController@increment');
+	Route::get('/swimlaness/{swimlane}', 'SwimlaneController@increment');
 	Route::get('/swimlanes/{swimlane}', 'SwimlaneController@decrement');
 
 

@@ -38,7 +38,7 @@
 				<span class="glyphicon glyphicon-eye-open" aria-hidden="true"/></a>
 				-->
 
-				<a href="{{action('SwimlaneController@increment')}}">
+				<a href="{{action('SwimlaneController@increment', $item->id)}}">
 				<button type="button" class="btn btn-info btn-sm" title="Up">
 				<span class="glyphicon glyphicon-arrow-up" aria-hidden="true"/>
 				</button></a>
