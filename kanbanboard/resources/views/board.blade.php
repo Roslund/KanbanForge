@@ -34,12 +34,23 @@
               $last = $category['parentcategory'];
             ?>
           @endforeach
-          
+
           @if(count($parentCategoriesOrder) > 1 || (count($parentCategoriesOrder) == 1 && $parentCategoriesOrder[0]['value'] != null))
             <tr>
               <th class="empty-th"></th>
             @foreach($parentCategoriesOrder as $group)
-              <th colspan="{{$group['count']}}">{{$group['value']}}</th>
+              <th colspan="{{$group['count']}}">
+                <?php
+                  if(!is_null($group['value']))
+      						{
+      							echo $parentCategories[$group['value']]['name'];
+      						}
+      						else
+      						{
+      							echo " ";
+      						}
+                ?>
+              </th>
             @endforeach
             </tr>
           @endif

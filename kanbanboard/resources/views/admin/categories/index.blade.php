@@ -26,7 +26,18 @@
 				<td>{{ $item->name }}</td>
 				<td>{{ $item->limit }}</td>
 				<td>{{ $item->sortnumber }}</td>
-				<td>{{ $item->parentcategory }}</td>
+				<td>
+					<?php
+						if(!is_null($item->parentcategory))
+						{
+							echo $parent_categories_keyed_by_id[$item->parentcategory]['name'];
+						}
+						else
+						{
+							echo " ";
+						}
+					?>
+				</td>
 				<td>
 
 					<a href="{{action('CategoryController@increment', $item->id)}}">
