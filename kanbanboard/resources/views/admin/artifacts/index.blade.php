@@ -25,7 +25,11 @@
 				<tbody>
 				@foreach($artifacts as $item)
 				<tr>
-					<td> {!! Form::checkbox('id[]', $item->id, false); !!} </td>
+					<td>
+						<div class="checkbox">
+						<label>{!! Form::checkbox('id[]', $item->id, false, ['class' => 'checkbox']); !!}</label>
+						</div>
+					 </td>
 					<td> {{ $item->id }}</td>
 					<td>{{ $item->title }}</td>
 				</tr>
