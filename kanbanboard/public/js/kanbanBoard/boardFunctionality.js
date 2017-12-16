@@ -1,12 +1,7 @@
-console.log("Successfully loaded in boardFunctionality.js");
 var boardTimestamp;
 
-// Check for if jQuery is defined.
-var table = $('table');
-if(table == undefined)
-{
-  console.log("jQuery isn't defined.");
-}
+var timeBetweenUpdateChecks = 3000;
+var updateCheckerID = setInterval(ajaxCheckIfShouldUpdateBoard, timeBetweenUpdateChecks);
 
 // Drag and drop start
 function allowDrop(ev)
@@ -16,7 +11,6 @@ function allowDrop(ev)
 
 function drag(ev)
 {
-  //setUpdateTimerState(0);
   console.log("Drag start");
 
   var categoryId = ev.currentTarget.parentElement.id;
@@ -146,6 +140,3 @@ function setBoardTimestamp(timestamp)
 {
   boardTimestamp = timestamp;
 }
-
-var timeBetweenUpdateChecks = 3000;
-var updateCheckerID = setInterval(ajaxCheckIfShouldUpdateBoard, timeBetweenUpdateChecks);
