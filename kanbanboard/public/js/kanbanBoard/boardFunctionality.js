@@ -105,6 +105,7 @@ function ajaxCheckIfShouldUpdateBoard()
     success: function(data) {
       if(data['response'] == 1)
       {
+        console.log(data);
         setBoardTimestamp(data['timestamp']);
         setBoardMetadata(data['metadataObject']);
         ajaxGetBoard();
@@ -122,7 +123,7 @@ function ajaxGetBoard()
   $.ajax({ url: "board/",
     method: "GET",
     success: function(data) {
-      $("#table-data").replaceWith($(data).find("#table-data"));
+      $(".tbl-board").replaceWith($(data).find(".tbl-board"));
     },
     error: function (xhr, ajaxOptions, thrownError) {
       $jsonXHR = JSON.stringify(xhr.responseText);
