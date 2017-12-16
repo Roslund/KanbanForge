@@ -1,5 +1,5 @@
 console.log("Successfully loaded in boardFunctionality.js");
-var cardsTimestamp;
+var boardTimestamp;
 
 // Check for if jQuery is defined.
 var table = $('table');
@@ -101,7 +101,7 @@ function ajaxUpdateCard(id, category_id, swimlane_id)
 */
 function ajaxCheckIfShouldUpdateBoard()
 {
-  $.ajax({ url: "api/cards/updatedsince/" + cardsTimestamp,
+  $.ajax({ url: "api/cards/updatedsince/" + boardTimestamp,
     method: "GET",
     success: function(data) {
       if(data['response'] == 1)
@@ -144,7 +144,7 @@ function ajaxGetCard(id)
 
 function setBoardTimestamp(timestamp)
 {
-  cardsTimestamp = timestamp;
+  boardTimestamp = timestamp;
 }
 
 var timeBetweenUpdateChecks = 3000;

@@ -125,9 +125,9 @@
 <!-- Kanban Board imports -->
 <script src="{{URL::asset('js/kanbanBoard/boardFunctionality.js')}}"></script>
 
-<!-- This is to inject the current server timestamp into the cardsTimestamp variable -->
+<!-- This is to inject the current server timestamp into the boardTimestamp variable -->
 <!-- Can't inject it directly into the javascript as it doesn't get compiled with blade -->
 <!-- This needs to be done after the javascript above has loaded in, which is why it's under it -->
-<script type="text/javascript">cardsTimestamp = "{{date('Y-m-d H:i:s')}}";</script>
+<script type="text/javascript">boardTimestamp = "{{date('Y-m-d H:i:s')}}";</script>
 
 @endsection
