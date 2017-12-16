@@ -12,7 +12,7 @@ class BoardController extends Controller
 {
   public function index()
   {
-    $cards = Card::all();
+    $cards = Card::join('artifacts', 'cards.artifact_id', '=', 'artifacts.id')->select('cards.*', 'artifacts.assignedTo')->get();
     $categories = Category::orderBy('sortnumber', 'asc')->get();
     $swimlanes = Swimlane::orderBy('sortnumber', 'asc')->get();
     $parentCategories = ParentCategory::all()->keyBy('id');

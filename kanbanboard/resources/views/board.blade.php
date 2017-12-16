@@ -76,9 +76,15 @@
             @foreach($cards as $card)
               @if($card["swimlane_id"] == $swimlane["id"] && $card["category_id"] == $category["id"])
               <div class='card' id="card{{$card['id']}}" card_id="{{$card['id']}}" draggable="true" ondragstart="drag(event)">
-                Card {{ $card["id"] }}
-                Assignee:
-                Description:
+                Card {{ $card["id"] }}<br>
+                Assigned to: {{ $card["assignedTo"] }}<br>
+                <?php
+                  $cardLastUpdate = new DateTime($card['updated_at']);
+                  $currentDate = new DateTime(date("Y-m-d H:i:s"));
+                  $dateInterval = $cardLastUpdate->diff($currentDate);
+
+                  echo $dateInterval->format('Last updated: <br>%d days ago');
+                ?>
               </div>
               @endif
             @endforeach
@@ -94,9 +100,15 @@
             @foreach($cards as $card)
               @if(is_null($card["swimlane_id"]) && $card["category_id"] == $category["id"])
               <div class='card' id="card{{$card['id']}}" card_id="{{$card['id']}}" draggable="true" ondragstart="drag(event)">
-                Card {{ $card["id"] }}
-                Assignee:
-                Description:
+                Card {{ $card["id"] }}<br>
+                Assigned to: {{ $card["assignedTo"] }}<br>
+                <?php
+                  $cardLastUpdate = new DateTime($card['updated_at']);
+                  $currentDate = new DateTime(date("Y-m-d H:i:s"));
+                  $dateInterval = $cardLastUpdate->diff($currentDate);
+
+                  echo $dateInterval->format('Last updated: <br>%d days ago');
+                ?>
               </div>
               @endif
             @endforeach
