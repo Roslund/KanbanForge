@@ -37,11 +37,26 @@ function drop(ev)
   // card was actually moved to another drop zone.
   if(cardElement.parentNode != ev.currentTarget)
   {
-    var categoryId = ev.currentTarget.getAttribute("category_id");
+    var targetCategoryId = ev.currentTarget.getAttribute("category_id");
+    var targetSwimlaneId = ev.currentTarget.getAttribute("swimlane_id");
     var cardId = cardElement.getAttribute("card_id");
+
+    //console.log("Target category ID: " + targetCategoryId + " Target swimlane ID: " + targetSwimlaneId + " Card ID: " + cardId);
 
     ev.currentTarget.appendChild(cardElement);
   }
 
   console.log("Drag end");
 }
+
+// As there's a possibility that the user drops the card in a non-droppable
+// area we have to account for this.
+document.addEventListener('dragend', function(event) {
+  // dropEffect is set to "move" if the card was moved and set to "none"
+  // if it was dropped in a area other than a dropzone.
+  if(event.dataTransfer.dropEffect == "none")
+  {
+    console.log("Drag cancelled");
+  }
+});
+// Drag and drop end
