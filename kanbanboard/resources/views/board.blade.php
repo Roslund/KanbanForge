@@ -72,7 +72,8 @@
           <td id="c{{$category['id']}}s{{$swimlane['id']}}" category_id='{{$category["id"]}}' swimlane_id='{{$swimlane["id"]}}'>
             @foreach($cards as $card)
               @if($card["swimlane_id"] == $swimlane["id"] && $card["category_id"] == $category["id"])
-              <div class='card' id="card{{$card['id']}}">Card {{ $card["id"] }}
+              <div class='card' id="card{{$card['id']}}" card_id="{{$card['id']}}">
+                Card {{ $card["id"] }}
                 Assignee:
                 Description:
               </div>
@@ -89,8 +90,10 @@
           <td id="c{{$category['id']}}snull" category_id='{{$category["id"]}}' swimlane_id='null'>
             @foreach($cards as $card)
               @if(is_null($card["swimlane_id"]) && $card["category_id"] == $category["id"])
-              <div class='card' id="card{{$card['id']}}">
-              Card {{ $card["id"] }}
+              <div class='card' id="card{{$card['id']}}" card_id="{{$card['id']}}">
+                Card {{ $card["id"] }}
+                Assignee:
+                Description:
               </div>
               @endif
             @endforeach
