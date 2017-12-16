@@ -131,6 +131,17 @@ function ajaxGetBoard()
   });
 }
 
+function ajaxGetCard(id)
+{
+  $.ajax({ url: "/api/cards/" + id,
+    method: "GET",
+    success: function( result ) {
+      //$('#returnValue').html('<pre>' + JSON.stringify(result, null, 2) + '</pre>');
+      console.log(JSON.stringify(result, null, 2));
+    }
+  });
+}
+
 function setBoardTimestamp(timestamp)
 {
   cardsTimestamp = timestamp;
