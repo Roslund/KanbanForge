@@ -146,3 +146,6 @@ function ajaxGetBoard()
     }
   });
 }
+
+var timeBetweenUpdateChecks = 3000;
+var updateCheckerID = setInterval(ajaxCheckIfShouldUpdateBoard, timeBetweenUpdateChecks);
