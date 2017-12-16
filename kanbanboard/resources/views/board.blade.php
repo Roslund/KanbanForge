@@ -69,10 +69,10 @@
         <tr>
         <th>{{ $swimlane["name"] }}</th>
         @foreach($categories as $category)
-          <td id="c{{$category['id']}}s{{$swimlane['id']}}" category_id='{{$category["id"]}}' swimlane_id='{{$swimlane["id"]}}'>
+          <td id="c{{$category['id']}}s{{$swimlane['id']}}" category_id='{{$category["id"]}}' swimlane_id='{{$swimlane["id"]}}' ondrop ="drop(event)" ondragover="allowDrop(event)">
             @foreach($cards as $card)
               @if($card["swimlane_id"] == $swimlane["id"] && $card["category_id"] == $category["id"])
-              <div class='card' id="card{{$card['id']}}" card_id="{{$card['id']}}">
+              <div class='card' id="card{{$card['id']}}" card_id="{{$card['id']}}" draggable="true" ondragstart="drag(event)">
                 Card {{ $card["id"] }}
                 Assignee:
                 Description:
@@ -87,10 +87,10 @@
       <tr>
         <td>&nbsp;</td>
         @foreach($categories as $category)
-          <td id="c{{$category['id']}}snull" category_id='{{$category["id"]}}' swimlane_id='null'>
+          <td id="c{{$category['id']}}snull" category_id='{{$category["id"]}}' swimlane_id='null' ondrop ="drop(event)" ondragover="allowDrop(event)">
             @foreach($cards as $card)
               @if(is_null($card["swimlane_id"]) && $card["category_id"] == $category["id"])
-              <div class='card' id="card{{$card['id']}}" card_id="{{$card['id']}}">
+              <div class='card' id="card{{$card['id']}}" card_id="{{$card['id']}}" draggable="true" ondragstart="drag(event)">
                 Card {{ $card["id"] }}
                 Assignee:
                 Description:
