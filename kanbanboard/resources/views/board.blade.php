@@ -59,7 +59,10 @@
       <tr>
         <th class="empty-th"></th>
         @foreach($categories as $category)
-          <th>{{ $category["name"] }}</th>
+          <th>
+            {{ $category["name"] }}<br>
+            Limit: {{ $category["limit"] }}
+          </th>
         @endforeach
       </tr>
     </thead>
