@@ -71,17 +71,6 @@ class CardApiController extends Controller
         return array('timestamp' => date("Y-m-d H:i:s"), 'success' => $queryReturnValue);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        // DELETE /api/cards/{id}
-    }
-
     public function checkIfUpdatedSince($dateTime)
     {
         if(Card::where('updated_at', '>', $dateTime)->get()->count() > 0)

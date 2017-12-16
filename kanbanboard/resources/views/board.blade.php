@@ -13,7 +13,7 @@
 
 <div class="tbl-board">
   @if(count($categories) > 0)
-  <table cellpadding="0" cellspacing="0" border="0">
+  <table id="table-data" cellpadding="0" cellspacing="0" border="0">
     <thead>
       @if(count($parentCategories) > 0)
           <?php
