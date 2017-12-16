@@ -87,10 +87,10 @@ class CardApiController extends Controller
         }
 
         // if cards haven't changed then we'll check if categories or swimlanes have
-        if(Category::all()->count() != $categoryCount
-          || Swimlane::all()->count() != $swimlaneCount
-          || Category::where('updated_at', '>', $lastUpdated)->get()->count() > 0
-          || Swimlane::where('updated_at', '>', $lastUpdated)->get()->count() > 0)
+        if(Category::where('updated_at', '>', $lastUpdated)->get()->count() > 0
+          || Swimlane::where('updated_at', '>', $lastUpdated)->get()->count() > 0
+          || Category::all()->count() != $categoryCount
+          || Swimlane::all()->count() != $swimlaneCount)
         {
           $newMetadataObject = array( "categoryCount" => Category::all()->count(), "swimlaneCount" => Swimlane::all()->count() );
           return array('timestamp' => date("Y-m-d H:i:s"), 'metadataObject' => $newMetadataObject, 'response' => 1);
