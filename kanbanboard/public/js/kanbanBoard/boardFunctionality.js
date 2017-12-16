@@ -41,7 +41,13 @@ function drop(ev)
     var targetSwimlaneId = ev.currentTarget.getAttribute("swimlane_id");
     var cardId = cardElement.getAttribute("card_id");
 
-    //console.log("Target category ID: " + targetCategoryId + " Target swimlane ID: " + targetSwimlaneId + " Card ID: " + cardId);
+    // We need to actually set it to null, otherwise we'd be sending
+    // a string with the value of "null".
+    if(targetSwimlaneId === "null") {
+      targetSwimlaneId = null;
+    }
+
+    ajaxUpdateCard(cardId, targetCategoryId, targetSwimlaneId);
 
     ev.currentTarget.appendChild(cardElement);
   }
@@ -60,3 +66,30 @@ document.addEventListener('dragend', function(event) {
   }
 });
 // Drag and drop end
+
+// Ajax related functions start
+$.ajaxSetup({
+  headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  }
+});
+
+function ajaxUpdateCard(id, category_id, swimlane_id)
+{
+  console.log("id: " + id + "\n category_id: " + category_id + "\n swimlane_id: " + swimlane_id);
+  $.ajax({
+    url: "/api/cards/" + id,
+    data: {
+      category_id: category_id,
+      swimlane_id: swimlane_id
+    },
+    method: "PUT",
+    success: function( result ) {
+      // As this is an async function we have to return the timestamp in a callback.
+      //handleTimestampFromAjaxCardUpdate(result["timestamp"]);
+    }, error: function (xhr, ajaxOptions, thrownError){
+      $jsonXHR = JSON.stringify(xhr.responseText);
+      console.log(JSON.parse($jsonXHR));
+    }
+  });
+};
