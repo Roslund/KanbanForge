@@ -78,12 +78,19 @@
               <div class='card' id="card{{$card['id']}}" card_id="{{$card['id']}}" draggable="true" ondragstart="drag(event)">
                 Card {{ $card["id"] }}<br>
                 Assigned to: {{ $card["assignedTo"] }}<br>
+                Last updated:<br>
                 <?php
                   $cardLastUpdate = new DateTime($card['updated_at']);
                   $currentDate = new DateTime(date("Y-m-d H:i:s"));
                   $dateInterval = $cardLastUpdate->diff($currentDate);
 
-                  echo $dateInterval->format('Last updated: <br>%d days ago');
+                  $stringValue = $dateInterval->format('%d days ago');
+                  if($stringValue == "0 days ago") {
+                    echo "Today";
+                  }
+                  else {
+                    echo $stringValue;
+                  }
                 ?>
               </div>
               @endif
@@ -102,12 +109,19 @@
               <div class='card' id="card{{$card['id']}}" card_id="{{$card['id']}}" draggable="true" ondragstart="drag(event)">
                 Card {{ $card["id"] }}<br>
                 Assigned to: {{ $card["assignedTo"] }}<br>
+                Last updated:<br>
                 <?php
                   $cardLastUpdate = new DateTime($card['updated_at']);
                   $currentDate = new DateTime(date("Y-m-d H:i:s"));
                   $dateInterval = $cardLastUpdate->diff($currentDate);
 
-                  echo $dateInterval->format('Last updated: <br>%d days ago');
+                  $stringValue = $dateInterval->format('%d days ago');
+                  if($stringValue == "0 days ago") {
+                    echo "Today";
+                  }
+                  else {
+                    echo $stringValue;
+                  }
                 ?>
               </div>
               @endif
