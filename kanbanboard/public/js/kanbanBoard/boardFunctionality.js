@@ -105,7 +105,6 @@ function ajaxCheckIfShouldUpdateBoard()
     success: function(data) {
       if(data['response'] == 1)
       {
-        console.log(data);
         setBoardTimestamp(data['timestamp']);
         setBoardMetadata(data['metadataObject']);
         ajaxGetBoard();
