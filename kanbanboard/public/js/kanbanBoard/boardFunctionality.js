@@ -85,22 +85,13 @@ function ajaxUpdateCard(id, category_id, swimlane_id)
     },
     method: "PUT",
     success: function( result ) {
-      // As this is an async function we have to return the timestamp in a callback.
-      handleTimestampFromAjaxCardUpdate(result["timestamp"]);
+      setBoardTimestamp(result["timestamp"]);
     }, error: function (xhr, ajaxOptions, thrownError){
       $jsonXHR = JSON.stringify(xhr.responseText);
       console.log(JSON.parse($jsonXHR));
     }
   });
 };
-
-// This updates the timestamp so that we're not seeing our own update as
-// a reason to update the board.
-function handleTimestampFromAjaxCardUpdate(timestampFromDB)
-{
-  cardsTimestamp = timestampFromDB;
-  console.log("handleTimestampFromAjaxCardUpdate set timestamp to: " + cardsTimestamp);
-}
 
 /*
   I do it in this separate way so that we don't have to download all cards
@@ -113,15 +104,10 @@ function ajaxCheckIfShouldUpdateBoard()
   $.ajax({ url: "api/cards/updatedsince/" + cardsTimestamp,
     method: "GET",
     success: function(data) {
-      console.log(data);
-      if(data == "1")
+      if(data['response'] == 1)
       {
-        console.log("Updating!");
+        setBoardTimestamp(data['timestamp']);
         ajaxGetBoard();
-      }
-      else
-      {
-        console.log("Board state unchanged.\nNothing to update.");
       }
     },
     error: function (xhr, ajaxOptions, thrownError) {
@@ -133,18 +119,21 @@ function ajaxCheckIfShouldUpdateBoard()
 
 function ajaxGetBoard()
 {
-  console.log("Getting board");
   $.ajax({ url: "board/",
     method: "GET",
     success: function(data) {
       $("#table-data").replaceWith($(data).find("#table-data"));
-      console.log("Table updated");
     },
     error: function (xhr, ajaxOptions, thrownError) {
       $jsonXHR = JSON.stringify(xhr.responseText);
       console.log(JSON.parse($jsonXHR));
     }
   });
+}
+
+function setBoardTimestamp(timestamp)
+{
+  cardsTimestamp = timestamp;
 }
 
 var timeBetweenUpdateChecks = 3000;

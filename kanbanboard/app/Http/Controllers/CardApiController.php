@@ -75,11 +75,11 @@ class CardApiController extends Controller
     {
         if(Card::where('updated_at', '>', $dateTime)->get()->count() > 0)
         {
-          return 1;
+          return array('timestamp' => date("Y-m-d H:i:s"), 'response' => 1);
         }
         else
         {
-          return 0;
+          return array('timestamp' => date("Y-m-d H:i:s"), 'response' => 0);
         }
     }
 }
