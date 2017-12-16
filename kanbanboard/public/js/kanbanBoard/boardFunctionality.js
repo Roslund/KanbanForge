@@ -1,4 +1,5 @@
 var boardTimestamp;
+var metadataObject;
 
 var timeBetweenUpdateChecks = 3000;
 var updateCheckerID = setInterval(ajaxCheckIfShouldUpdateBoard, timeBetweenUpdateChecks);
@@ -96,11 +97,16 @@ function ajaxUpdateCard(id, category_id, swimlane_id)
 function ajaxCheckIfShouldUpdateBoard()
 {
   $.ajax({ url: "api/cards/updatedsince/" + boardTimestamp,
-    method: "GET",
+    data: {
+      timestamp: boardTimestamp,
+      metadataObject: metadataObject
+    },
+    method: "POST",
     success: function(data) {
       if(data['response'] == 1)
       {
         setBoardTimestamp(data['timestamp']);
+        setBoardMetadata(data['metadataObject']);
         ajaxGetBoard();
       }
     },
@@ -139,4 +145,9 @@ function ajaxGetCard(id)
 function setBoardTimestamp(timestamp)
 {
   boardTimestamp = timestamp;
+}
+
+function setBoardMetadata(metadata)
+{
+  metadataObject = metadata;
 }

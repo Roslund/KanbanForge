@@ -20,7 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 // Card related api routes
 Route::get('/cards', 'CardApiController@index');
 
-Route::get('/cards/updatedsince/{dateTime}', 'CardApiController@checkIfUpdatedSince');
+Route::post('/cards/updatedsince/{dateTime}', 'CardApiController@checkIfUpdatedSince');
 
 Route::get('/cards/{id}', 'CardApiController@show');
 

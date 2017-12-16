@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Card;
+use App\Category;
+use App\Swimlane;
 
 class CardApiController extends Controller
 {
@@ -71,15 +73,26 @@ class CardApiController extends Controller
         return array('timestamp' => date("Y-m-d H:i:s"), 'success' => $queryReturnValue);
     }
 
-    public function checkIfUpdatedSince($dateTime)
+    public function checkIfUpdatedSince(Request $request)
     {
-        if(Card::where('updated_at', '>', $dateTime)->get()->count() > 0)
+        $lastUpdated = request('timestamp');
+        $metadataObject = request('metadataObject');
+
+        $categoryCount = $metadataObject['categoryCount'];
+        $swimlaneCount = $metadataObject['swimlaneCount'];
+
+        if(Card::where('updated_at', '>', $lastUpdated)->get()->count() > 0)
         {
-          return array('timestamp' => date("Y-m-d H:i:s"), 'response' => 1);
+          return array('timestamp' => date("Y-m-d H:i:s"), 'metadataObject' => $metadataObject, 'response' => 1);
         }
-        else
+
+        // if cards haven't changed then we'll check if categories or swimlanes have
+        if(Category::all()->count() != $categoryCount || Swimlane::all()->count() != $swimlaneCount)
         {
-          return array('timestamp' => date("Y-m-d H:i:s"), 'response' => 0);
+          $newMetadataObject = array( "categoryCount" => Category::all()->count(), "swimlaneCount" => Swimlane::all()->count() );
+          return array('timestamp' => date("Y-m-d H:i:s"), 'metadataObject' => $newMetadataObject, 'response' => 1);
         }
+
+        return array('timestamp' => date("Y-m-d H:i:s"), 'response' => 0);
     }
 }
