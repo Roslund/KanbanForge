@@ -195,7 +195,13 @@
   {
     $.ajax({ url: "/api/cards/" + id,
     method: "GET",
-    success: function( result ) {      
+    success: function( result ) {
+      if (result.length != 1)
+      {
+        alert("Something went wrong while fetching the card details!");
+        return;
+      }
+  
       $("#cardModalTitle").text(result[0].title);
 
       var modal = $("#cardModalBodyTable");
@@ -209,7 +215,7 @@
       $("#cardModal").modal('toggle');
     },
     error: function() {
-      alert("Card details couldn't be fetched!  ");
+      alert("Card details couldn't be fetched! ");
     }
   });
   }
