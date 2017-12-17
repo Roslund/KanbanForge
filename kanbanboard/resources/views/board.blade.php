@@ -151,9 +151,13 @@
           <div class="modal-header">
             <h2 class="modal-title" id="cardModalTitle">Create Category</h2>
           </div>
-          <div class="modal-body">
+          <hr>
+          <div class="modal-body" id="cardModalBody">
 
           </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
         </div>
       </div>
     </div>
@@ -182,17 +186,21 @@
     success: function( result ) {
       console.log(result[0]);
       
-      $.each(result[0], function (key, value) {
-        console.log(key); // log the current property name, the last is "".
-             // return the unchanged property value.
-      });
 
       $("#cardModalTitle").text(result[0].title);
+
+      var modal = $("#cardModalBody");
+
+      modal.empty();
+
+      $.each(result[0], function(key, value) {
+        modal.append("<p>" + key + ": <i>" + value + "</i></p>");
+      });
 
       $("#cardModal").modal('toggle');
     },
     error: function() {
-      alert("Card details couldn't be fetched.");
+      alert("Card details couldn't be fetched!  ");
     }
   });
   }
