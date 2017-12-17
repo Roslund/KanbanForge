@@ -76,7 +76,9 @@
             @foreach($cards as $card)
               @if($card["swimlane_id"] == $swimlane["id"] && $card["category_id"] == $category["id"])
               <div class='card' id="card{{$card['id']}}" card_id="{{$card['id']}}" draggable="true" ondragstart="drag(event)">
-                Card {{ $card["id"] }}<br>
+                <a onclick="cardModal({{ $card['id'] }})" href="#">
+                Card {{ $card["id"] }}
+                </a><br>
                 Assigned to: {{ $card["assignedTo"] }}<br>
                 Last updated:<br>
                 <span class="cardLastUpdated">
@@ -142,6 +144,20 @@
 
 </div>
 
+<!-- Card Modal -->
+    <div class="modal fade" id="cardModal" tabindex="-1" role="dialog" aria-labelledby="Create" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title" id="cardModalTitle">Create Category</h2>
+          </div>
+          <div class="modal-body">
+
+          </div>
+        </div>
+      </div>
+    </div>
+
 @endsection
 
 {{--
@@ -157,6 +173,30 @@
 
 <!-- Kanban Board imports -->
 <script src="{{URL::asset('js/kanbanBoard/boardFunctionality.js')}}"></script>
+
+<script type="text/javascript">
+  function cardModal(id)
+  {
+    $.ajax({ url: "/api/cards/" + id,
+    method: "GET",
+    success: function( result ) {
+      console.log(result[0]);
+      
+      $.each(result[0], function (key, value) {
+        console.log(key); // log the current property name, the last is "".
+             // return the unchanged property value.
+      });
+
+      $("#cardModalTitle").text(result[0].title);
+
+      $("#cardModal").modal('toggle');
+    },
+    error: function() {
+      alert("Card details couldn't be fetched.");
+    }
+  });
+  }
+</script>
 
 <!-- This is to inject the current server timestamp into the boardTimestamp variable -->
 <!-- Can't inject it directly into the javascript as it doesn't get compiled with blade -->
