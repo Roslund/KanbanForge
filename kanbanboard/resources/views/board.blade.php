@@ -169,7 +169,7 @@
           </div>
           <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -195,10 +195,7 @@
   {
     $.ajax({ url: "/api/cards/" + id,
     method: "GET",
-    success: function( result ) {
-      console.log(result[0]);
-      
-
+    success: function( result ) {      
       $("#cardModalTitle").text(result[0].title);
 
       var modal = $("#cardModalBodyTable");
@@ -208,8 +205,6 @@
       $.each(result[0], function(key, value) {
         modal.append("<tr><td>"+key+"</td><td>"+value+"</td></tr>");
       });
-
-      modal.append
 
       $("#cardModal").modal('toggle');
     },
