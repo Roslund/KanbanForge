@@ -25,10 +25,9 @@
 				<tbody>
 				@foreach($artifacts as $item)
 				<tr>
-
 					<td>
 						<div class="checkbox">
-						<label>{!! Form::checkbox('id[]', $item->id, false, ['class' => 'checkbox']); !!}</label>
+						<label><input class ="checkbox" name="id[]" type="checkbox" value="{{$item->id}}" @if (in_array($item->id, $cards)) checked @endif ></label>
 						</div>
 					 </td>
 					<td> {{ $item->id }}</td>

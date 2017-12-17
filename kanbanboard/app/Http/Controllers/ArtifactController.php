@@ -22,8 +22,8 @@ class ArtifactController extends Controller {
   public function index() {
         //Gets the artifacts from the database! :)
     $artifacts = Artifact::all()->sortByDesc("id");
-
-    return view('admin.artifacts.index',compact(['artifacts']));
+		$cards = DB::table('cards')->pluck('artifact_id')->toArray();
+    return view('admin.artifacts.index',compact(['artifacts','cards']));
   }
 
 
@@ -33,8 +33,12 @@ class ArtifactController extends Controller {
       if($ids)
       {
 				$cards = DB::table('cards')->pluck('artifact_id')->toArray();
+				//finding items that are in request but not in card db for dublicated values
 				$missing = array_diff($ids, $cards);
+				//finding items that are in card db but nut in request
+				$remove = array_diff( $cards,$ids);
 				if($missing)
+				//adding values to cards
         foreach ($missing as $id) {
           $card = new Card;
           $card->artifact_id = $id;
@@ -42,8 +46,16 @@ class ArtifactController extends Controller {
           $card->swimlane_id = Null;
           $card->save();
           }
-          return view('admin.artifacts.selected', compact('ids'));
+					//removing items that have been unselected
+					foreach ($remove as $item) {
+						DB::table('cards')->where('artifact_id', $item)->delete();
+					}
       }
+			//if no selected items then remove all from card db
+			else
+			{
+				DB::table('cards')->truncate();
+			}
       return redirect('/admin/filter');
   }
 
