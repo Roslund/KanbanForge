@@ -12,12 +12,7 @@ function allowDrop(ev)
 
 function drag(ev)
 {
-  console.log("Drag start");
-
   var categoryId = ev.currentTarget.parentElement.id;
-
-  console.log(ev.target.id + " is being dragged.");
-
   ev.dataTransfer.setData("cardId", ev.target.id);
 }
 
@@ -52,8 +47,6 @@ function drop(ev)
 
     ev.currentTarget.appendChild(cardElement);
   }
-
-  console.log("Drag end");
 }
 
 // As there's a possibility that the user drops the card in a non-droppable
@@ -63,7 +56,8 @@ document.addEventListener('dragend', function(event) {
   // if it was dropped in a area other than a dropzone.
   if(event.dataTransfer.dropEffect == "none")
   {
-    console.log("Drag cancelled");
+    // Still keeping this if here as it'll be used later.
+    //console.log("Drag cancelled");
   }
 });
 // Drag and drop end
@@ -77,7 +71,6 @@ $.ajaxSetup({
 
 function ajaxUpdateCard(id, category_id, swimlane_id)
 {
-  console.log("id: " + id + "\n category_id: " + category_id + "\n swimlane_id: " + swimlane_id);
   $.ajax({
     url: "/api/cards/" + id,
     data: {
@@ -89,7 +82,7 @@ function ajaxUpdateCard(id, category_id, swimlane_id)
       setBoardTimestamp(result["timestamp"]);
     }, error: function (xhr, ajaxOptions, thrownError){
       $jsonXHR = JSON.stringify(xhr.responseText);
-      console.log(JSON.parse($jsonXHR));
+      //console.log(JSON.parse($jsonXHR));
     }
   });
 };
@@ -118,7 +111,7 @@ function ajaxCheckIfShouldUpdateBoard()
     },
     error: function (xhr, ajaxOptions, thrownError) {
       $jsonXHR = JSON.stringify(xhr.responseText);
-      console.log(JSON.parse($jsonXHR));
+      //console.log(JSON.parse($jsonXHR));
     }
   });
 }
@@ -132,7 +125,7 @@ function ajaxGetBoard()
     },
     error: function (xhr, ajaxOptions, thrownError) {
       $jsonXHR = JSON.stringify(xhr.responseText);
-      console.log(JSON.parse($jsonXHR));
+      //console.log(JSON.parse($jsonXHR));
     }
   });
 }
@@ -143,7 +136,7 @@ function ajaxGetCard(id)
     method: "GET",
     success: function( result ) {
       //$('#returnValue').html('<pre>' + JSON.stringify(result, null, 2) + '</pre>');
-      console.log(JSON.stringify(result, null, 2));
+      //console.log(JSON.stringify(result, null, 2));
     }
   });
 }
