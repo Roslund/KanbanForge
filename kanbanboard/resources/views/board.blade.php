@@ -223,38 +223,11 @@
   });
   }
 
-  function checkLimits()
-  {
-    var categories = $("#table-data").find("thead").find("tr").children().slice(1);
-
-    var limits = $("#table-data").find("thead").find(".limit-nr").map(function(){
-      return $(this).text();
-    }).toArray();
-    console.log(limits);
-
-    var counter = new Array(categories.length);
-    counter.fill(0);
-
-    // table td with cards
-    var tdwc = $("#table-data").find("tbody").find(".card").parent();
-
-    $.each(tdwc, function (index) {
-      counter[$(this).attr("category_id")-1] += $(this).children().length;
-    });
-
-    $.each(categories, function(index){
-      if (limits[index] <= counter[index] && limits[index] != 0)
-      {
-        console.log($($(categories).find(".limit")[index]).css('color', 'red'));
-      }
-      else
-      {
-        console.log($($(categories).find(".limit")[index]).css('color', 'black'));
-      }
-    });
-  }
-
-  // Category limits 
+  $(document).ready(function() {
+    checkLimits();
+  });
+  
+  // Check limits on drop
   $(".card-td").on("drop", function(event) {
     checkLimits();
   });
