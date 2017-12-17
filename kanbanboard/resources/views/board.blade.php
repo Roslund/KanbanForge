@@ -153,7 +153,19 @@
           </div>
           <hr>
           <div class="modal-body" id="cardModalBody">
+            <div class="table">
+              <table class="table table-bordered table-striped table-hover table-fixed">
+                <thead>
+                  <tr>
+                    <th>Key</th>
+                    <th>Value</th>
+                  </tr>
+                </thead>
+                <tbody id="cardModalBodyTable">
 
+                </tbody>
+              </table>
+            </div>
           </div>
           <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -189,13 +201,15 @@
 
       $("#cardModalTitle").text(result[0].title);
 
-      var modal = $("#cardModalBody");
+      var modal = $("#cardModalBodyTable");
 
       modal.empty();
 
       $.each(result[0], function(key, value) {
-        modal.append("<p>" + key + ": <i>" + value + "</i></p>");
+        modal.append("<tr><td>"+key+"</td><td>"+value+"</td></tr>");
       });
+
+      modal.append
 
       $("#cardModal").modal('toggle');
     },
