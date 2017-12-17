@@ -61,7 +61,7 @@
         @foreach($categories as $category)
           <th limit="{{ $category['limit'] }}">
             {{ $category["name"] }}<br>
-            Limit: <span class="limit-nr">{{ $category["limit"] }}</span>
+            <span class="limit">Limit: <span class="limit-nr">{{ $category["limit"] }}</span></span>
           </th>
         @endforeach
       </tr>
@@ -223,35 +223,41 @@
   });
   }
 
+  function checkLimits()
+  {
+    var categories = $("#table-data").find("thead").find("tr").children().slice(1);
+
+    var limits = $("#table-data").find("thead").find(".limit-nr").map(function(){
+      return $(this).text();
+    }).toArray();
+    console.log(limits);
+
+    var counter = new Array(categories.length);
+    counter.fill(0);
+
+    // table td with cards
+    var tdwc = $("#table-data").find("tbody").find(".card").parent();
+
+    $.each(tdwc, function (index) {
+      counter[$(this).attr("category_id")-1] += $(this).children().length;
+    });
+
+    $.each(categories, function(index){
+      if (limits[index] <= counter[index] && limits[index] != 0)
+      {
+        console.log($($(categories).find(".limit")[index]).css('color', 'red'));
+      }
+      else
+      {
+        console.log($($(categories).find(".limit")[index]).css('color', 'black'));
+      }
+    });
+  }
+
   // Category limits 
   $(".card-td").on("drop", function(event) {
-    var counter = 0;
-    //console.log("called");
-    // Get the category id
-    var catID = event.currentTarget.getAttribute("category_id") - 1;
-    //console.log(catID);
-
-    var category = $("#table-data").find("thead").find("tr").children().get(catID+1);
-    var limit = category.getAttribute("limit");
-    //console.log(category);
-
-    var rows = $("#table-data").find("tbody").children();
-    //console.log(rows);
-
-    $.each(rows, function (i) {
-      counter += $(this).find("td")[catID].childElementCount;
-    });
-    console.log(counter);
-
-    if (limit <= counter)
-    {
-      $(category).find(".limit-nr").css('color', 'red');
-    }
-    else
-    {
-      $(category).find(".limit-nr").css('color', 'initial');
-    }
-});
+    checkLimits();
+  });
 </script>
 
 <!-- This is to inject the current server timestamp into the boardTimestamp variable -->
