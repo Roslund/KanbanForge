@@ -111,7 +111,9 @@
             @foreach($cards as $card)
               @if(is_null($card["swimlane_id"]) && $card["category_id"] == $category["id"])
               <div class='card' id="card{{$card['id']}}" card_id="{{$card['id']}}" draggable="true" ondragstart="drag(event)">
-                Card {{ $card["id"] }}<br>
+                <a onclick="cardModal({{ $card['id'] }})" href="#">
+                Card {{ $card["id"] }}
+                </a><br>
                 Assigned to: {{ $card["assignedTo"] }}<br>
                 Last updated:<br>
                 <span class="cardLastUpdated">
