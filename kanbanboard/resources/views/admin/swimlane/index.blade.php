@@ -82,7 +82,7 @@
 			<div class="modal-header">
 				<h2 class="modal-title" id="exampleModalLongTitle">Edit {{ $item->name }}</h2>
 			</div>
-			<div class="modal-body" style="margin-top: 0; padding-top: 0;">
+			<div class="modal-body">
 				{!! Form::model($item, [
 				'method' => 'PATCH',
 				'url' => ['/admin/swimlanes', $item->id],
@@ -128,7 +128,7 @@
 				<h2 class="modal-title" id="exampleModalLongTitle">Create Swimlane</h2>
 			</div>
 
-			<div class="modal-body" style="margin-top: 0; padding-top: 0;">
+			<div class="modal-body">
 				 {!! Form::open(['url' => '/admin/swimlanes', 'class' => 'form-horizontal', 'files' => true]) !!}
 
 				<div class="form-group {{ $errors->has('name') ? 'has-error' : ''}}">

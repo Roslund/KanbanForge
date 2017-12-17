@@ -17,7 +17,7 @@
 				<div class="row" style="margin-left: 0; margin-right: 0;">
 					<div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
 						<div class="card card-signup">
-							<div class="header header-primary text-center" style="margin-top: 0; box-shadow: none; margin: 0; border-radius: 3px 3px 0 0;">
+							<div class="header header-primary text-center">
 								<h2>Sign In</h2>
 							</div>
 
@@ -75,7 +75,7 @@
 		</div>
 	</div>
 
-	<footer class="footer" style="position: absolute; bottom: 0; z-index: 10; text-align: center; width: 100%;">
+	<footer class="footer">
 		<div class="container">
 
 		</div>
