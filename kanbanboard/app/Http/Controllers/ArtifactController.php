@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Artifact;
 use App\Card;
+use DB;
 
 
 
@@ -31,7 +32,10 @@ class ArtifactController extends Controller {
       $ids = Input::get('id');
       if($ids)
       {
-        foreach ($ids as $id) {
+				$cards = DB::table('cards')->pluck('artifact_id')->toArray();
+				$missing = array_diff($ids, $cards);
+				if($missing)
+        foreach ($missing as $id) {
           $card = new Card;
           $card->artifact_id = $id;
           $card->category_id = 1;
