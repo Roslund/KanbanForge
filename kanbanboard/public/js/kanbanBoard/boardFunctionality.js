@@ -136,7 +136,7 @@ function ajaxGetCard(id)
     method: "GET",
     success: function( result ) {
       //$('#returnValue').html('<pre>' + JSON.stringify(result, null, 2) + '</pre>');
-      //console.log(JSON.stringify(result, null, 2));
+      console.log(JSON.stringify(result, null, 2));
     }
   });
 }

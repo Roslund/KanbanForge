@@ -76,7 +76,9 @@
             @foreach($cards as $card)
               @if($card["swimlane_id"] == $swimlane["id"] && $card["category_id"] == $category["id"])
               <div class='card' id="card{{$card['id']}}" card_id="{{$card['id']}}" draggable="true" ondragstart="drag(event)">
-                Card {{ $card["id"] }}<br>
+                <a onclick="cardModal({{ $card['id'] }})" href="#">
+                Card {{ $card["id"] }}
+                </a><br>
                 Assigned to: {{ $card["assignedTo"] }}<br>
                 Last updated:<br>
                 <span class="cardLastUpdated">
@@ -142,6 +144,36 @@
 
 </div>
 
+<!-- Card Modal -->
+    <div class="modal fade" id="cardModal" tabindex="-1" role="dialog" aria-labelledby="Create" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title" id="cardModalTitle">Create Category</h2>
+          </div>
+          <hr>
+          <div class="modal-body" id="cardModalBody">
+            <div class="table">
+              <table class="table table-bordered table-striped table-hover table-fixed">
+                <thead>
+                  <tr>
+                    <th>Key</th>
+                    <th>Value</th>
+                  </tr>
+                </thead>
+                <tbody id="cardModalBodyTable">
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
 @endsection
 
 {{--
@@ -157,6 +189,37 @@
 
 <!-- Kanban Board imports -->
 <script src="{{URL::asset('js/kanbanBoard/boardFunctionality.js')}}"></script>
+
+<script type="text/javascript">
+  function cardModal(id)
+  {
+    $.ajax({ url: "/api/cards/" + id,
+    method: "GET",
+    success: function( result ) {
+      if (result.length != 1)
+      {
+        alert("Something went wrong while fetching the card details!");
+        return;
+      }
+  
+      $("#cardModalTitle").text(result[0].title);
+
+      var modal = $("#cardModalBodyTable");
+
+      modal.empty();
+
+      $.each(result[0], function(key, value) {
+        modal.append("<tr><td>"+key+"</td><td>"+value+"</td></tr>");
+      });
+
+      $("#cardModal").modal('toggle');
+    },
+    error: function() {
+      alert("Card details couldn't be fetched! ");
+    }
+  });
+  }
+</script>
 
 <!-- This is to inject the current server timestamp into the boardTimestamp variable -->
 <!-- Can't inject it directly into the javascript as it doesn't get compiled with blade -->
