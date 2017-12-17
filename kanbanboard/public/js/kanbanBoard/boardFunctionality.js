@@ -44,6 +44,12 @@ function drop(ev)
 
     ajaxUpdateCard(cardId, targetCategoryId, targetSwimlaneId);
 
+    // This changes the "Last Updated: " value to Today.
+    if(cardElement.getElementsByClassName('cardLastUpdated')[0].innerHTML.trim() != "Today")
+    {
+      cardElement.getElementsByClassName('cardLastUpdated')[0].innerHTML = "Today";
+    }
+
     ev.currentTarget.appendChild(cardElement);
   }
 

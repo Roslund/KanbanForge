@@ -79,6 +79,7 @@
                 Card {{ $card["id"] }}<br>
                 Assigned to: {{ $card["assignedTo"] }}<br>
                 Last updated:<br>
+                <span class="cardLastUpdated">
                 <?php
                   $cardLastUpdate = new DateTime($card['updated_at']);
                   $currentDate = new DateTime(date("Y-m-d H:i:s"));
@@ -92,6 +93,7 @@
                     echo $stringValue;
                   }
                 ?>
+                </span>
               </div>
               @endif
             @endforeach
@@ -110,6 +112,7 @@
                 Card {{ $card["id"] }}<br>
                 Assigned to: {{ $card["assignedTo"] }}<br>
                 Last updated:<br>
+                <span class="cardLastUpdated">
                 <?php
                   $cardLastUpdate = new DateTime($card['updated_at']);
                   $currentDate = new DateTime(date("Y-m-d H:i:s"));
@@ -123,6 +126,7 @@
                     echo $stringValue;
                   }
                 ?>
+                </span>
               </div>
               @endif
             @endforeach
