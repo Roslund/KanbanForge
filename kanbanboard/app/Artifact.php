@@ -40,7 +40,7 @@ class Artifact extends Model
     $url = config('teamforge.url') . '/ctfrest/tracker/v1/artifacts/filter';
     $options=array(
       'http' => array(
-        'header'  => "Authorization: Bearer " . TeamForgeApiToken::getToken() . "\r\n" . 
+        'header'  => "Authorization: Bearer " . TeamForgeApiToken::getToken() . "\r\n" .
                      "Content-type: application/json\r\n",
         'method'  => 'POST',
         'content' => $postdata
@@ -51,9 +51,9 @@ class Artifact extends Model
       ),
     );
     try {
-      $contents = file_get_contents($url, false, stream_context_create($options)); 
-      $contents = utf8_encode($contents); 
-      $results = json_decode($contents); 
+      $contents = file_get_contents($url, false, stream_context_create($options));
+      $contents = utf8_encode($contents);
+      $results = json_decode($contents);
 
       $newArtifacts = array();
       foreach ($results->items as $item) {
@@ -80,6 +80,34 @@ class Artifact extends Model
     } catch (\Exception $e) {
       \Log::info($e);
       \Log::warning('failed to refresh_all_artifacts_from_teamforge()');
+    }
+
+    return null;
+  }
+
+  public static function get_artifact_by_id($artifactId)
+  {
+    $url = config('teamforge.url') . '/ctfrest/tracker/v1/artifacts/' . $artifactId;
+    $options=array(
+      'http' => array(
+        'header'  => "Authorization: Bearer " . TeamForgeApiToken::getToken() . "\r\n" .
+                     "Content-type: application/json\r\n",
+        'method'  => 'GET'
+      ),
+      "ssl"=>array(
+        "verify_peer"=>false,
+        "verify_peer_name"=>false,
+      ),
+    );
+
+    try {
+      $contents = file_get_contents($url, false, stream_context_create($options));
+      $contents = utf8_encode($contents);
+      $result = json_decode($contents);
+      return $result;
+    } catch (\Exception $e) {
+      \Log::info($e);
+      \Log::warning('failed to get_artifact_by_id()');
     }
 
     return null;
