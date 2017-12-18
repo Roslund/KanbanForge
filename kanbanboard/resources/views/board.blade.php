@@ -59,9 +59,9 @@
       <tr>
         <th class="empty-th"></th>
         @foreach($categories as $category)
-          <th>
+          <th limit="{{ $category['limit'] }}">
             {{ $category["name"] }}<br>
-            Limit: {{ $category["limit"] }}
+            <span class="limit">Limit: <span class="limit-nr">{{ $category["limit"] }}</span></span>
           </th>
         @endforeach
       </tr>
@@ -72,7 +72,7 @@
         <tr>
         <th>{{ $swimlane["name"] }}</th>
         @foreach($categories as $category)
-          <td id="c{{$category['id']}}s{{$swimlane['id']}}" category_id='{{$category["id"]}}' swimlane_id='{{$swimlane["id"]}}' ondrop ="drop(event)" ondragover="allowDrop(event)">
+          <td id="c{{$category['id']}}s{{$swimlane['id']}}" category_id='{{$category["id"]}}' swimlane_id='{{$swimlane["id"]}}' ondrop ="drop(event)" ondragover="allowDrop(event)" class="card-td">
             @foreach($cards as $card)
               @if($card["swimlane_id"] == $swimlane["id"] && $card["category_id"] == $category["id"])
               <div class='card' id="card{{$card['id']}}" card_id="{{$card['id']}}" draggable="true" ondragstart="drag(event)">
@@ -105,9 +105,9 @@
       @endforeach
 
       <tr>
-        <td>&nbsp;</td>
+        <th>&nbsp;</th>
         @foreach($categories as $category)
-          <td id="c{{$category['id']}}snull" category_id='{{$category["id"]}}' swimlane_id='null' ondrop ="drop(event)" ondragover="allowDrop(event)">
+          <td id="c{{$category['id']}}snull" category_id='{{$category["id"]}}' swimlane_id='null' ondrop ="drop(event)" ondragover="allowDrop(event)" class="card-td">
             @foreach($cards as $card)
               @if(is_null($card["swimlane_id"]) && $card["category_id"] == $category["id"])
               <div class='card' id="card{{$card['id']}}" card_id="{{$card['id']}}" draggable="true" ondragstart="drag(event)">
@@ -151,7 +151,7 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h2 class="modal-title" id="cardModalTitle">Create Category</h2>
+            <h2 class="modal-title" id="cardModalTitle">Card Title</h2>
           </div>
           <hr>
           <div class="modal-body" id="cardModalBody">
@@ -193,6 +193,7 @@
 <script src="{{URL::asset('js/kanbanBoard/boardFunctionality.js')}}"></script>
 
 <script type="text/javascript">
+  // Card Modals
   function cardModal(id)
   {
     $.ajax({ url: "/api/cards/" + id,
@@ -203,7 +204,7 @@
         alert("Something went wrong while fetching the card details!");
         return;
       }
-  
+
       $("#cardModalTitle").text(result[0].title);
 
       var modal = $("#cardModalBodyTable");
@@ -221,6 +222,11 @@
     }
   });
   }
+
+  $(document).ready(function() {
+    checkLimits();
+  });
+  
 </script>
 
 <!-- This is to inject the current server timestamp into the boardTimestamp variable -->

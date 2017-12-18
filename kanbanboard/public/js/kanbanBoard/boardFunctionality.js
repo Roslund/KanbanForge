@@ -46,6 +46,8 @@ function drop(ev)
     }
 
     ev.currentTarget.appendChild(cardElement);
+
+    checkLimits();
   }
 }
 
@@ -122,6 +124,7 @@ function ajaxGetBoard()
     method: "GET",
     success: function(data) {
       $(".tbl-board").replaceWith($(data).find(".tbl-board"));
+      checkLimits();
     },
     error: function (xhr, ajaxOptions, thrownError) {
       $jsonXHR = JSON.stringify(xhr.responseText);
@@ -150,3 +153,33 @@ function setBoardMetadata(metadata)
 {
   metadataObject = metadata;
 }
+
+function checkLimits()
+  {
+    var categories = $("#table-data").find("thead").find("tr").children().slice(1);
+
+    var limits = $("#table-data").find("thead").find(".limit-nr").map(function(){
+      return $(this).text();
+    }).toArray();
+
+    var counter = new Array(categories.length);
+    counter.fill(0);
+
+    // table td with cards
+    var tdwc = $("#table-data").find("tbody").find(".card").parent();
+
+    $.each(tdwc, function (index) {
+      counter[$(this).attr("category_id")-1] += $(this).children().length;
+    });
+
+    $.each(categories, function(index) {
+      if (limits[index] <= counter[index] && limits[index] != 0)
+      {
+        $($(categories).find(".limit")[index]).css('color', 'red');
+      }
+      else
+      {
+        $($(categories).find(".limit")[index]).css('color', 'black');
+      }
+    });
+  }
