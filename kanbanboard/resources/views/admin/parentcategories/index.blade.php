@@ -65,7 +65,7 @@
 					<div class="modal-header">
 						<h2 class="modal-title" id="exampleModalLongTitle">Edit {{ $item->name }}</h2>
 					</div>
-					<div class="modal-body" style="margin-top: 0; padding-top: 0;">
+					<div class="modal-body">
 						{!! Form::model($item, [
 						'method' => 'PATCH',
 						'url' => ['/admin/parentcategories', $item->id],
@@ -101,7 +101,7 @@
 				<h2 class="modal-title" id="exampleModalLongTitle">Create Parent Category</h2>
 			</div>
 
-			<div class="modal-body" style="margin-top: 0; padding-top: 0;">
+			<div class="modal-body">
 				 {!! Form::open(['url' => '/admin/parentcategories', 'class' => 'form-horizontal', 'files' => true]) !!}
 
 				<div class="form-group {{ $errors->has('name') ? 'has-error' : ''}}">

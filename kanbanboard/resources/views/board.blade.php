@@ -13,7 +13,7 @@
 
 <div class="tbl-board">
   @if(count($categories) > 0)
-  <table cellpadding="0" cellspacing="0" border="0">
+  <table id="table-data" cellpadding="0" cellspacing="0" border="0">
     <thead>
       @if(count($parentCategories) > 0)
           <?php
@@ -59,7 +59,10 @@
       <tr>
         <th class="empty-th"></th>
         @foreach($categories as $category)
-          <th>{{ $category["name"] }}</th>
+          <th limit="{{ $category['limit'] }}">
+            {{ $category["name"] }}<br>
+            <span class="limit">Limit: <span class="limit-nr">{{ $category["limit"] }}</span></span>
+          </th>
         @endforeach
       </tr>
     </thead>
@@ -69,12 +72,30 @@
         <tr>
         <th>{{ $swimlane["name"] }}</th>
         @foreach($categories as $category)
-          <td id="c{{$category['id']}}s{{$swimlane['id']}}" category_id='{{$category["id"]}}' swimlane_id='{{$swimlane["id"]}}'>
+          <td id="c{{$category['id']}}s{{$swimlane['id']}}" category_id='{{$category["id"]}}' swimlane_id='{{$swimlane["id"]}}' ondrop ="drop(event)" ondragover="allowDrop(event)" class="card-td">
             @foreach($cards as $card)
               @if($card["swimlane_id"] == $swimlane["id"] && $card["category_id"] == $category["id"])
-              <div class='card' id="card{{$card['id']}}">Card {{ $card["id"] }}
-                Assignee:
-                Description:
+              <div class='card' id="card{{$card['id']}}" card_id="{{$card['id']}}" draggable="true" ondragstart="drag(event)">
+                <a onclick="cardModal({{ $card['id'] }})" href="#">
+                Card {{ $card["id"] }}
+                </a><br>
+                Assigned to: {{ $card["assignedTo"] }}<br>
+                Last updated:<br>
+                <span class="cardLastUpdated">
+                <?php
+                  $cardLastUpdate = new DateTime($card['updated_at']);
+                  $currentDate = new DateTime(date("Y-m-d H:i:s"));
+                  $dateInterval = $cardLastUpdate->diff($currentDate);
+
+                  $stringValue = $dateInterval->format('%d days ago');
+                  if($stringValue == "0 days ago") {
+                    echo "Today";
+                  }
+                  else {
+                    echo $stringValue;
+                  }
+                ?>
+                </span>
               </div>
               @endif
             @endforeach
@@ -84,13 +105,32 @@
       @endforeach
 
       <tr>
-        <td>&nbsp;</td>
+        <th>&nbsp;</th>
         @foreach($categories as $category)
-          <td id="c{{$category['id']}}snull" category_id='{{$category["id"]}}' swimlane_id='null'>
+          <td id="c{{$category['id']}}snull" category_id='{{$category["id"]}}' swimlane_id='null' ondrop ="drop(event)" ondragover="allowDrop(event)" class="card-td">
             @foreach($cards as $card)
               @if(is_null($card["swimlane_id"]) && $card["category_id"] == $category["id"])
-              <div class='card' id="card{{$card['id']}}">
-              Card {{ $card["id"] }}
+              <div class='card' id="card{{$card['id']}}" card_id="{{$card['id']}}" draggable="true" ondragstart="drag(event)">
+                <a onclick="cardModal({{ $card['id'] }})" href="#">
+                Card {{ $card["id"] }}
+                </a><br>
+                Assigned to: {{ $card["assignedTo"] }}<br>
+                Last updated:<br>
+                <span class="cardLastUpdated">
+                <?php
+                  $cardLastUpdate = new DateTime($card['updated_at']);
+                  $currentDate = new DateTime(date("Y-m-d H:i:s"));
+                  $dateInterval = $cardLastUpdate->diff($currentDate);
+
+                  $stringValue = $dateInterval->format('%d days ago');
+                  if($stringValue == "0 days ago") {
+                    echo "Today";
+                  }
+                  else {
+                    echo $stringValue;
+                  }
+                ?>
+                </span>
               </div>
               @endif
             @endforeach
@@ -105,6 +145,36 @@
   @endif
 
 </div>
+
+<!-- Card Modal -->
+    <div class="modal fade" id="cardModal" tabindex="-1" role="dialog" aria-labelledby="Create" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title" id="cardModalTitle">Card Title</h2>
+          </div>
+          <hr>
+          <div class="modal-body" id="cardModalBody">
+            <div class="table">
+              <table class="table table-bordered table-striped table-hover table-fixed">
+                <thead>
+                  <tr>
+                    <th>Key</th>
+                    <th>Value</th>
+                  </tr>
+                </thead>
+                <tbody id="cardModalBodyTable">
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
 @endsection
 
@@ -122,9 +192,49 @@
 <!-- Kanban Board imports -->
 <script src="{{URL::asset('js/kanbanBoard/boardFunctionality.js')}}"></script>
 
-<!-- This is to inject the current server timestamp into the cardsTimestamp variable -->
+<script type="text/javascript">
+  // Card Modals
+  function cardModal(id)
+  {
+    $.ajax({ url: "/api/cards/" + id,
+    method: "GET",
+    success: function( result ) {
+      if (result.length != 1)
+      {
+        alert("Something went wrong while fetching the card details!");
+        return;
+      }
+
+      $("#cardModalTitle").text(result[0].title);
+
+      var modal = $("#cardModalBodyTable");
+
+      modal.empty();
+
+      $.each(result[0], function(key, value) {
+        modal.append("<tr><td>"+key+"</td><td>"+value+"</td></tr>");
+      });
+
+      $("#cardModal").modal('toggle');
+    },
+    error: function() {
+      alert("Card details couldn't be fetched! ");
+    }
+  });
+  }
+
+  $(document).ready(function() {
+    checkLimits();
+  });
+  
+</script>
+
+<!-- This is to inject the current server timestamp into the boardTimestamp variable -->
 <!-- Can't inject it directly into the javascript as it doesn't get compiled with blade -->
 <!-- This needs to be done after the javascript above has loaded in, which is why it's under it -->
-<script type="text/javascript">cardsTimestamp = "{{date('Y-m-d H:i:s')}}";</script>
+<script type="text/javascript">
+  boardTimestamp = "{{date('Y-m-d H:i:s')}}";
+  metadataObject = { 'categoryCount': {{count($categories)}}, 'swimlaneCount': {{count($swimlanes)}} };
+</script>
 
 @endsection
