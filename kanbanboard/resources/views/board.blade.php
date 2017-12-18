@@ -204,7 +204,7 @@
         alert("Something went wrong while fetching the card details!");
         return;
       }
-  
+
       $("#cardModalTitle").text(result[0].title);
 
       var modal = $("#cardModalBodyTable");
@@ -227,10 +227,6 @@
     checkLimits();
   });
   
-  // Check limits on drop
-  $(".card-td").on("drop", function(event) {
-    checkLimits();
-  });
 </script>
 
 <!-- This is to inject the current server timestamp into the boardTimestamp variable -->

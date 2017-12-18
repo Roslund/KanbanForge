@@ -46,6 +46,8 @@ function drop(ev)
     }
 
     ev.currentTarget.appendChild(cardElement);
+
+    checkLimits();
   }
 }
 
