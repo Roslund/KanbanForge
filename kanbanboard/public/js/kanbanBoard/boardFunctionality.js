@@ -161,7 +161,6 @@ function checkLimits()
     var limits = $("#table-data").find("thead").find(".limit-nr").map(function(){
       return $(this).text();
     }).toArray();
-    console.log(limits);
 
     var counter = new Array(categories.length);
     counter.fill(0);
@@ -173,7 +172,7 @@ function checkLimits()
       counter[$(this).attr("category_id")-1] += $(this).children().length;
     });
 
-    $.each(categories, function(index){
+    $.each(categories, function(index) {
       if (limits[index] <= counter[index] && limits[index] != 0)
       {
         $($(categories).find(".limit")[index]).css('color', 'red');
