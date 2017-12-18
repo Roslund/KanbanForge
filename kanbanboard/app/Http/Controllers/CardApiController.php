@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Card;
 use App\Category;
 use App\Swimlane;
+use App\Artifact;
 
 class CardApiController extends Controller
 {
@@ -37,13 +38,46 @@ class CardApiController extends Controller
      */
     public function show($id)
     {
-        return Card::join('artifacts', 'cards.artifact_id', '=', 'artifacts.id')->
+        $cardValueInDB = Card::where('id', $id)->get()->first();
+        $artiactValuesInTF = Artifact::get_artifact_by_id($cardValueInDB['artifact_id']);
+
+        if($artiactValuesInTF != null)
+        {
+          // removes sensetive or unimportant api related variables.
+          unset($artiactValuesInTF->_type);
+          unset($artiactValuesInTF->folderId);
+          unset($artiactValuesInTF->autoSumming);
+          unset($artiactValuesInTF->autoSummingPoints);
+          unset($artiactValuesInTF->reportedReleasePath);
+          unset($artiactValuesInTF->reportedReleaseId);
+          unset($artiactValuesInTF->resolvedReleasePath);
+          unset($artiactValuesInTF->resolvedReleaseId);
+          unset($artiactValuesInTF->path);
+          unset($artiactValuesInTF->_links);
+
+          // now that we're done with this value we unset it so that it
+          // doesn't get returned twice.
+          unset($cardValueInDB['artifact_id']);
+
+          return array(
+            'dbValues' => $cardValueInDB,
+            'teamforgeValues' => $artiactValuesInTF
+          );
+        }
+
+        // if all else fails, get the artifact and card data we have in the database.
+        $backupQuery = Card::join('artifacts', 'cards.artifact_id', '=', 'artifacts.id')->
           select('cards.*',
             'artifacts.assignedTo',
             'artifacts.description',
             'artifacts.title',
             'artifacts.createdDate as teamforgeCreatedDate',
             'artifacts.status')->where('cards.id', $id)->get();
+
+        return $objectToReturn = array(
+          'dbValues' => $backupQuery,
+          'teamforgeValues' => null
+        );
     }
 
     /**
