@@ -106,14 +106,10 @@ class CardApiController extends Controller
         $lastUpdated = request('timestamp');
         $metadataObject = request('metadataObject');
 
-        $categoryCount = $metadataObject['categoryCount'];
-        $swimlaneCount = $metadataObject['swimlaneCount'];
-        $cardCount = $metadataObject['cardCount'];
-
         // check for if swimlanes, categories or cards have been added or removed.
-        if(Category::all()->count() != $categoryCount
-          || Swimlane::all()->count() != $swimlaneCount
-          || Card::all()->count() != $cardCount)
+        if(Category::all()->count() != $metadataObject['categoryCount']
+          || Swimlane::all()->count() != $metadataObject['swimlaneCount']
+          || Card::all()->count() != $metadataObject['cardCount'])
         {
           $newMetadataObject = array( "categoryCount" => Category::all()->count(),
             "swimlaneCount" => Swimlane::all()->count(),
