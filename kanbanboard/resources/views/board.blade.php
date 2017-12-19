@@ -226,7 +226,7 @@
   $(document).ready(function() {
     checkLimits();
   });
-  
+
 </script>
 
 <!-- This is to inject the current server timestamp into the boardTimestamp variable -->
@@ -234,7 +234,7 @@
 <!-- This needs to be done after the javascript above has loaded in, which is why it's under it -->
 <script type="text/javascript">
   boardTimestamp = "{{date('Y-m-d H:i:s')}}";
-  metadataObject = { 'categoryCount': {{count($categories)}}, 'swimlaneCount': {{count($swimlanes)}} };
+  metadataObject = { 'categoryCount': {{count($categories)}}, 'swimlaneCount': {{count($swimlanes)}}, 'cardCount': {{count($cards)}} };
 </script>
 
 @endsection
