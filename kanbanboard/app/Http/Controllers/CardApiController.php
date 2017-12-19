@@ -10,12 +10,6 @@ use App\Artifact;
 
 class CardApiController extends Controller
 {
-    // Only authenticated users can use this api.
-    /*public function __construct()
-    {
-      $this->middleware('auth');
-    }*/
-
     /**
      * Display a listing of all cards.
      * GET /api/cards/
