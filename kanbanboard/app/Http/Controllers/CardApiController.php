@@ -74,7 +74,7 @@ class CardApiController extends Controller
             'artifacts.createdDate as teamforgeCreatedDate',
             'artifacts.status')->where('cards.id', $id)->get();
 
-        return $objectToReturn = array(
+        return array(
           'dbValues' => $backupQuery,
           'teamforgeValues' => null
         );
