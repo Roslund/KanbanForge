@@ -40,7 +40,7 @@ class Artifact extends Model
     $url = config('teamforge.url') . '/ctfrest/tracker/v1/artifacts/filter';
     $options=array(
       'http' => array(
-        'header'  => "Authorization: Bearer " . TeamForgeApiToken::getToken() . "\r\n" . 
+        'header'  => "Authorization: Bearer " . TeamForgeApiToken::getToken() . "\r\n" .
                      "Content-type: application/json\r\n",
         'method'  => 'POST',
         'content' => $postdata
@@ -51,9 +51,9 @@ class Artifact extends Model
       ),
     );
     try {
-      $contents = file_get_contents($url, false, stream_context_create($options)); 
-      $contents = utf8_encode($contents); 
-      $results = json_decode($contents); 
+      $contents = file_get_contents($url, false, stream_context_create($options));
+      $contents = utf8_encode($contents);
+      $results = json_decode($contents);
 
       $newArtifacts = array();
       foreach ($results->items as $item) {
@@ -83,5 +83,57 @@ class Artifact extends Model
     }
 
     return null;
+  }
+
+  public static function get_artifact_by_id($artifactId, $includeKeys = null)
+  {
+    $url = config('teamforge.url') . '/ctfrest/tracker/v1/artifacts/' . $artifactId;
+    $options=array(
+      'http' => array(
+        'header'  => "Authorization: Bearer " . TeamForgeApiToken::getToken() . "\r\n" .
+                     "Content-type: application/json\r\n",
+        'method'  => 'GET',
+        'timeout' => 5 // 5 second timeout
+      ),
+      "ssl"=>array(
+        "verify_peer"=>false,
+        "verify_peer_name"=>false,
+      ),
+    );
+
+    try {
+      $contents = file_get_contents($url, false, stream_context_create($options));
+
+      if($contents !== null)
+      {
+        $contents = utf8_encode($contents);
+        $result = json_decode($contents, true);
+
+        if($includeKeys == null) {
+            return $result;
+        }
+        else {
+          // This filters out all other keys than the ones specified in $includeKeys.
+          // This removes sensetive or unimportant api related variables from the return value.
+          // (It also keeps values added in the future hidden until they actually need to be shown)
+          $returnValue = array();
+
+          foreach($result as $key => $value) {
+            if(in_array($key, $includeKeys)) {
+              $returnValue[$key] = $result[$key];
+            }
+          }
+
+          return $returnValue;
+        }
+      }
+      else {
+        return null;
+      }
+
+    } catch (\Exception $e) {
+      \Log::warning('failed to get_artifact_by_id()');
+      return null;
+    }
   }
 }

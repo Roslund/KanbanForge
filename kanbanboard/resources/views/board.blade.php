@@ -159,6 +159,9 @@
               <table class="table table-bordered table-striped table-hover table-fixed">
                 <thead>
                   <tr>
+                    <th colspan="2">DB</th>
+                  </tr>
+                  <tr>
                     <th>Key</th>
                     <th>Value</th>
                   </tr>
@@ -199,28 +202,41 @@
     $.ajax({ url: "/api/cards/" + id,
     method: "GET",
     success: function( result ) {
-      if (result.length != 1)
-      {
-        alert("Something went wrong while fetching the card details!");
-        return;
-      }
-
-      $("#cardModalTitle").text(result[0].title);
-
       var modal = $("#cardModalBodyTable");
 
       modal.empty();
 
-      $.each(result[0], function(key, value) {
+      $.each(result['dbValues'], function(key, value) {
         modal.append("<tr><td>"+key+"</td><td>"+value+"</td></tr>");
+        //console.log(key + ": " + value);
       });
+
+      if(result['teamforgeValues'] != null) {
+        $("#cardModalTitle").text(result['teamforgeValues'].title);
+
+        $.each(result['teamforgeValues'], function(key, value) {
+          if (key == "flexFields") {
+            var rows = $(modal).children().toArray();
+
+            $.each(value, function(k, v) {
+              modal.append("<tr><td>"+v.name+"</td><td>"+v.values[0]+"</td></tr>");
+            });
+
+            return true;
+          }
+          modal.append("<tr><td>"+key+"</td><td>"+value+"</td></tr>");
+        });
+      }
+      else {
+        $("#cardModalTitle").text(result['dbValues'].title);
+      }
 
       $("#cardModal").modal('toggle');
     },
     error: function() {
-      alert("Card details couldn't be fetched! ");
+      alert("Card details couldn't be fetched!");
     }
-  });
+    });
   }
 
   $(document).ready(function() {
@@ -234,7 +250,7 @@
 <!-- This needs to be done after the javascript above has loaded in, which is why it's under it -->
 <script type="text/javascript">
   boardTimestamp = "{{date('Y-m-d H:i:s')}}";
-  metadataObject = { 'categoryCount': {{count($categories)}}, 'swimlaneCount': {{count($swimlanes)}} };
+  metadataObject = { 'categoryCount': {{count($categories)}}, 'swimlaneCount': {{count($swimlanes)}}, 'cardCount': {{count($cards)}} };
 </script>
 
 @endsection

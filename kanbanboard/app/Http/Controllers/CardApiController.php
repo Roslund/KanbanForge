@@ -6,15 +6,10 @@ use Illuminate\Http\Request;
 use App\Card;
 use App\Category;
 use App\Swimlane;
+use App\Artifact;
 
 class CardApiController extends Controller
 {
-    // Only authenticated users can use this api.
-    /*public function __construct()
-    {
-      $this->middleware('auth');
-    }*/
-
     /**
      * Display a listing of all cards.
      * GET /api/cards/
@@ -37,13 +32,42 @@ class CardApiController extends Controller
      */
     public function show($id)
     {
-        return Card::join('artifacts', 'cards.artifact_id', '=', 'artifacts.id')->
+        $cardValueInDB = Card::where('id', $id)->get()->first();
+
+        $includeKeys = ['id', 'title', 'description', 'category', 'group',
+          'status', 'statusClass', 'customer', 'priority', 'estimatedEffort',
+          'actualEffort', 'remainingEffort', 'points', 'closeDate',
+          'assignedTo', 'teamId', 'flexFields', 'lastModifiedBy', 'createdBy',
+          'lastModifiedDate', 'createdDate'];
+
+        $artiactValuesInTF = Artifact::get_artifact_by_id($cardValueInDB['artifact_id'], $includeKeys);
+
+        if($artiactValuesInTF != null)
+        {
+          // now that we're done with this value we unset it so that it
+          // doesn't get returned twice.
+          unset($cardValueInDB['artifact_id']);
+
+          return array(
+            'dbValues' => $cardValueInDB,
+            'teamforgeValues' => $artiactValuesInTF
+          );
+        }
+
+        // if all else fails, get the artifact and card data we have in the database.
+        $backupQuery = Card::join('artifacts', 'cards.artifact_id', '=', 'artifacts.id')->
           select('cards.*',
             'artifacts.assignedTo',
             'artifacts.description',
             'artifacts.title',
             'artifacts.createdDate as teamforgeCreatedDate',
-            'artifacts.status')->where('cards.id', $id)->get();
+            'artifacts.status')->where('cards.id', $id)
+            ->get()->first();
+
+        return array(
+          'dbValues' => $backupQuery,
+          'teamforgeValues' => null
+        );
     }
 
     /**
@@ -78,22 +102,24 @@ class CardApiController extends Controller
         $lastUpdated = request('timestamp');
         $metadataObject = request('metadataObject');
 
-        $categoryCount = $metadataObject['categoryCount'];
-        $swimlaneCount = $metadataObject['swimlaneCount'];
-
-        if(Card::where('updated_at', '>', $lastUpdated)->get()->count() > 0)
+        // check for if swimlanes, categories or cards have been added or removed.
+        if(Category::all()->count() != $metadataObject['categoryCount']
+          || Swimlane::all()->count() != $metadataObject['swimlaneCount']
+          || Card::all()->count() != $metadataObject['cardCount'])
         {
-          return array('timestamp' => date("Y-m-d H:i:s"), 'metadataObject' => $metadataObject, 'response' => 1);
+          $newMetadataObject = array( "categoryCount" => Category::all()->count(),
+            "swimlaneCount" => Swimlane::all()->count(),
+            "cardCount" => Card::all()->count());
+
+          return array('timestamp' => date("Y-m-d H:i:s"), 'metadataObject' => $newMetadataObject, 'response' => 1);
         }
 
-        // if cards haven't changed then we'll check if categories or swimlanes have
-        if(Category::where('updated_at', '>', $lastUpdated)->get()->count() > 0
-          || Swimlane::where('updated_at', '>', $lastUpdated)->get()->count() > 0
-          || Category::all()->count() != $categoryCount
-          || Swimlane::all()->count() != $swimlaneCount)
+        // check for if swimlanes, categories of cards have been edited since last check.
+        if(Card::where('updated_at', '>', $lastUpdated)->get()->count() > 0
+          || Category::where('updated_at', '>', $lastUpdated)->get()->count() > 0
+          || Swimlane::where('updated_at', '>', $lastUpdated)->get()->count() > 0)
         {
-          $newMetadataObject = array( "categoryCount" => Category::all()->count(), "swimlaneCount" => Swimlane::all()->count() );
-          return array('timestamp' => date("Y-m-d H:i:s"), 'metadataObject' => $newMetadataObject, 'response' => 1);
+          return array('timestamp' => date("Y-m-d H:i:s"), 'metadataObject' => $metadataObject, 'response' => 1);
         }
 
         return array('timestamp' => date("Y-m-d H:i:s"), 'response' => 0);
