@@ -92,7 +92,8 @@ class Artifact extends Model
       'http' => array(
         'header'  => "Authorization: Bearer " . TeamForgeApiToken::getToken() . "\r\n" .
                      "Content-type: application/json\r\n",
-        'method'  => 'GET'
+        'method'  => 'GET',
+        'timeout' => 5 // 5 second timeout
       ),
       "ssl"=>array(
         "verify_peer"=>false,
@@ -102,32 +103,37 @@ class Artifact extends Model
 
     try {
       $contents = file_get_contents($url, false, stream_context_create($options));
-      $contents = utf8_encode($contents);
-      $result = json_decode($contents, true);
 
-      if($includeKeys == null) {
-          return $result;
+      if($contents !== null)
+      {
+        $contents = utf8_encode($contents);
+        $result = json_decode($contents, true);
+
+        if($includeKeys == null) {
+            return $result;
+        }
+        else {
+          // This filters out all other keys than the ones specified in $includeKeys.
+          // This removes sensetive or unimportant api related variables from the return value.
+          // (It also keeps values added in the future hidden until they actually need to be shown)
+          $returnValue = array();
+
+          foreach($result as $key => $value) {
+            if(in_array($key, $includeKeys)) {
+              $returnValue[$key] = $result[$key];
+            }
+          }
+
+          return $returnValue;
+        }
       }
       else {
-        // This filters out all other keys than the ones specified in $includeKeys.
-        // This removes sensetive or unimportant api related variables from the return value.
-        // (It also keeps values added in the future hidden until they actually need to be shown)
-        $returnValue = array();
-
-        foreach($result as $key => $value) {
-          if(in_array($key, $includeKeys)) {
-            $returnValue[$key] = $result[$key];
-          }
-        }
-
-        return $returnValue;
+        return null;
       }
 
     } catch (\Exception $e) {
-      \Log::info($e);
       \Log::warning('failed to get_artifact_by_id()');
+      return null;
     }
-
-    return null;
   }
 }
