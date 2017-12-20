@@ -202,9 +202,7 @@
     $.ajax({ url: "/api/cards/" + id,
     method: "GET",
     success: function( result ) {
-
       var modal = $("#cardModalBodyTable");
-
 
       modal.empty();
 
@@ -217,11 +215,10 @@
         $("#cardModalTitle").text(result['teamforgeValues'].title);
 
         $.each(result['teamforgeValues'], function(key, value) {
-          if (key == "flexFields")
-          {
+          if (key == "flexFields") {
             var rows = $(modal).children().toArray();
 
-            $.each(value, function(k, v){
+            $.each(value, function(k, v) {
               modal.append("<tr><td>"+v.name+"</td><td>"+v.values[0]+"</td></tr>");
             });
 
@@ -239,7 +236,7 @@
     error: function() {
       alert("Card details couldn't be fetched!");
     }
-  });
+    });
   }
 
   $(document).ready(function() {
