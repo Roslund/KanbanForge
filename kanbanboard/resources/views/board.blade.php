@@ -203,10 +203,8 @@
     method: "GET",
     success: function( result ) {
 
-      $("#cardModalTitle").text(result['dbValues'].title);
-
       var modal = $("#cardModalBodyTable");
-      
+
 
       modal.empty();
 
@@ -215,19 +213,26 @@
         //console.log(key + ": " + value);
       });
 
-      $.each(result['teamforgeValues'], function(key, value) {
-        if (key == "flexFields")
-        {
-          var rows = $(modal).children().toArray();
+      if(result['teamforgeValues'] != null) {
+        $("#cardModalTitle").text(result['teamforgeValues'].title);
 
-          $.each(value, function(k, v){
-            modal.append("<tr><td>"+v.name+"</td><td>"+v.values[0]+"</td></tr>");
-          });
+        $.each(result['teamforgeValues'], function(key, value) {
+          if (key == "flexFields")
+          {
+            var rows = $(modal).children().toArray();
 
-          return true;
-        }
-        modal.append("<tr><td>"+key+"</td><td>"+value+"</td></tr>");
-      });
+            $.each(value, function(k, v){
+              modal.append("<tr><td>"+v.name+"</td><td>"+v.values[0]+"</td></tr>");
+            });
+
+            return true;
+          }
+          modal.append("<tr><td>"+key+"</td><td>"+value+"</td></tr>");
+        });
+      }
+      else {
+        $("#cardModalTitle").text(result['dbValues'].title);
+      }
 
       $("#cardModal").modal('toggle');
     },
