@@ -85,7 +85,7 @@ class Artifact extends Model
     return null;
   }
 
-  public static function get_artifact_by_id($artifactId)
+  public static function get_artifact_by_id($artifactId, $includeKeys = null)
   {
     $url = config('teamforge.url') . '/ctfrest/tracker/v1/artifacts/' . $artifactId;
     $options=array(
@@ -103,8 +103,26 @@ class Artifact extends Model
     try {
       $contents = file_get_contents($url, false, stream_context_create($options));
       $contents = utf8_encode($contents);
-      $result = json_decode($contents);
-      return $result;
+      $result = json_decode($contents, true);
+
+      if($includeKeys == null) {
+          return $result;
+      }
+      else {
+        // This filters out all other keys than the ones specified in $includeKeys.
+        // This removes sensetive or unimportant api related variables from the return value.
+        // (It also keeps values added in the future hidden until they actually need to be shown)
+        $returnValue = array();
+
+        foreach($result as $key => $value) {
+          if(in_array($key, $includeKeys)) {
+            $returnValue[$key] = $result[$key];
+          }
+        }
+
+        return $returnValue;
+      }
+
     } catch (\Exception $e) {
       \Log::info($e);
       \Log::warning('failed to get_artifact_by_id()');
