@@ -61,7 +61,7 @@
         @foreach($categories as $category)
           <th class="categoryHeader" category_id="{{$category['id']}}" limit="{{ $category['limit'] }}">
             {{ $category["name"] }}<br>
-            <span class="limit">Limit: <span class="limit-nr">{{ $category["limit"] }}</span></span>
+            <span class="limit">Limit: {{ $category["limit"] }}</span>
           </th>
         @endforeach
       </tr>
