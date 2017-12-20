@@ -156,30 +156,30 @@ function setBoardMetadata(metadata)
 
 function checkLimits()
   {
-    var categories = $("#table-data").find("thead").find("tr").children().slice(1);
+    var categories = $("#table-data").find("thead").find(".categoryHeader");
+    var limits = {};
 
-    var limits = $("#table-data").find("thead").find(".limit-nr").map(function(){
-      return $(this).text();
-    }).toArray();
-
-    var counter = new Array(categories.length);
-    counter.fill(0);
-
-    // table td with cards
-    var tdwc = $("#table-data").find("tbody").find(".card").parent();
-
-    $.each(tdwc, function (index) {
-      counter[$(this).attr("category_id")-1] += $(this).children().length;
+    $.each(categories, function (index, value) {
+      limits[$(value).attr("category_id")] = parseInt($(value).attr("limit"));
     });
 
-    $.each(categories, function(index) {
-      if (limits[index] <= counter[index] && limits[index] != 0)
-      {
-        $($(categories).find(".limit")[index]).css('color', 'red');
+    // This is just a quick way to make a deep copy of the object.
+    var counter = JSON.parse(JSON.stringify(limits));
+    $.each(counter, function (key) {
+      counter[key] = 0;
+    });
+
+    var cards = $("#table-data").find("tbody").find(".card");
+    $.each(cards, function (index, value) {
+      counter[$(value).parent().attr("category_id")] += 1;
+    });
+
+    $.each(limits, function(key, value) {
+      if(value <= counter[key] && value != 0) {
+        $("th[category_id=" + key + "]").find(".limit").css('color', 'red');
       }
-      else
-      {
-        $($(categories).find(".limit")[index]).css('color', 'black');
+      else {
+        $("th[category_id=" + key + "]").find(".limit").css('color', 'black');
       }
     });
   }

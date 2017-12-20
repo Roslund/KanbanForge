@@ -59,7 +59,7 @@
       <tr>
         <th class="empty-th"></th>
         @foreach($categories as $category)
-          <th limit="{{ $category['limit'] }}">
+          <th class="categoryHeader" category_id="{{$category['id']}}" limit="{{ $category['limit'] }}">
             {{ $category["name"] }}<br>
             <span class="limit">Limit: <span class="limit-nr">{{ $category["limit"] }}</span></span>
           </th>
@@ -226,7 +226,7 @@
   $(document).ready(function() {
     checkLimits();
   });
-  
+
 </script>
 
 <!-- This is to inject the current server timestamp into the boardTimestamp variable -->
