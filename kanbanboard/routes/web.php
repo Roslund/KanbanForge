@@ -30,6 +30,8 @@ Route::get('/api/cards', 'CardApiController@index')->middleware('loggedin');
 
 Route::get('/api/cards/{id}', 'CardApiController@show')->middleware('loggedin');
 
+//Route::post('/api/cards/{id}', 'CardApiController@checkIfUpdatedSince');
+
 Route::prefix('admin')->group(function(){
 
 	/*categories*/
