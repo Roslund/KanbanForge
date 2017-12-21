@@ -81,6 +81,13 @@
 								{!! $errors->first('name', '<p class="help-block">:message</p>') !!}
 							</div>
 						</div>
+						<div class="form-group {{ $errors->has('name') ? 'has-error' : ''}}">
+							{!! Form::label('limit', 'Limit:', ['class' => 'control-label', 'style' => 'margin-left:15px;color:#000000;margin-bottom:10px;']) !!}
+							<div class="col-sm-12">
+								{!! Form::number('limit', null, ['class' => 'form-control', 'required' => 'required']) !!}
+								{!! $errors->first('name', '<p class="help-block">:message</p>') !!}
+							</div>
+						</div>
 
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
