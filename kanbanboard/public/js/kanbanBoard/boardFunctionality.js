@@ -157,14 +157,16 @@ function setBoardMetadata(metadata)
 function checkLimits()
   {
     var categories = $("#table-data").find("thead").find(".categoryHeader");
-    var limits = {};
+    var parentCategories = $("#table-data").find("thead").find(".parentCategoryHeader");
+
+    var categoryLimits = {};
 
     $.each(categories, function (index, value) {
-      limits[$(value).attr("category_id")] = parseInt($(value).attr("limit"));
+      categoryLimits[$(value).attr("category_id")] = parseInt($(value).attr("limit"));
     });
 
     // This is just a quick way to make a deep copy of the object.
-    var counter = JSON.parse(JSON.stringify(limits));
+    var counter = JSON.parse(JSON.stringify(categoryLimits));
     $.each(counter, function (key) {
       counter[key] = 0;
     });
@@ -174,12 +176,29 @@ function checkLimits()
       counter[$(value).parent().attr("category_id")] += 1;
     });
 
-    $.each(limits, function(key, value) {
+    $.each(categoryLimits, function(key, value) {
       if(value <= counter[key] && value != 0) {
         $("th[category_id=" + key + "]").find(".limit").css('color', 'red');
       }
       else {
         $("th[category_id=" + key + "]").find(".limit").css('color', 'black');
+      }
+    });
+
+    $.each(parentCategories, function (index, value) {
+      let limit = parseInt($(value).attr("limit"));
+      let group = ($(value).attr("group")).split(',');
+      let sum = 0;
+
+      $.each(group, function(key, value) {
+        sum += counter[value];
+      });
+
+      if(sum >= limit && limit != 0) {
+        $(value).find(".limit").css('color', 'red');
+      }
+      else {
+        $(value).find(".limit").css('color', 'black');
       }
     });
   }
