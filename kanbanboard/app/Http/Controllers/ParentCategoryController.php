@@ -39,7 +39,7 @@ class ParentCategoryController extends Controller
      */
     public function create()
     {
-        
+
     }
 
     /**
@@ -52,10 +52,12 @@ class ParentCategoryController extends Controller
     {
 
         $this->validate(request(), [
-          'name'=>'required'
+          'name'=>'required',
+          'limit'=>'required',
         ]);
         $pcategory = new ParentCategory;
         $pcategory->name = $request->name;
+        $pcategory->limit = $request->limit;
 
         $pcategory->save();
         return redirect('admin/parentcategories');
@@ -69,7 +71,7 @@ class ParentCategoryController extends Controller
      */
     public function show(ParentCategory $parentcategory)
     {
-        
+
     }
 
     /**
@@ -80,7 +82,7 @@ class ParentCategoryController extends Controller
      */
     public function edit(ParentCategory $parentcategory)
     {
-        
+
     }
 
     /**
