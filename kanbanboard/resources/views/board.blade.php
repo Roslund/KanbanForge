@@ -40,16 +40,10 @@
               <th class="empty-th"></th>
             @foreach($parentCategoriesOrder as $group)
               <th colspan="{{$group['count']}}">
-                <?php
-                  if(!is_null($group['value']))
-      						{
-      							echo $parentCategories[$group['value']]['name'];
-      						}
-      						else
-      						{
-      							echo " ";
-      						}
-                ?>
+                @if(!(is_null($group['value'])))
+                  {{ $parentCategories[$group['value']]['name'] }}<br>
+                  <span class="limit">Limit: {{ $parentCategories[$group['value']]['limit'] }}</span>
+                @endif
               </th>
             @endforeach
             </tr>
