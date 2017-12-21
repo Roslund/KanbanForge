@@ -17,12 +17,16 @@ class LoggedIn
     public function handle($request, Closure $next, $guard = null)
     {
 
-        
+
         if(Auth::check() || Auth::guard('teamforge')->check()){
-            
+
             return $next($request);
         }
-        return redirect('/login');
-        
+
+        return response()->json([
+          'message' => 'Forbidden',
+          'code' => '403'
+        ]);
+
     }
 }
