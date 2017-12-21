@@ -17,6 +17,7 @@ class CardApiController extends Controller
      *
      * @return JSON collection
      */
+
     public function index()
     {
         $cards = Card::all();
