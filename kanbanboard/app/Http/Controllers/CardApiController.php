@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Card;
 use App\Category;
 use App\Swimlane;
+use App\ParentCategory;
 use App\Artifact;
 
 class CardApiController extends Controller
@@ -115,9 +116,12 @@ class CardApiController extends Controller
         }
 
         // check for if swimlanes, categories of cards have been edited since last check.
+        // We also check for if a parent category has been updated.
+        // (As that's the only relevant parent category related update we need to keep track of)
         if(Card::where('updated_at', '>', $lastUpdated)->get()->count() > 0
           || Category::where('updated_at', '>', $lastUpdated)->get()->count() > 0
-          || Swimlane::where('updated_at', '>', $lastUpdated)->get()->count() > 0)
+          || Swimlane::where('updated_at', '>', $lastUpdated)->get()->count() > 0
+          || ParentCategory::where('updated_at', '>', $lastUpdated)->get()->count() > 0)
         {
           return array('timestamp' => date("Y-m-d H:i:s"), 'metadataObject' => $metadataObject, 'response' => 1);
         }
