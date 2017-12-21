@@ -10,6 +10,12 @@ use App\ParentCategory;
 
 class BoardController extends Controller
 {
+
+  public function __construct()
+  {
+    $this->middleware('loggedin');
+  }
+
   public function index()
   {
     $cards = Card::join('artifacts', 'cards.artifact_id', '=', 'artifacts.id')->select('cards.*', 'artifacts.assignedTo')->get();
