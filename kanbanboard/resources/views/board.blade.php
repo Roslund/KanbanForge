@@ -23,13 +23,19 @@
           ?>
           @foreach($categories as $category)
             <?php
-              if($last != $category['parentcategory'])
-              {
+              if($last != $category['parentcategory']) {
                 $counter++;
-                $parentCategoriesOrder[$counter] = [ "value" => $category['parentcategory'], "count" => 1 ];
+                $parentCategoriesOrder[$counter] = [ "value" => $category['parentcategory'], "count" => 1, "inGroup" => $category['id'] ];
               }
               else {
                 $parentCategoriesOrder[$counter]["count"]++;
+
+                if($parentCategoriesOrder[$counter]["inGroup"] == "") {
+                  $parentCategoriesOrder[$counter]["inGroup"] = $category['id'];
+                }
+                else {
+                  $parentCategoriesOrder[$counter]["inGroup"] .= ",".$category['id'];
+                }
               }
               $last = $category['parentcategory'];
             ?>
@@ -39,18 +45,18 @@
             <tr>
               <th class="empty-th"></th>
             @foreach($parentCategoriesOrder as $group)
-              <th colspan="{{$group['count']}}">
-                <?php
-                  if(!is_null($group['value']))
-      						{
-      							echo $parentCategories[$group['value']]['name'];
-      						}
-      						else
-      						{
-      							echo " ";
-      						}
-                ?>
-              </th>
+              @if(!(is_null($group['value'])))
+                <th colspan="{{$group['count']}}"
+                    group="{{$group['inGroup']}}"
+                    limit="{{$parentCategories[$group['value']]['limit']}}"
+                    class="parentCategoryHeader">
+
+                  {{ $parentCategories[$group['value']]['name'] }}<br>
+                  <span class="limit">Limit: {{ $parentCategories[$group['value']]['limit'] }}</span>
+              @else
+                <th colspan="{{$group['count']}}">
+              @endif
+                </th>
             @endforeach
             </tr>
           @endif

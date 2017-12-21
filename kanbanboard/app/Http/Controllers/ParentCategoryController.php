@@ -39,7 +39,7 @@ class ParentCategoryController extends Controller
      */
     public function create()
     {
-        
+
     }
 
     /**
@@ -50,12 +50,14 @@ class ParentCategoryController extends Controller
      */
     public function store(Request $request)
     {
-
         $this->validate(request(), [
-          'name'=>'required'
+          'name'=>'required',
+          'limit'=>'required',
         ]);
+
         $pcategory = new ParentCategory;
         $pcategory->name = $request->name;
+        $pcategory->limit = $request->limit;
 
         $pcategory->save();
         return redirect('admin/parentcategories');
@@ -69,7 +71,7 @@ class ParentCategoryController extends Controller
      */
     public function show(ParentCategory $parentcategory)
     {
-        
+
     }
 
     /**
@@ -80,7 +82,7 @@ class ParentCategoryController extends Controller
      */
     public function edit(ParentCategory $parentcategory)
     {
-        
+
     }
 
     /**
@@ -92,10 +94,13 @@ class ParentCategoryController extends Controller
      */
     public function update(Request $request, ParentCategory $parentcategory)
     {
-        $parentcategory->update($request->all());
+        $this->validate(request(), [
+          'name'=>'required',
+          'limit'=>'required',
+        ]);
 
-        $parentcategory->save();
-
+        // Not sure why the previous code faild, but had to do it this way for it to work.
+        ParentCategory::where('id', $parentcategory['id'])->update(["name" => request("name"), "limit" => request("limit")]);
 
         return redirect('admin/parentcategories');
     }
