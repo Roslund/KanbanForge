@@ -81,12 +81,20 @@
           <td id="c{{$category['id']}}s{{$swimlane['id']}}" category_id='{{$category["id"]}}' swimlane_id='{{$swimlane["id"]}}' ondrop ="drop(event)" ondragover="allowDrop(event)" class="card-td">
             @foreach($cards as $card)
               @if($card["swimlane_id"] == $swimlane["id"] && $card["category_id"] == $category["id"])
-              <div class='card' id="card{{$card['id']}}" card_id="{{$card['id']}}" draggable="true" ondragstart="drag(event)">
+              <div class='card' id="card{{$card['id']}}" title="{{$card['title']}}" card_id="{{$card['id']}}" draggable="true" ondragstart="drag(event)">
                 <a onclick="cardModal({{ $card['id'] }})" href="#">
-                Card {{ $card["id"] }}
+                <?php
+                  $wordCutoff = 5;
+                  if(str_word_count($card["title"]) > $wordCutoff) {
+                    echo implode(' ', array_slice(explode(' ', $card["title"]), 0, $wordCutoff)) . "&hellip;";
+                  }
+                  else {
+                    echo $card["title"];
+                  }
+                ?>
                 </a><br>
                 Assigned to: {{ $card["assignedTo"] }}<br>
-                Last updated:<br>
+                Last updated:
                 <span class="cardLastUpdated">
                 <?php
                   $cardLastUpdate = new DateTime($card['updated_at']);
@@ -98,7 +106,7 @@
                     echo "Today";
                   }
                   else {
-                    echo $stringValue;
+                    echo "<br>".$stringValue;
                   }
                 ?>
                 </span>
@@ -116,12 +124,20 @@
           <td id="c{{$category['id']}}snull" category_id='{{$category["id"]}}' swimlane_id='null' ondrop ="drop(event)" ondragover="allowDrop(event)" class="card-td">
             @foreach($cards as $card)
               @if(is_null($card["swimlane_id"]) && $card["category_id"] == $category["id"])
-              <div class='card' id="card{{$card['id']}}" card_id="{{$card['id']}}" draggable="true" ondragstart="drag(event)">
+              <div class='card' id="card{{$card['id']}}" title="{{$card['title']}}" card_id="{{$card['id']}}" draggable="true" ondragstart="drag(event)">
                 <a onclick="cardModal({{ $card['id'] }})" href="#">
-                Card {{ $card["id"] }}
+                <?php
+                  $wordCutoff = 5;
+                  if(str_word_count($card["title"]) > $wordCutoff) {
+                    echo implode(' ', array_slice(explode(' ', $card["title"]), 0, $wordCutoff)) . "&hellip;";
+                  }
+                  else {
+                    echo $card["title"];
+                  }
+                ?>
                 </a><br>
                 Assigned to: {{ $card["assignedTo"] }}<br>
-                Last updated:<br>
+                Last updated:
                 <span class="cardLastUpdated">
                 <?php
                   $cardLastUpdate = new DateTime($card['updated_at']);
@@ -133,7 +149,7 @@
                     echo "Today";
                   }
                   else {
-                    echo $stringValue;
+                    echo "<br>".$stringValue;
                   }
                 ?>
                 </span>

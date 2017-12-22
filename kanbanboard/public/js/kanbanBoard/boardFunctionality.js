@@ -12,8 +12,16 @@ function allowDrop(ev)
 
 function drag(ev)
 {
-  var categoryId = ev.currentTarget.parentElement.id;
-  ev.dataTransfer.setData("cardId", ev.target.id);
+  if(ev.target.id != "") {
+    ev.dataTransfer.setData("cardId", ev.target.id);
+  }
+  else {
+    // As we don't have a large amount of nesting we can just
+    // refer directly to the parent here.
+    // This only happens on the 'a' tags and makes it so that
+    // the card is still dragged even if the drag started on the title.
+    ev.dataTransfer.setData("cardId", ev.target.parentElement.id);
+  }
 }
 
 function drop(ev)

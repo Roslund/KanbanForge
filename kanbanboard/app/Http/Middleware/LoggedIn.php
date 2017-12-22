@@ -23,10 +23,7 @@ class LoggedIn
             return $next($request);
         }
 
-        return response()->json([
-          'message' => 'Forbidden',
-          'code' => '403'
-        ]);
+        return redirect('/login');
 
     }
 }
