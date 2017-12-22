@@ -81,7 +81,7 @@
           <td id="c{{$category['id']}}s{{$swimlane['id']}}" category_id='{{$category["id"]}}' swimlane_id='{{$swimlane["id"]}}' ondrop ="drop(event)" ondragover="allowDrop(event)" class="card-td">
             @foreach($cards as $card)
               @if($card["swimlane_id"] == $swimlane["id"] && $card["category_id"] == $category["id"])
-              <div class='card' id="card{{$card['id']}}" card_id="{{$card['id']}}" draggable="true" ondragstart="drag(event)">
+              <div class='card' id="card{{$card['id']}}" title="{{$card['title']}}" card_id="{{$card['id']}}" draggable="true" ondragstart="drag(event)">
                 <a onclick="cardModal({{ $card['id'] }})" href="#">
                 <?php
                   $wordCutoff = 5;
