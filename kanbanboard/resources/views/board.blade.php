@@ -87,7 +87,7 @@
                   $wordCutoff = 5;
                   if(str_word_count($card["title"]) > $wordCutoff)
                   {
-                    echo implode(' ', array_slice(explode(' ', $card["title"]), 0, $wordCutoff)) . "...";
+                    echo implode(' ', array_slice(explode(' ', $card["title"]), 0, $wordCutoff)) . "&hellip;";
                   }
                   else {
                     echo $card["title"];
