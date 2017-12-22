@@ -83,7 +83,16 @@
               @if($card["swimlane_id"] == $swimlane["id"] && $card["category_id"] == $category["id"])
               <div class='card' id="card{{$card['id']}}" card_id="{{$card['id']}}" draggable="true" ondragstart="drag(event)">
                 <a onclick="cardModal({{ $card['id'] }})" href="#">
-                Card {{ $card["id"] }}
+                <?php
+                  $wordCutoff = 5;
+                  if(str_word_count($card["title"]) > $wordCutoff)
+                  {
+                    echo implode(' ', array_slice(explode(' ', $card["title"]), 0, $wordCutoff)) . "...";
+                  }
+                  else {
+                    echo implode(' ', array_slice(explode(' ', $card["title"]), 0, $wordCutoff));
+                  }
+                ?>
                 </a><br>
                 Assigned to: {{ $card["assignedTo"] }}<br>
                 Last updated:<br>
