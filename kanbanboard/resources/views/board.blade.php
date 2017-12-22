@@ -90,7 +90,7 @@
                     echo implode(' ', array_slice(explode(' ', $card["title"]), 0, $wordCutoff)) . "...";
                   }
                   else {
-                    echo implode(' ', array_slice(explode(' ', $card["title"]), 0, $wordCutoff));
+                    echo $card["title"];
                   }
                 ?>
                 </a><br>
