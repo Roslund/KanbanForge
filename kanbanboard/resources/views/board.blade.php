@@ -85,8 +85,7 @@
                 <a onclick="cardModal({{ $card['id'] }})" href="#">
                 <?php
                   $wordCutoff = 5;
-                  if(str_word_count($card["title"]) > $wordCutoff)
-                  {
+                  if(str_word_count($card["title"]) > $wordCutoff) {
                     echo implode(' ', array_slice(explode(' ', $card["title"]), 0, $wordCutoff)) . "&hellip;";
                   }
                   else {
@@ -129,8 +128,7 @@
                 <a onclick="cardModal({{ $card['id'] }})" href="#">
                 <?php
                   $wordCutoff = 5;
-                  if(str_word_count($card["title"]) > $wordCutoff)
-                  {
+                  if(str_word_count($card["title"]) > $wordCutoff) {
                     echo implode(' ', array_slice(explode(' ', $card["title"]), 0, $wordCutoff)) . "&hellip;";
                   }
                   else {
