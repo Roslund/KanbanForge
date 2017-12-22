@@ -26,7 +26,9 @@ Route::get('board', 'BoardController@index');
 
 Route::get('/logout', 'Auth\UsersLoginController@logout');
 
+Route::get('/api/cards', 'CardApiController@index')->middleware('loggedin');
 
+Route::get('/api/cards/{id}', 'CardApiController@show')->middleware('loggedin');
 
 Route::prefix('admin')->group(function(){
 
