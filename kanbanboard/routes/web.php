@@ -26,9 +26,9 @@ Route::get('board', 'BoardController@index');
 
 Route::get('/logout', 'Auth\UsersLoginController@logout');
 
-Route::get('/api/cards', 'CardApiController@index')->middleware('loggedin');
+Route::get('/api/cards', 'CardApiController@index')->middleware('auth:teamforge,web');
 
-Route::get('/api/cards/{id}', 'CardApiController@show')->middleware('loggedin');
+Route::get('/api/cards/{id}', 'CardApiController@show')->middleware('auth:teamforge,web');
 
 Route::prefix('admin')->group(function(){
 

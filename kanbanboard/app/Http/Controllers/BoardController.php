@@ -13,7 +13,7 @@ class BoardController extends Controller
 
   public function __construct()
   {
-    $this->middleware('loggedin');
+    $this->middleware('auth:teamforge,web');
   }
 
   public function index()
