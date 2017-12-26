@@ -9,4 +9,13 @@ class BoardLog extends Model
     protected $table = 'board_log';
     public $incrementing = false;
     protected $fillable = ['userId', 'eventType', 'message'];
+
+    public static function logBoardEvent($userId, $eventType, $message)
+    {
+      BoardLog::create([
+        'userId' => 1,
+        'eventType' => $eventType,
+        'message' => $message
+      ]);
+    }
 }
