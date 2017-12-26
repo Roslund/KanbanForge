@@ -13,7 +13,7 @@ class LogEventType extends Migration
      */
     public function up()
     {
-        Schema::create('board_log', function (Blueprint $table) {
+        Schema::create('log_event_type', function (Blueprint $table) {
             $table->increments('id');
 
             $table->string('eventType');
@@ -30,6 +30,6 @@ class LogEventType extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('log_event_type');
     }
 }

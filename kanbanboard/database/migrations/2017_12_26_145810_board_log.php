@@ -31,6 +31,6 @@ class BoardLog extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('board_log');
     }
 }
