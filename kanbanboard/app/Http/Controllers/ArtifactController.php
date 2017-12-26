@@ -56,7 +56,7 @@ class ArtifactController extends Controller {
 			{
 				DB::table('cards')->truncate();
 			}
-      return redirect('/admin/filter');
+      return redirect('/board');
   }
 
 
