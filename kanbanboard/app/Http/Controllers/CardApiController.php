@@ -97,7 +97,10 @@ class CardApiController extends Controller
           ['category_id' => $category_id,
           'swimlane_id' => $swimlane_id]);
 
-        
+        // Logging of the movement.
+        $message = "Card " . $card_id . " was moved to category " . $category_id . " swimlane " . ($swimlane_id == null ? "null" : $swimlane_id);
+        BoardLog::logBoardEvent(auth()->user()->id, "Card_Movement", $message);
+
         return array('timestamp' => date("Y-m-d H:i:s"), 'success' => $queryReturnValue);
     }
 
