@@ -85,8 +85,7 @@ function ajaxUpdateCard(id, category_id, swimlane_id)
     url: "/api/cards/" + id,
     data: {
       category_id: category_id,
-      swimlane_id: swimlane_id,
-      user_id: user_id
+      swimlane_id: swimlane_id
     },
     method: "PUT",
     success: function( result ) {
