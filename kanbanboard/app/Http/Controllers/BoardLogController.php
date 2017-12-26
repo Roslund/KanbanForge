@@ -10,8 +10,7 @@ class BoardLogController extends Controller
 {
     public function index()
     {
-      // gets the latest 15 logged events.
-      $events = BoardLog::join('users', 'users.id', '=', 'board_log.userId') ->select('board_log.*', 'users.username') ->orderBy('board_log.id', 'asc') ->take(15)->get();
+      $events = BoardLog::join('users', 'users.id', '=', 'board_log.userId') ->select('board_log.*', 'users.username')->orderBy('board_log.id', 'desc')->limit(12)->get()->reverse();
 
       return view('stats.boardLog')->with(array('events' => $events));
     }

@@ -97,9 +97,7 @@ class CardApiController extends Controller
           ['category_id' => $category_id,
           'swimlane_id' => $swimlane_id]);
 
-        // Logging of the movement.
-        $message = "Card " . $card_id . " was moved to category " . $category_id . " swimlane " . ($swimlane_id == null ? "null" : $swimlane_id);
-        BoardLog::logBoardEvent(auth()->user()->id, "Card_Movement", $message);
+        $this->logCardMovement($card_id, $category_id, $swimlane_id);
 
         return array('timestamp' => date("Y-m-d H:i:s"), 'success' => $queryReturnValue);
     }
@@ -133,5 +131,22 @@ class CardApiController extends Controller
         }
 
         return array('timestamp' => date("Y-m-d H:i:s"), 'response' => 0);
+    }
+
+    private function logCardMovement($card_id, $category_id, $swimlane_id)
+    {
+      $categoryName = Category::where('id', $category_id)->select('name')->get()->pluck('name')->first();
+      $cardName = Card::where('cards.id', $card_id)->join('artifacts', 'cards.artifact_id', '=', 'artifacts.id')->get()->pluck('title')->first();
+
+      if($swimlane_id != null) {
+        $swimlaneName = Swimlane::where('id', $swimlane_id)->select('name')->get()->pluck('name')->first();
+      }
+      else {
+        $swimlaneName = "null";
+      }
+
+      // Logging of the movement.
+      $message = "Card \"" . $cardName . "\" was moved to category \"" . $categoryName . "\" swimlane \"" . $swimlaneName . "\"";
+      BoardLog::logBoardEvent(auth()->user()->id, "Card_Movement", $message);
     }
 }
