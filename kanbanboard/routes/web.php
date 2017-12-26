@@ -28,7 +28,6 @@ Route::get('/logout', 'Auth\UsersLoginController@logout');
 
 
 Route::prefix('admin')->group(function(){
-
 	/*categories*/
 	Route::resource('/categories', 'CategoryController');
 	Route::get('/categories/{category}', 'CategoryController@increment');
@@ -57,7 +56,8 @@ Route::prefix('admin')->group(function(){
   	Route::get('projects/update', 'ProjectController@refresh');
   	Route::post('change', 'ProjectController@change');
 
-
+	/*Logging*/
+	Route::get('/log', 'BoardLogController@index');
 });
 
 // Card related api routes
