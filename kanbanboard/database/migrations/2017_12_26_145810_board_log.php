@@ -18,7 +18,7 @@ class BoardLog extends Migration
 
             $table->integer('userId');
             $table->string('eventType');
-            $table->longText('message')
+            $table->longText('message');
 
             $table->timestamps();
         });
