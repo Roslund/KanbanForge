@@ -13,7 +13,7 @@ class BoardLog extends Model
     public static function logBoardEvent($userId, $eventType, $message)
     {
       BoardLog::create([
-        'userId' => 1,
+        'userId' => $userId,
         'eventType' => $eventType,
         'message' => $message
       ]);
