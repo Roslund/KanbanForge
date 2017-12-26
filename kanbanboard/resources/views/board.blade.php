@@ -273,6 +273,7 @@
 <script type="text/javascript">
   boardTimestamp = "{{date('Y-m-d H:i:s')}}";
   metadataObject = { 'categoryCount': {{count($categories)}}, 'swimlaneCount': {{count($swimlanes)}}, 'cardCount': {{count($cards)}} };
+  user_id = {{auth()->user()->id}};
 </script>
 
 @endsection

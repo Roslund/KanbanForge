@@ -8,6 +8,7 @@ use App\Category;
 use App\Swimlane;
 use App\ParentCategory;
 use App\Artifact;
+use App\BoardLog;
 
 class CardApiController extends Controller
 {
@@ -80,21 +81,26 @@ class CardApiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $card_id)
     {
         // A card will always belong to a category, but it doesn't
         // necessarily belong to a swimlane.
         $this->validate(request(), [
           'category_id' => 'integer|required',
-          'swimlane_id' => 'integer|nullable'
+          'swimlane_id' => 'integer|nullable',
+          'user_id' => 'integer|required'
         ]);
 
         $category_id = request('category_id');
         $swimlane_id = request('swimlane_id');
+        $user_id = request('user_id');
 
-        $queryReturnValue = Card::where('id', $id)->update(
+        $queryReturnValue = Card::where('id', $card_id)->update(
           ['category_id' => $category_id,
           'swimlane_id' => $swimlane_id]);
+
+        $message = "Card " . $card_id . " was moved to category " . $category_id . " swimlane " . ($swimlane_id == null ? "null" : $swimlane_id);
+        BoardLog::logBoardEvent(2, "Card_Movement", $message);
 
         return array('timestamp' => date("Y-m-d H:i:s"), 'success' => $queryReturnValue);
     }
