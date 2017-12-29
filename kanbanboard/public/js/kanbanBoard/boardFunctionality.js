@@ -194,7 +194,12 @@ function checkLimits()
         limitElement.css('color', 'black');
       }
 
-      limitElement.text("LIMIT: " + counter[key] + "/" + value);
+      if(value != 0) {
+        limitElement.html("LIMIT: " + counter[key] + "/" + value);
+      }
+      else {
+        limitElement.html("LIMIT: " + counter[key] + "/" + "&infin;");
+      }
     });
 
     $.each(parentCategories, function (index, value) {
@@ -215,6 +220,11 @@ function checkLimits()
         limitElement.css('color', 'black');
       }
 
-      limitElement.text("LIMIT: " + sum + "/" + limit);
+      if(limit != 0) {
+        limitElement.html("LIMIT: " + sum + "/" + limit);
+      }
+      else {
+        limitElement.html("LIMIT: " + sum + "/" + "&infin;");
+      }
     });
   }
