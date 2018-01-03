@@ -185,11 +185,20 @@ function checkLimits()
     });
 
     $.each(categoryLimits, function(key, value) {
-      if(value <= counter[key] && value != 0) {
-        $("th[category_id=" + key + "]").find(".limit").css('color', 'red');
+      let limitElement = $("th[category_id=" + key + "]").find(".limit");
+
+      if((value + 1) <= counter[key] && value != 0) {
+        limitElement.css('color', 'red');
       }
       else {
-        $("th[category_id=" + key + "]").find(".limit").css('color', 'black');
+        limitElement.css('color', 'black');
+      }
+
+      if(value != 0) {
+        limitElement.html("LIMIT: " + counter[key] + "/" + value);
+      }
+      else {
+        limitElement.html("LIMIT: " + counter[key] + "/" + "&infin;");
       }
     });
 
@@ -202,11 +211,20 @@ function checkLimits()
         sum += counter[value];
       });
 
-      if(sum >= limit && limit != 0) {
-        $(value).find(".limit").css('color', 'red');
+      let limitElement = $(value).find(".limit");
+
+      if(sum >= (limit + 1) && limit != 0) {
+        limitElement.css('color', 'red');
       }
       else {
-        $(value).find(".limit").css('color', 'black');
+        limitElement.css('color', 'black');
+      }
+
+      if(limit != 0) {
+        limitElement.html("LIMIT: " + sum + "/" + limit);
+      }
+      else {
+        limitElement.html("LIMIT: " + sum + "/" + "&infin;");
       }
     });
   }
