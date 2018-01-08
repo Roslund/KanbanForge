@@ -11,8 +11,3 @@ Software Engineering 2: Project Teamwork
 * Kevin Oswaldo Cabrera Navarro
 * Robert Duras
 * Noah Gustavsson
-
-### Client
-Christoffer Holmstedt - ABB Ports
-christoffer.holmstedt@se.abb.com 
-021-32 46 18
