@@ -113,6 +113,8 @@ class ParentCategoryController extends Controller
      */
     public function destroy(ParentCategory $parentcategory)
     {
+        Category::where('parentcategory', $parentcategory['id'])->update(['parentcategory' => null]);
+
         $parentcategory->delete();
 
         return redirect('admin/parentcategories');

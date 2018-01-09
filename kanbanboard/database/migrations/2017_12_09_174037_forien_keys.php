@@ -13,10 +13,6 @@ class ForienKeys extends Migration
      */
     public function up()
     {
-        Schema::table('categories', function ($table) {
-            $table->foreign('parentcategory')->references('id')->on('parent_categories')->onDelete('cascade');
-        });
-
         Schema::table('cards', function ($table) {
             $table->foreign('artifact_id')->references('id')->on('artifacts')->onDelete('cascade');;
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
