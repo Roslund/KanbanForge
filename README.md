@@ -1,6 +1,8 @@
 # DVA313
 A school project for the course DVA313, Software Engineering 2: Project Teamwork.
 
+![](https://i.imgur.com/hXaemJI.png)
+
 ## Goal
 The goal of the project was to create a digital kanbanboard that interfaces with TeamForge.
 
@@ -15,6 +17,10 @@ The goal of the project was to create a digital kanbanboard that interfaces with
 * Kevin Oswaldo Cabrera Navarro
 * Robert Duras
 * ~~Noah Gustavsson~~ (Dropped the coruse)
+
+
+## Board
+![](https://i.imgur.com/4Ixqjqf.png)
 
 # Instalation
 Note that this project has only been tested using apache, nginx and mysql.
