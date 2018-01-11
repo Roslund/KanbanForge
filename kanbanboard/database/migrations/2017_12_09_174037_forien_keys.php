@@ -27,10 +27,6 @@ class ForienKeys extends Migration
      */
     public function down()
     {
-      Schema::table('categories', function ($table) {
-          $table->dropForeign(['parentcategory']);
-      });
-
       Schema::table('cards', function ($table) {
           // Providing an array with all value didn't work, so I'm splitting it up.
           // This syntax means we don't have to provide the table name and the columns.
