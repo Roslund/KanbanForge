@@ -1,4 +1,4 @@
-# DVA313
+# KanbanForge
 A school project for the course DVA313, Software Engineering 2: Project Teamwork.
 
 ![](https://i.imgur.com/hXaemJI.png)
