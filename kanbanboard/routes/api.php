@@ -16,12 +16,3 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-
-// Card related api routes
-Route::get('/cards', 'CardApiController@index');
-
-Route::post('/cards/updatedsince/{dateTime}', 'CardApiController@checkIfUpdatedSince');
-
-Route::get('/cards/{id}', 'CardApiController@show');
-
-Route::put('/cards/{id}', 'CardApiController@update');

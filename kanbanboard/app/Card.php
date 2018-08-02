@@ -10,10 +10,4 @@ class Card extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = ['artifact_id','category_id','swimlane_id'];
-
-    /*public function update() {
-        //
-
-    }*/
-
 }

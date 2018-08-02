@@ -8,6 +8,7 @@ use App\Category;
 use App\Swimlane;
 use App\ParentCategory;
 use App\Artifact;
+use App\BoardLog;
 
 class CardApiController extends Controller
 {
@@ -80,7 +81,7 @@ class CardApiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $card_id)
     {
         // A card will always belong to a category, but it doesn't
         // necessarily belong to a swimlane.
@@ -92,9 +93,11 @@ class CardApiController extends Controller
         $category_id = request('category_id');
         $swimlane_id = request('swimlane_id');
 
-        $queryReturnValue = Card::where('id', $id)->update(
+        $queryReturnValue = Card::where('id', $card_id)->update(
           ['category_id' => $category_id,
           'swimlane_id' => $swimlane_id]);
+
+        $this->logCardMovement($card_id, $category_id, $swimlane_id);
 
         return array('timestamp' => date("Y-m-d H:i:s"), 'success' => $queryReturnValue);
     }
@@ -128,5 +131,22 @@ class CardApiController extends Controller
         }
 
         return array('timestamp' => date("Y-m-d H:i:s"), 'response' => 0);
+    }
+
+    private function logCardMovement($card_id, $category_id, $swimlane_id)
+    {
+      $categoryName = Category::where('id', $category_id)->select('name')->get()->pluck('name')->first();
+      $cardName = Card::where('cards.id', $card_id)->join('artifacts', 'cards.artifact_id', '=', 'artifacts.id')->get()->pluck('title')->first();
+
+      if($swimlane_id != null) {
+        $swimlaneName = Swimlane::where('id', $swimlane_id)->select('name')->get()->pluck('name')->first();
+      }
+      else {
+        $swimlaneName = "null";
+      }
+
+      // Logging of the movement.
+      $message = "Card \"" . $cardName . "\" was moved to category \"" . $categoryName . "\" swimlane \"" . $swimlaneName . "\"";
+      BoardLog::logBoardEvent(auth()->user()->id, "Card_Movement", $message);
     }
 }

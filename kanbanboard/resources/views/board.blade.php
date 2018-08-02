@@ -4,6 +4,8 @@
 
 <title>Board</title>
 
+<meta name="csrf-token" content="{{ csrf_token() }}">
+
 @endsection
 
 @section('content')

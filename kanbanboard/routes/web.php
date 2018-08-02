@@ -26,12 +26,8 @@ Route::get('board', 'BoardController@index');
 
 Route::get('/logout', 'Auth\UsersLoginController@logout');
 
-Route::get('/api/cards', 'CardApiController@index')->middleware('auth:teamforge,web');
-
-Route::get('/api/cards/{id}', 'CardApiController@show')->middleware('auth:teamforge,web');
 
 Route::prefix('admin')->group(function(){
-
 	/*categories*/
 	Route::resource('/categories', 'CategoryController');
 	Route::get('/categories/{category}', 'CategoryController@increment');
@@ -60,5 +56,17 @@ Route::prefix('admin')->group(function(){
   	Route::get('projects/update', 'ProjectController@refresh');
   	Route::post('change', 'ProjectController@change');
 
+	/*Logging*/
+	Route::get('/log', 'BoardLogController@index');
+});
 
+// Card related api routes
+Route::prefix('api')->middleware('auth:teamforge,web')->group(function(){
+	Route::get('/cards', 'CardApiController@index');
+
+	Route::post('/cards/updatedsince/{dateTime}', 'CardApiController@checkIfUpdatedSince');
+
+	Route::get('/cards/{id}', 'CardApiController@show');
+
+	Route::put('/cards/{id}', 'CardApiController@update');
 });
